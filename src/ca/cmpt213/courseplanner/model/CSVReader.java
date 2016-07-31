@@ -1,6 +1,7 @@
 package ca.cmpt213.courseplanner.model;
 
 import java.io.*;
+import java.nio.file.*;
 import java.util.*;
 
 /**
@@ -14,15 +15,36 @@ public class CSVReader {
         this.csvFileName = csvFileName;
     }
 
-    void scanCSVFile(){
-        try {
-            Scanner csvScanner = new Scanner(new File(csvFileName));
-            while(csvScanner.hasNext()){
+    // Return array of course offerings that would be sorted by CoursePlanner
+    public void scanCSVFile(){
 
+        ArrayList <CourseOffering> courseOfferingsInsideCSV = new ArrayList<CourseOffering>();
+        Path pathToCSVFile = Paths.get(csvFileName);
+
+        BufferedReader br;
+
+        try {
+            br = new BufferedReader(new FileReader(csvFileName));
+
+            br.readLine(); // Reading and skipping the column headers of CSV file
+
+            String row = null;
+
+            while ((row = br.readLine()) != null){
+                String[] offerInfo = row.split(",");
+
+                courseOfferingsInsideCSV.add(new CourseOffering(offerInfo[0],offerInfo[1],offerInfo[2],
+                        offerInfo[3],offerInfo[4],offerInfo[5],offerInfo[6],offerInfo[7]));
             }
-            csvScanner.close();
+
+            br.close();
+
         }
+
         catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
     }
