@@ -38,16 +38,20 @@ public class CourseOffering {
         return departmentName;
     }
 
-    public int getCatalogNumber(){
-        return Integer.parseInt(catalogNumber);
+    public String getCatalogNumber(){
+        return catalogNumber;
     }
 
-    public int getEnrolmentCapacity(){
-        return Integer.parseInt(enrolmentCapacity);
+    public String getLocation(){
+        return location;
     }
 
-    public int getEnrolmentTotal(){
-        return Integer.parseInt(enrolmentTotal);
+    public String getEnrolmentCapacity(){
+        return enrolmentCapacity;
+    }
+
+    public String getEnrolmentTotal(){
+        return enrolmentTotal;
     }
 
     public String getInstructors(){

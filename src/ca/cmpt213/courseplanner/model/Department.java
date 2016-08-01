@@ -8,7 +8,7 @@ import java.util.*;
  */
 public class Department {
 
-    private ArrayList<Course> courses;
+    private ArrayList<Course> courses = new ArrayList<>();
 
     private String departmentName;
 

@@ -22,20 +22,80 @@ public class CoursePlanner {
 
     public void createDepartments(){
 
-        Iterator <CourseOffering> itr = importedData.iterator();
-        while (itr.hasNext()){
-            CourseOffering element = itr.next();
+        Iterator <CourseOffering> courseOfferingIterator = importedData.iterator();
+        while (courseOfferingIterator.hasNext()){
+            CourseOffering offer = courseOfferingIterator.next();
             if (departments == null){
-                departments.add(new Department(element.getDepartmentName()));
+                departments.add(new Department(offer.getDepartmentName()));
             }
-            else if (!checkInsideDepartments(element.getDepartmentName())){
-                departments.add(new Department(element.getDepartmentName()));
+            else if (!checkInsideDepartments(offer.getDepartmentName())){
+                departments.add(new Department(offer.getDepartmentName()));
             }
         }
 
-        for (Department d: departments){
-            System.out.println(d.getDepartmentName());
+//        for (Department d: departments){
+//            System.out.println(d.getDepartmentName());
+//        }
+    }
+
+    public void insertCoursesIntoDepartments(){
+
+        Iterator <Department> departmentIterator = departments.iterator();
+
+        while (departmentIterator.hasNext()){
+
+            Department currentDepartment = departmentIterator.next();
+
+            for (CourseOffering currentOffer: importedData){
+                if (currentDepartment.getDepartmentName().equals(currentOffer.getDepartmentName())) {
+                    if (!checkForCourses(currentDepartment, currentOffer.getCatalogNumber())) {
+                        currentDepartment.addCourse(new Course(currentOffer.getCatalogNumber()));
+                    }
+                }
+            }
         }
+
+//         for (Department d: departments){
+//             for (Course c: d.getCourses()) {
+//                 System.out.println(d.getDepartmentName() + " " + c.getCatalogNumber());
+//             }
+//        }
+
+    }
+
+    public void insertCourseOfferingsIntoCourses(){
+        Iterator <Department> departmentIterator = departments.iterator();
+
+        while (departmentIterator.hasNext()){
+            Department currentDepartment = departmentIterator.next();
+
+            Iterator <Course> courseIterator = currentDepartment.getCourses().iterator();
+
+            while (courseIterator.hasNext()){
+                Course currentCourse = courseIterator.next();
+
+                for (CourseOffering c: importedData){
+                    if (c.getDepartmentName().equals(currentDepartment.getDepartmentName()) &&
+                            c.getCatalogNumber().equals(currentCourse.getCatalogNumber())){
+
+                        currentCourse.addCourseOffering(new CourseOffering(c.getSemester(),
+                                c.getDepartmentName(), c.getCatalogNumber(), c.getLocation(),
+                                c.getEnrolmentCapacity(),c.getEnrolmentTotal(),
+                                c.getInstructors(), c.getComponentCode()));
+                    }
+                }
+            }
+
+        }
+
+        for (Department d: departments){
+             for (Course c: d.getCourses()) {
+                 for (CourseOffering o: c.getCourseOfferings()) {
+                     System.out.println(o.toString());
+                 }
+             }
+        }
+
     }
 
     private boolean checkInsideDepartments(String departmentname){
@@ -48,4 +108,15 @@ public class CoursePlanner {
 
         return containsDepartment;
     }
+
+    private boolean checkForCourses(Department department, String catalogNumber){
+        boolean containsCourse = false;
+        for (Course c: department.getCourses()){
+            if (c.getCatalogNumber().equals(catalogNumber)){
+                containsCourse = true;
+            }
+        }
+        return containsCourse;
+    }
+
 }

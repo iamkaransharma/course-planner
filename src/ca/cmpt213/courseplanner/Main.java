@@ -13,5 +13,7 @@ public class Main {
 
         CoursePlanner coursePlanner = new CoursePlanner("data/course_data_2016.csv");
         coursePlanner.createDepartments();
+        coursePlanner.insertCoursesIntoDepartments();
+        coursePlanner.insertCourseOfferingsIntoCourses();
     }
 }

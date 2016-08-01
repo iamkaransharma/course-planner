@@ -7,11 +7,11 @@ import java.util.*;
  */
 public class Course {
 
-    private ArrayList<CourseOffering> courseOfferings;
+    private ArrayList<CourseOffering> courseOfferings = new ArrayList<>();
 
-    private int catalogNumber;
+    private String catalogNumber;
 
-    public Course (int catalogNumber){
+    public Course (String catalogNumber){
         this.courseOfferings = courseOfferings;
         this.catalogNumber = catalogNumber;
     }
@@ -24,7 +24,7 @@ public class Course {
         courseOfferings.add(courseOffering);
     }
 
-    public int getCatalogNumber(){
+    public String getCatalogNumber(){
         return catalogNumber;
     }
 
