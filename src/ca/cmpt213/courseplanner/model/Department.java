@@ -12,8 +12,7 @@ public class Department {
 
     private String departmentName;
 
-    public Department (ArrayList<Course> courses, String departmentName){
-        this.courses = courses;
+    public Department (String departmentName){
         this.departmentName = departmentName;
     }
 

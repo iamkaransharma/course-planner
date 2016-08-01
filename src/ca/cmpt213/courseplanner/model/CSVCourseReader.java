@@ -84,9 +84,9 @@ public class CSVCourseReader {
 
             br.close();
 
-            for (CourseOffering courseO : courseOfferingsInsideCSV){
-                System.out.println(courseO.toString());
-            }
+//            for (CourseOffering courseO : courseOfferingsInsideCSV){
+//                System.out.println(courseO.toString());
+//            }
 
         }
 
