@@ -8,7 +8,6 @@ import java.util.*;
 public class CoursePlanner {
 
     private ArrayList<Department> departments = new ArrayList<>();
-    private ArrayList<Course> courses;
     private ArrayList<CourseOffering> importedData;
 
     private String csvFileName;
@@ -33,6 +32,7 @@ public class CoursePlanner {
             }
         }
 
+        // Test Code
 //        for (Department d: departments){
 //            System.out.println(d.getDepartmentName());
 //        }
@@ -55,6 +55,7 @@ public class CoursePlanner {
             }
         }
 
+        // Test Code
 //         for (Department d: departments){
 //             for (Course c: d.getCourses()) {
 //                 System.out.println(d.getDepartmentName() + " " + c.getCatalogNumber());
@@ -88,13 +89,14 @@ public class CoursePlanner {
 
         }
 
-        for (Department d: departments){
-             for (Course c: d.getCourses()) {
-                 for (CourseOffering o: c.getCourseOfferings()) {
-                     System.out.println(o.toString());
-                 }
-             }
-        }
+        // Test Code
+//        for (Department d: departments){
+//             for (Course c: d.getCourses()) {
+//                 for (CourseOffering o: c.getCourseOfferings()) {
+//                     System.out.println(o.toString());
+//                 }
+//             }
+//        }
 
     }
 

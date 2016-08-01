@@ -84,6 +84,7 @@ public class CSVCourseReader {
 
             br.close();
 
+            // Test Code
 //            for (CourseOffering courseO : courseOfferingsInsideCSV){
 //                System.out.println(courseO.toString());
 //            }
