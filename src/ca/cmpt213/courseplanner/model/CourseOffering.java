@@ -35,7 +35,7 @@ public class CourseOffering {
         return "Semester: " + this.semester + " Department: " + this.departmentName +
                 " Catalog Number: " + this.catalogNumber + " Location: " + this.location
                 + " Enrolment Capacity: " + this.enrolmentCapacity + " Enrolment Total: "
-                + this.enrolmentTotal + " Instructors: " + this.instructors + " Component Code: "
+                + this.enrolmentTotal + "\n" + "Instructors: " + this.instructors + "\n" + "Component Code: "
                 + this.componentCode;
     }
 
