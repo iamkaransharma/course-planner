@@ -24,6 +24,10 @@ public class Department {
         return departmentName;
     }
 
+    public void addCourse(Course course){
+        courses.add(course);
+    }
+
     @Override
     public String toString(){
         return "Department: " + departmentName;

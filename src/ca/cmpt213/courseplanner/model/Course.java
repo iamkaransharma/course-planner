@@ -11,13 +11,17 @@ public class Course {
 
     private int catalogNumber;
 
-    public Course (ArrayList<CourseOffering> courseOfferings, int catalogNumber){
+    public Course (int catalogNumber){
         this.courseOfferings = courseOfferings;
         this.catalogNumber = catalogNumber;
     }
 
     public ArrayList<CourseOffering> getCourseOfferings(){
         return courseOfferings;
+    }
+
+    public void addCourseOffering(CourseOffering courseOffering){
+        courseOfferings.add(courseOffering);
     }
 
     public int getCatalogNumber(){
