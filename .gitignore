@@ -1,2 +1,3 @@
-out/
-.idea/
+/out/
+/.idea/
+/asn4-course-planner.iml
