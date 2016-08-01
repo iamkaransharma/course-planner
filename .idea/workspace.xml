@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8b7e15b-c1af-4aea-9aea-20f3c80b2897" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CSVReader.java" afterPath="$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CSVReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CourseOffering.java" afterPath="$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CourseOffering.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/Department.java" afterPath="$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/Department.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CSVCourseReader.java" afterPath="$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CSVCourseReader.java" />
     </list>
     <ignored path="asn4-course-planner.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,16 +66,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CSVReader.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CSVReader.java">
+      <file leaf-file-name="CSVCourseReader.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CSVCourseReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="82" column="13" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
+            <state relative-caret-position="103">
+              <caret line="47" column="42" selection-start-line="47" selection-start-column="42" selection-end-line="47" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#251#252#0" expanded="true" />
-                <element signature="e#297#298#0" expanded="true" />
-                <element signature="e#506#522#0" expanded="true" />
+                <element signature="e#263#264#0" expanded="true" />
+                <element signature="e#309#310#0" expanded="true" />
+                <element signature="e#518#534#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,6 +121,7 @@
         <option value="$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/Department.java" />
         <option value="$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CourseOffering.java" />
         <option value="$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CSVReader.java" />
+        <option value="$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CSVCourseReader.java" />
       </list>
     </option>
   </component>
@@ -540,8 +540,8 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -706,15 +706,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CSVReader.java">
+    <entry file="file://$PROJECT_DIR$/src/ca/cmpt213/courseplanner/model/CSVCourseReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="82" column="13" selection-start-line="82" selection-start-column="13" selection-end-line="82" selection-end-column="13" />
+        <state relative-caret-position="103">
+          <caret line="47" column="42" selection-start-line="47" selection-start-column="42" selection-end-line="47" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#251#252#0" expanded="true" />
-            <element signature="e#297#298#0" expanded="true" />
-            <element signature="e#506#522#0" expanded="true" />
+            <element signature="e#263#264#0" expanded="true" />
+            <element signature="e#309#310#0" expanded="true" />
+            <element signature="e#518#534#0" expanded="true" />
           </folding>
         </state>
       </provider>

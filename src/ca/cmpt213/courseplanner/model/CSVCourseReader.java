@@ -39,10 +39,14 @@ public class CSVCourseReader {
 
                 // Handles course offerings with more than 1 instructor
                 if (row.contains("\"")) {
-                    String[] infoForInstructors;
-                    offerInfo = row.split(",");
-                    infoForInstructors = row.split(", ");
 
+                    String[] infoForInstructors;
+
+                    // Contains information on columns that are not Instructors
+                    offerInfo = row.split(",");
+
+                    // This String array deals with column that have more than 1 instructor
+                    infoForInstructors = row.split(", ");
                     String[] offerInfo1 = infoForInstructors[0].split(",");
 
                     // First instructor
@@ -50,13 +54,15 @@ public class CSVCourseReader {
                     instructors = instructors + firstInstructor + ", ";
 
                     for (int i = 1; i < infoForInstructors.length; i++){
+                        // Adding instructors between the first and last instructor
                         if (!infoForInstructors[i].contains("\"")){
                             instructors = instructors + infoForInstructors[i] + ", ";
                         }
+                        // Adding the last instructor and getting the component code
                         else {
-                            String[] oi = infoForInstructors[i].split("\",");
-                            instructors = instructors + oi[0];
-                            componentCode = componentCode + oi[oi.length-1];
+                            String[] lastPartOfRow = infoForInstructors[i].split("\",");
+                            instructors = instructors + lastPartOfRow[0];
+                            componentCode = componentCode + lastPartOfRow[lastPartOfRow.length-1];
                         }
                     }
 
