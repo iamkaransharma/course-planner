@@ -16,5 +16,13 @@ public class Course {
         this.catalogNumber = catalogNumber;
     }
 
+    public ArrayList<CourseOffering> getCourseOfferings(){
+        return courseOfferings;
+    }
+
+    public int getCatalogNumber(){
+        return catalogNumber;
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package ca.cmpt213.courseplanner.model;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -16,6 +17,17 @@ public class Department {
         this.departmentName = departmentName;
     }
 
+    public ArrayList<Course> getCourses(){
+        return courses;
+    }
 
+    public String getDepartmentName(){
+        return departmentName;
+    }
+
+    @Override
+    public String toString(){
+        return "Department: " + departmentName;
+    }
 
 }

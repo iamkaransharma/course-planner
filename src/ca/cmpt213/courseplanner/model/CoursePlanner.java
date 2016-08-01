@@ -8,6 +8,7 @@ import java.util.*;
 public class CoursePlanner {
 
     private ArrayList<Department> departments;
+    private ArrayList<Course> courses;
 
     public CoursePlanner(){
 

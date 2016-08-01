@@ -12,5 +12,6 @@ public class main {
 
         CSVCourseReader csvfile = new CSVCourseReader("data/course_data_2016.csv");
         csvfile.scanCSVFile();
+
     }
 }

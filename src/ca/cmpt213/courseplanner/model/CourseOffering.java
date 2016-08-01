@@ -30,6 +30,34 @@ public class CourseOffering {
 
     }
 
+    public String getSemester(){
+        return semester;
+    }
+
+    public String getDepartmentName(){
+        return departmentName;
+    }
+
+    public int getCatalogNumber(){
+        return Integer.parseInt(catalogNumber);
+    }
+
+    public int getEnrolmentCapacity(){
+        return Integer.parseInt(enrolmentCapacity);
+    }
+
+    public int getEnrolmentTotal(){
+        return Integer.parseInt(enrolmentTotal);
+    }
+
+    public String getInstructors(){
+        return instructors;
+    }
+
+    public String getComponentCode(){
+        return componentCode;
+    }
+
     @Override
     public String toString(){
         return "Semester: " + this.semester + " Department: " + this.departmentName +
