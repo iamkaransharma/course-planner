@@ -26,17 +26,19 @@ public class CoursePlannerGUI extends JPanel {
         JFrame frame = new JFrame();
         frame.setTitle("FAS Course Planner");
 
-        JPanel entireGUI = new JPanel();
-        entireGUI.setLayout(new BoxLayout(entireGUI,BoxLayout.LINE_AXIS));
+        JPanel coursePlannerUI = new JPanel();
+        coursePlannerUI.setLayout(new BoxLayout(coursePlannerUI,BoxLayout.PAGE_AXIS));
 
-        entireGUI.add(Box.createRigidArea(new Dimension(5,0)));
+        JPanel coursePlannerPanels = new JPanel();
+        coursePlannerPanels.setLayout(new BoxLayout(coursePlannerPanels,BoxLayout.LINE_AXIS));
+
+        coursePlannerPanels.add(Box.createRigidArea(new Dimension(5,0)));
 
         // West Side
 
         JPanel westSide = new JPanel();
 
         westSide.setLayout(new BoxLayout(westSide, BoxLayout.PAGE_AXIS));
-
 
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
@@ -58,9 +60,9 @@ public class CoursePlannerGUI extends JPanel {
         panel2.setPreferredSize(new Dimension(200,300));
         westSide.add(panel2);
 
-        entireGUI.add(westSide);
+        coursePlannerPanels.add(westSide);
 
-        entireGUI.add(Box.createRigidArea(new Dimension(5,0)));
+        coursePlannerPanels.add(Box.createRigidArea(new Dimension(5,0)));
 
         // Center
 
@@ -71,9 +73,10 @@ public class CoursePlannerGUI extends JPanel {
         panel3.add(sop.getLabel(),BorderLayout.NORTH);
         panel3.add(sop.getCoursePanel(),BorderLayout.CENTER);
         panel3.setPreferredSize(new Dimension(800,HEIGHT));
-        entireGUI.add(panel3);
 
-        entireGUI.add(Box.createRigidArea(new Dimension(5,0)));
+        coursePlannerPanels.add(panel3);
+
+        coursePlannerPanels.add(Box.createRigidArea(new Dimension(5,0)));
 
         // East Side
 
@@ -102,11 +105,15 @@ public class CoursePlannerGUI extends JPanel {
 
         eastSide.add(panel5);
 
-        entireGUI.add(eastSide);
+        coursePlannerPanels.add(eastSide);
 
-        entireGUI.add(Box.createRigidArea(new Dimension(5,0)));
+        coursePlannerPanels.add(Box.createRigidArea(new Dimension(5,0)));
 
-        frame.add(entireGUI);
+        coursePlannerUI.add(coursePlannerPanels);
+        coursePlannerUI.add(Box.createRigidArea(new Dimension(0,5)));
+
+        frame.add(coursePlannerUI);
+
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
