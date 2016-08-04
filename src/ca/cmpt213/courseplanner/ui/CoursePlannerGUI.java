@@ -44,8 +44,10 @@ public class CoursePlannerGUI extends JPanel {
         CourseListFilterPanel clfp = new CourseListFilterPanel(coursePlanner,"Course List Filter Panel");
         panel1.add(clfp.getLabel(),BorderLayout.NORTH);
         panel1.add(clfp.getCoursePanel(),BorderLayout.CENTER);
-        panel1.setPreferredSize(new Dimension(200,200));
+        panel1.setPreferredSize(new Dimension(200,300));
         westSide.add(panel1);
+
+        westSide.add(Box.createRigidArea(new Dimension(0,5)));
 
         JPanel panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
@@ -53,7 +55,7 @@ public class CoursePlannerGUI extends JPanel {
         CourseListPanel clp = new CourseListPanel(coursePlanner, "Course List");
         panel2.add(clp.getLabel(),BorderLayout.NORTH);
         panel2.add(clp.getCoursePanel(),BorderLayout.CENTER);
-        panel2.setPreferredSize(new Dimension(200,500));
+        panel2.setPreferredSize(new Dimension(200,300));
         westSide.add(panel2);
 
         entireGUI.add(westSide);
@@ -85,8 +87,10 @@ public class CoursePlannerGUI extends JPanel {
         panel4.add(barGraph.getLabel(),BorderLayout.NORTH);
         panel4.add(barGraph.getCoursePanel(),BorderLayout.CENTER);
 
-        panel4.setPreferredSize(new Dimension(250,350));
+        panel4.setPreferredSize(new Dimension(250,300));
         eastSide.add(panel4);
+
+        eastSide.add(Box.createRigidArea(new Dimension(0,5)));
 
         JPanel panel5 = new JPanel();
         panel5.setLayout(new BorderLayout());
@@ -94,7 +98,7 @@ public class CoursePlannerGUI extends JPanel {
         panel5.add(odp.getLabel(),BorderLayout.NORTH);
         panel5.add(odp.getCoursePanel(),BorderLayout.CENTER);
 
-        panel5.setPreferredSize(new Dimension(250,500));
+        panel5.setPreferredSize(new Dimension(250,300));
 
         eastSide.add(panel5);
 
