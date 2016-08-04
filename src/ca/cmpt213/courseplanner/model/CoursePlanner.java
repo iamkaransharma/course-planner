@@ -19,6 +19,11 @@ public class CoursePlanner {
         this.importedData = csvfile.scanCSVFile();
     }
 
+    public ArrayList<Department> getDepartments(){
+        return departments;
+    }
+
+
     public void createDepartments(){
 
         Iterator <CourseOffering> courseOfferingIterator = importedData.iterator();
@@ -90,13 +95,13 @@ public class CoursePlanner {
         }
 
         // Test Code
-//        for (Department d: departments){
-//             for (Course c: d.getCourses()) {
-//                 for (CourseOffering o: c.getCourseOfferings()) {
-//                     System.out.println(o.toString());
-//                 }
-//             }
-//        }
+        for (Department d: departments){
+             for (Course c: d.getCourses()) {
+                 for (CourseOffering o: c.getCourseOfferings()) {
+                     System.out.println(o.toString());
+                 }
+             }
+        }
 
     }
 
