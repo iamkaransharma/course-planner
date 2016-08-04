@@ -41,7 +41,7 @@ public class CoursePlannerGUI extends JPanel {
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
 
-        CourseListFilterPanel clfp = new CourseListFilterPanel(coursePlanner,"Course List Filter Panel");
+        CourseListFilterPanel clfp = new CourseListFilterPanel(coursePlanner,"Course List Filter");
         panel1.add(clfp.getLabel(),BorderLayout.NORTH);
         panel1.add(clfp.getCoursePanel(),BorderLayout.CENTER);
         panel1.setPreferredSize(new Dimension(200,300));
