@@ -24,16 +24,22 @@ public class CoursePlannerGUI extends JPanel {
     public void startProgram(){
 
         JFrame frame = new JFrame();
+        frame.setTitle("FAS Course Planner");
 
-        frame.setLayout(new BorderLayout());
+        JPanel entireGUI = new JPanel();
+        entireGUI.setLayout(new BoxLayout(entireGUI,BoxLayout.LINE_AXIS));
+
+        entireGUI.add(Box.createRigidArea(new Dimension(5,0)));
 
         // West Side
 
         JPanel westSide = new JPanel();
+
         westSide.setLayout(new BoxLayout(westSide, BoxLayout.PAGE_AXIS));
 
+
         JPanel panel1 = new JPanel();
-        panel1.setLayout(new BoxLayout(panel1, BoxLayout.PAGE_AXIS));
+        panel1.setLayout(new BorderLayout());
 
         CourseListFilterPanel clfp = new CourseListFilterPanel(coursePlanner,"Course List Filter Panel");
         panel1.add(clfp.getLabel(),BorderLayout.NORTH);
@@ -42,7 +48,7 @@ public class CoursePlannerGUI extends JPanel {
         westSide.add(panel1);
 
         JPanel panel2 = new JPanel();
-        panel2.setLayout(new BoxLayout(panel2, BoxLayout.PAGE_AXIS));
+        panel2.setLayout(new BorderLayout());
 
         CourseListPanel clp = new CourseListPanel(coursePlanner, "Course List");
         panel2.add(clp.getLabel(),BorderLayout.NORTH);
@@ -50,18 +56,22 @@ public class CoursePlannerGUI extends JPanel {
         panel2.setPreferredSize(new Dimension(200,500));
         westSide.add(panel2);
 
-        frame.add(westSide,BorderLayout.WEST);
+        entireGUI.add(westSide);
+
+        entireGUI.add(Box.createRigidArea(new Dimension(5,0)));
 
         // Center
 
         JPanel panel3 = new JPanel();
-        panel3.setLayout(new BoxLayout(panel3, BoxLayout.PAGE_AXIS));
+        panel3.setLayout(new BorderLayout());
 
         SemesterOfferingsPanel sop = new SemesterOfferingsPanel(coursePlanner, "Course Offerings by Semester");
-        panel3.add(sop.getLabel());
-        panel3.add(sop.getCoursePanel());
-        panel3.setPreferredSize(new Dimension(800,250));
-        frame.add(panel3,BorderLayout.CENTER);
+        panel3.add(sop.getLabel(),BorderLayout.NORTH);
+        panel3.add(sop.getCoursePanel(),BorderLayout.CENTER);
+        panel3.setPreferredSize(new Dimension(800,HEIGHT));
+        entireGUI.add(panel3);
+
+        entireGUI.add(Box.createRigidArea(new Dimension(5,0)));
 
         // East Side
 
@@ -69,7 +79,7 @@ public class CoursePlannerGUI extends JPanel {
         eastSide.setLayout(new BoxLayout(eastSide, BoxLayout.PAGE_AXIS));
 
         JPanel panel4 = new JPanel();
-        panel4.setLayout(new BoxLayout(panel4, BoxLayout.PAGE_AXIS));
+        panel4.setLayout(new BorderLayout());
 
         BarGraphPanel barGraph = new BarGraphPanel(coursePlanner, "Statistics");
         panel4.add(barGraph.getLabel(),BorderLayout.NORTH);
@@ -79,7 +89,7 @@ public class CoursePlannerGUI extends JPanel {
         eastSide.add(panel4);
 
         JPanel panel5 = new JPanel();
-        panel5.setLayout(new BoxLayout(panel5, BoxLayout.PAGE_AXIS));
+        panel5.setLayout(new BorderLayout());
         OfferingDetailsPanel odp = new OfferingDetailsPanel(coursePlanner, "Details of Course Offering");
         panel5.add(odp.getLabel(),BorderLayout.NORTH);
         panel5.add(odp.getCoursePanel(),BorderLayout.CENTER);
@@ -88,8 +98,11 @@ public class CoursePlannerGUI extends JPanel {
 
         eastSide.add(panel5);
 
-        frame.add(eastSide,BorderLayout.EAST);
+        entireGUI.add(eastSide);
 
+        entireGUI.add(Box.createRigidArea(new Dimension(5,0)));
+
+        frame.add(entireGUI);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

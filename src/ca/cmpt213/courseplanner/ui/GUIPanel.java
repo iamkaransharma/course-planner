@@ -31,7 +31,7 @@ abstract class GUIPanel extends JPanel{
     }
 
     JLabel getLabel(){
-        JLabel label = new JLabel(title);
+        JLabel label = new JLabel(title,JLabel.LEFT);
         label.setForeground(Color.blue);
         return label;
     }
