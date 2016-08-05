@@ -12,5 +12,16 @@ public class SemesterOfferingsPanel extends GUIPanel{
 
     public SemesterOfferingsPanel (CoursePlanner coursePlanner){
         super(coursePlanner);
+        this.setLabel("Course Offerings by Semester");
+    }
+
+    @Override
+    protected JPanel getPanel(){
+        JPanel semesterOfferingsPanel = new JPanel();
+        semesterOfferingsPanel.setLayout(new BorderLayout());
+        semesterOfferingsPanel.add(getLabel(),BorderLayout.NORTH);
+        semesterOfferingsPanel.add(getComponent(),BorderLayout.CENTER);
+        semesterOfferingsPanel.setPreferredSize(new Dimension(800,HEIGHT));
+        return semesterOfferingsPanel;
     }
 }

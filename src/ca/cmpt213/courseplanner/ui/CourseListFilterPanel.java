@@ -19,11 +19,12 @@ public class CourseListFilterPanel extends GUIPanel{
     public CourseListFilterPanel(CoursePlanner coursePlanner){
         super(coursePlanner);
         departments = coursePlanner.getDepartments();
+        this.setLabel("Course List Filter");
 
     }
 
     @Override
-    protected Component getCoursePanel() {
+    protected Component getComponent() {
         panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
         panel.setBackground(Color.white);
 
@@ -51,6 +52,17 @@ public class CourseListFilterPanel extends GUIPanel{
         }
         Arrays.sort(departmentNames);
         return departmentNames;
+    }
+
+    @Override
+    protected JPanel getPanel(){
+        JPanel courseListFilterPanel = new JPanel();
+        courseListFilterPanel.setLayout(new BorderLayout());
+        courseListFilterPanel.add(getLabel(),BorderLayout.NORTH);
+        courseListFilterPanel.add(getComponent(),BorderLayout.CENTER);
+        courseListFilterPanel.setMinimumSize(new Dimension(200,300));
+        courseListFilterPanel.setPreferredSize(new Dimension(200,300));
+        return courseListFilterPanel;
     }
 
 }

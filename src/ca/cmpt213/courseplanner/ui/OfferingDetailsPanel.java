@@ -12,6 +12,17 @@ public class OfferingDetailsPanel extends GUIPanel {
 
     public OfferingDetailsPanel(CoursePlanner coursePlanner){
         super(coursePlanner);
+        this.setLabel("Details of Course Offering");
+    }
+
+    @Override
+    protected JPanel getPanel(){
+        JPanel offeringDetailsPanel = new JPanel();
+        offeringDetailsPanel.setLayout(new BorderLayout());
+        offeringDetailsPanel.add(getLabel(),BorderLayout.NORTH);
+        offeringDetailsPanel.add(getComponent(),BorderLayout.CENTER);
+        offeringDetailsPanel.setPreferredSize(new Dimension(250,300));
+        return offeringDetailsPanel;
     }
 
 }

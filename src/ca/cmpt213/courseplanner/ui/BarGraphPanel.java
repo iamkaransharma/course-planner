@@ -12,5 +12,16 @@ public class BarGraphPanel extends GUIPanel {
 
     public BarGraphPanel(CoursePlanner coursePlanner){
         super(coursePlanner);
+        this.setLabel("Statistics");
+    }
+
+    @Override
+    protected JPanel getPanel(){
+        JPanel barGraphPanel = new JPanel();
+        barGraphPanel.setLayout(new BorderLayout());
+        barGraphPanel.add(getLabel(),BorderLayout.NORTH);
+        barGraphPanel.add(getComponent(),BorderLayout.CENTER);
+        barGraphPanel.setPreferredSize(new Dimension(250,300));
+        return barGraphPanel;
     }
 }

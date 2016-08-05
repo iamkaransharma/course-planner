@@ -23,7 +23,7 @@ abstract class GUIPanel extends JPanel{
     }
 
     // Required methods
-    protected Component getCoursePanel(){
+    protected Component getComponent(){
         panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
         panel.setBackground(Color.white);
         return panel;
@@ -37,6 +37,13 @@ abstract class GUIPanel extends JPanel{
 
     void setLabel(String title){
         this.title = title;
+    }
+
+    protected JPanel getPanel(){
+        panel.setLayout(new BorderLayout());
+        panel.add(this.getLabel());
+        panel.add(this.getComponent());
+        return panel;
     }
 
 
