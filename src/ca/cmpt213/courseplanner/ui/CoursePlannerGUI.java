@@ -47,6 +47,7 @@ public class CoursePlannerGUI extends JPanel {
         clfp.setLabel("Course List Filter");
         panel1.add(clfp.getLabel(),BorderLayout.NORTH);
         panel1.add(clfp.getCoursePanel(),BorderLayout.CENTER);
+        panel1.setMinimumSize(new Dimension(200,300));
         panel1.setPreferredSize(new Dimension(200,300));
         westSide.add(panel1);
 
@@ -59,6 +60,7 @@ public class CoursePlannerGUI extends JPanel {
         clp.setLabel("Course List");
         panel2.add(clp.getLabel(),BorderLayout.NORTH);
         panel2.add(clp.getCoursePanel(),BorderLayout.CENTER);
+        panel2.setMinimumSize(new Dimension(200,300));
         panel2.setPreferredSize(new Dimension(200,300));
         westSide.add(panel2);
 
