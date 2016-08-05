@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class BarGraphPanel extends GUIPanel {
 
-    public BarGraphPanel(CoursePlanner coursePlanner, String title){
-        super(coursePlanner,title);
+    public BarGraphPanel(CoursePlanner coursePlanner){
+        super(coursePlanner);
     }
 }

@@ -18,13 +18,12 @@ abstract class GUIPanel extends JPanel{
     private CoursePlanner coursePlanner;
     private String title;
 
-    public GUIPanel (CoursePlanner coursePlanner, String title){
+    public GUIPanel (CoursePlanner coursePlanner){
         this.coursePlanner = coursePlanner;
-        this.title = title;
     }
 
     // Required methods
-    Component getCoursePanel(){
+    protected Component getCoursePanel(){
         panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
         panel.setBackground(Color.white);
         return panel;
@@ -34,6 +33,10 @@ abstract class GUIPanel extends JPanel{
         JLabel label = new JLabel(title,JLabel.LEFT);
         label.setForeground(Color.blue);
         return label;
+    }
+
+    void setLabel(String title){
+        this.title = title;
     }
 
 

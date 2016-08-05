@@ -43,7 +43,8 @@ public class CoursePlannerGUI extends JPanel {
         JPanel panel1 = new JPanel();
         panel1.setLayout(new BorderLayout());
 
-        CourseListFilterPanel clfp = new CourseListFilterPanel(coursePlanner,"Course List Filter");
+        CourseListFilterPanel clfp = new CourseListFilterPanel(coursePlanner);
+        clfp.setLabel("Course List Filter");
         panel1.add(clfp.getLabel(),BorderLayout.NORTH);
         panel1.add(clfp.getCoursePanel(),BorderLayout.CENTER);
         panel1.setPreferredSize(new Dimension(200,300));
@@ -54,7 +55,8 @@ public class CoursePlannerGUI extends JPanel {
         JPanel panel2 = new JPanel();
         panel2.setLayout(new BorderLayout());
 
-        CourseListPanel clp = new CourseListPanel(coursePlanner, "Course List");
+        CourseListPanel clp = new CourseListPanel(coursePlanner);
+        clp.setLabel("Course List");
         panel2.add(clp.getLabel(),BorderLayout.NORTH);
         panel2.add(clp.getCoursePanel(),BorderLayout.CENTER);
         panel2.setPreferredSize(new Dimension(200,300));
@@ -69,7 +71,8 @@ public class CoursePlannerGUI extends JPanel {
         JPanel panel3 = new JPanel();
         panel3.setLayout(new BorderLayout());
 
-        SemesterOfferingsPanel sop = new SemesterOfferingsPanel(coursePlanner, "Course Offerings by Semester");
+        SemesterOfferingsPanel sop = new SemesterOfferingsPanel(coursePlanner);
+        sop.setLabel("Course Offerings by Semester");
         panel3.add(sop.getLabel(),BorderLayout.NORTH);
         panel3.add(sop.getCoursePanel(),BorderLayout.CENTER);
         panel3.setPreferredSize(new Dimension(800,HEIGHT));
@@ -86,18 +89,21 @@ public class CoursePlannerGUI extends JPanel {
         JPanel panel4 = new JPanel();
         panel4.setLayout(new BorderLayout());
 
-        BarGraphPanel barGraph = new BarGraphPanel(coursePlanner, "Statistics");
+        BarGraphPanel barGraph = new BarGraphPanel(coursePlanner);
+        barGraph.setLabel("Statistics");
         panel4.add(barGraph.getLabel(),BorderLayout.NORTH);
         panel4.add(barGraph.getCoursePanel(),BorderLayout.CENTER);
 
         panel4.setPreferredSize(new Dimension(250,300));
+
         eastSide.add(panel4);
 
         eastSide.add(Box.createRigidArea(new Dimension(0,5)));
 
         JPanel panel5 = new JPanel();
         panel5.setLayout(new BorderLayout());
-        OfferingDetailsPanel odp = new OfferingDetailsPanel(coursePlanner, "Details of Course Offering");
+        OfferingDetailsPanel odp = new OfferingDetailsPanel(coursePlanner);
+        odp.setLabel("Details of Course Offering");
         panel5.add(odp.getLabel(),BorderLayout.NORTH);
         panel5.add(odp.getCoursePanel(),BorderLayout.CENTER);
 

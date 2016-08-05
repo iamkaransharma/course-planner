@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class SemesterOfferingsPanel extends GUIPanel{
 
-    public SemesterOfferingsPanel (CoursePlanner coursePlanner, String title){
-        super(coursePlanner,title);
+    public SemesterOfferingsPanel (CoursePlanner coursePlanner){
+        super(coursePlanner);
     }
 }
