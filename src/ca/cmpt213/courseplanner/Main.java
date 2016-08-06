@@ -13,9 +13,9 @@ public class Main {
     public static void main(String[] args) {
 
         CoursePlanner coursePlanner = new CoursePlanner("data/course_data_2016.csv");
-//        coursePlanner.createDepartments();
-//        coursePlanner.insertCoursesIntoDepartments();
-//        coursePlanner.insertCourseOfferingsIntoCourses();
+        coursePlanner.createDepartments();
+        coursePlanner.insertCoursesIntoDepartments();
+        coursePlanner.insertCourseOfferingsIntoCourses();
         CoursePlannerGUI coursePlannerGUI = new CoursePlannerGUI(coursePlanner);
         coursePlannerGUI.startProgram();
     }

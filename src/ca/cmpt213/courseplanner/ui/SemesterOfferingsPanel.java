@@ -25,14 +25,17 @@ public class SemesterOfferingsPanel extends GUIPanel{
         // Testing it out
         JButton testButton = new JButton("CMPT 213 - SURREY");
         JButton testButton2 = new JButton("CMPT 213 - BURNABY");
+        JButton testButton3 = new JButton("CMPT 213 - VANCOUVER");
+        JButton testButton4 = new JButton("CMPT 373 - SURREY");
         panel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridwidth = 3;
+        c.weightx = 1.0;
 
         panel.add(testButton,c);
-
         panel.add(testButton2,c);
+        panel.add(testButton3,c);
 
         return panel;
     }

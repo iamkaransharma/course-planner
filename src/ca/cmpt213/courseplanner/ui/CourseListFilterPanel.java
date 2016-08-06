@@ -4,17 +4,19 @@ import ca.cmpt213.courseplanner.model.*;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.*;
 import java.awt.*;
 
 /**
  * Created by Thomas_Ngo on 2016-07-30.
  */
-public class CourseListFilterPanel extends GUIPanel{
+public class CourseListFilterPanel extends GUIPanel implements ItemListener{
 
     private ArrayList<Department> departments = new ArrayList<>();
+
+    JCheckBox undergradCoursesButton;
+    JCheckBox gradCoursesButton;
 
     public CourseListFilterPanel(CoursePlanner coursePlanner){
         super(coursePlanner);
@@ -40,7 +42,32 @@ public class CourseListFilterPanel extends GUIPanel{
             }
         });
 
+        // Check-boxes for undergrad and grad courses
+        undergradCoursesButton = new JCheckBox("Include undergrad courses");
+        undergradCoursesButton.setMnemonic(KeyEvent.VK_C);
+        undergradCoursesButton.setSelected(true);
+        undergradCoursesButton.addItemListener(this);
+
+        gradCoursesButton = new JCheckBox("Include grad courses");
+        gradCoursesButton.setMnemonic(KeyEvent.VK_C);
+        gradCoursesButton.setSelected(false);
+        gradCoursesButton.addItemListener(this);
+
+        // Button to update the list
+        JButton updateListButton = new JButton("Update Course List");
+
+        updateListButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        panel.add(new JLabel("Department:"));
         panel.add(departmentList);
+        panel.add(undergradCoursesButton);
+        panel.add(gradCoursesButton);
+        panel.add(updateListButton);
 
         return panel;
     }
@@ -65,4 +92,8 @@ public class CourseListFilterPanel extends GUIPanel{
         return courseListFilterPanel;
     }
 
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+
+    }
 }
