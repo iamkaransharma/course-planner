@@ -43,6 +43,11 @@ public class CourseListFilterPanel extends GUIPanel implements ItemListener{
         });
 
         // Check-boxes for undergrad and grad courses
+
+        JPanel checkBoxes = new JPanel();
+        checkBoxes.setLayout(new BoxLayout(checkBoxes, BoxLayout.PAGE_AXIS));
+        checkBoxes.setBackground(Color.white);
+
         undergradCoursesButton = new JCheckBox("Include undergrad courses");
         undergradCoursesButton.setMnemonic(KeyEvent.VK_C);
         undergradCoursesButton.setSelected(true);
@@ -52,6 +57,9 @@ public class CourseListFilterPanel extends GUIPanel implements ItemListener{
         gradCoursesButton.setMnemonic(KeyEvent.VK_C);
         gradCoursesButton.setSelected(false);
         gradCoursesButton.addItemListener(this);
+
+        checkBoxes.add(undergradCoursesButton);
+        checkBoxes.add(gradCoursesButton);
 
         // Button to update the list
         JButton updateListButton = new JButton("Update Course List");
@@ -65,8 +73,7 @@ public class CourseListFilterPanel extends GUIPanel implements ItemListener{
 
         panel.add(new JLabel("Department:"));
         panel.add(departmentList);
-        panel.add(undergradCoursesButton);
-        panel.add(gradCoursesButton);
+        panel.add(checkBoxes);
         panel.add(updateListButton);
 
         return panel;
@@ -87,8 +94,8 @@ public class CourseListFilterPanel extends GUIPanel implements ItemListener{
         courseListFilterPanel.setLayout(new BorderLayout());
         courseListFilterPanel.add(getLabel(),BorderLayout.NORTH);
         courseListFilterPanel.add(getComponent(),BorderLayout.CENTER);
-        courseListFilterPanel.setMinimumSize(new Dimension(200,300));
-        courseListFilterPanel.setPreferredSize(new Dimension(200,300));
+        courseListFilterPanel.setMinimumSize(new Dimension(225,175));
+        courseListFilterPanel.setPreferredSize(new Dimension(225,175));
         return courseListFilterPanel;
     }
 

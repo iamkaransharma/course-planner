@@ -54,8 +54,8 @@ public class CourseListPanel extends GUIPanel{
         courseListPanel.setLayout(new BorderLayout());
         courseListPanel.add(getLabel(),BorderLayout.NORTH);
         courseListPanel.add(getComponent(),BorderLayout.CENTER);
-        courseListPanel.setMinimumSize(new Dimension(200,300));
-        courseListPanel.setPreferredSize(new Dimension(200,300));
+        courseListPanel.setMinimumSize(new Dimension(200,425));
+        courseListPanel.setPreferredSize(new Dimension(200,425));
         return courseListPanel;
     }
 

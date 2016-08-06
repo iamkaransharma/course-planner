@@ -1,6 +1,7 @@
 package ca.cmpt213.courseplanner.ui;
 
 import ca.cmpt213.courseplanner.model.*;
+import ca.cmpt213.bargraph.*;
 
 import javax.swing.*;
 import java.awt.*;
