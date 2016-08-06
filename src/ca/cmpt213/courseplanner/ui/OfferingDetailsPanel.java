@@ -3,6 +3,7 @@ package ca.cmpt213.courseplanner.ui;
 import ca.cmpt213.courseplanner.model.CoursePlanner;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 
 /**
@@ -13,6 +14,19 @@ public class OfferingDetailsPanel extends GUIPanel {
     public OfferingDetailsPanel(CoursePlanner coursePlanner){
         super(coursePlanner);
         this.setLabel("Details of Course Offering");
+    }
+
+    @Override
+    protected Component getComponent() {
+        panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
+        panel.setBackground(Color.white);
+
+        panel.add(new JLabel("Course Name:"));
+        panel.add(new JLabel("Semester:"));
+        panel.add(new JLabel("Location:"));
+        panel.add(new JLabel("Instructors:"));
+
+        return panel;
     }
 
     @Override
