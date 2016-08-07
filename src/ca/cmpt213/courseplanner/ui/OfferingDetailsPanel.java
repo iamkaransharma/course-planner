@@ -18,13 +18,18 @@ public class OfferingDetailsPanel extends GUIPanel {
 
     @Override
     protected Component getComponent() {
+        panel.setLayout(new GridLayout(0,2));
         panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
         panel.setBackground(Color.white);
 
-        panel.add(new JLabel("Course Name:"));
-        panel.add(new JLabel("Semester:"));
-        panel.add(new JLabel("Location:"));
-        panel.add(new JLabel("Instructors:"));
+        JPanel labelsPanel = new JPanel();
+        labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.PAGE_AXIS));
+        labelsPanel.add(new JLabel("Course Name:"));
+        labelsPanel.add(new JLabel("Semester:"));
+        labelsPanel.add(new JLabel("Location:"));
+        labelsPanel.add(new JLabel("Instructors:"));
+
+        panel.add(labelsPanel);
 
         return panel;
     }

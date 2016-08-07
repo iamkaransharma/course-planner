@@ -24,17 +24,19 @@ public class CourseListPanel extends GUIPanel{
         panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
         panel.setBackground(Color.white);
 
-
         // Need to insert list of courses from selected department inside this parameter.
-        String[] temporarytestdata = {"CMPT 213","CMPT 307","CMPT 213","CMPT 307","CMPT 213","CMPT 307",
-                "CMPT 213","CMPT 307","CMPT 213","CMPT 307","CMPT 213","CMPT 307","CMPT 213","CMPT 307"};
+        String[] temporarytestdata = {"CMPT 213","CMPT 307","CMPT 225","CMPT 300","CMPT 250","CMPT 354"
+        ,"CMPT 471","CMPT 470","CMPT 454","CMPT 125","CMPT 150","CMPT 310"};
         listOfCourses = new JList(temporarytestdata);
-//        listOfCourses.setSize(150,300);
-//        listOfCourses.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-//        listOfCourses.setVisibleRowCount(-1);
+        listOfCourses.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        listOfCourses.setLayoutOrientation(JList.VERTICAL_WRAP);
+        listOfCourses.setFixedCellWidth(90);
+        listOfCourses.setVisibleRowCount(-1);
 
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setViewportView(listOfCourses);
+        JScrollPane scrollPane = new JScrollPane(listOfCourses);
+        scrollPane.setPreferredSize(new Dimension(200,100));
+
+
 
 //        listOfCourses.addMouseListener(new MouseAdapter() {
 //            public void mouseClicked(MouseEvent e) {
@@ -43,7 +45,7 @@ public class CourseListPanel extends GUIPanel{
 //         });
 
 
-        panel.add(listOfCourses);
+        panel.add(scrollPane);
 
         return panel;
     }
