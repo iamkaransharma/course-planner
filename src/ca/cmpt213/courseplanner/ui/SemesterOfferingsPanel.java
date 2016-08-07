@@ -15,6 +15,33 @@ public class SemesterOfferingsPanel extends GUIPanel{
         super(coursePlanner);
         this.setLabel("Course Offerings by Semester");
     }
+
+    protected Component getTableRowOfLabels(){
+        JPanel tableRow = new JPanel();
+        tableRow.setLayout(new BoxLayout(tableRow,BoxLayout.LINE_AXIS));
+
+        JLabel springLabel = new JLabel("Spring", SwingConstants.CENTER);
+        springLabel.setBackground(Color.white);
+        springLabel.setOpaque(true);
+        springLabel.setPreferredSize(new Dimension(200,15));
+
+        JLabel summerLabel = new JLabel("Summer", SwingConstants.CENTER);
+        summerLabel.setBackground(Color.white);
+        summerLabel.setOpaque(true);
+        summerLabel.setPreferredSize(new Dimension(200,15));
+
+        JLabel fallLabel = new JLabel("Fall", SwingConstants.CENTER);
+        fallLabel.setBackground(Color.white);
+        fallLabel.setOpaque(true);
+        fallLabel.setPreferredSize(new Dimension(200,15));
+
+        tableRow.add(springLabel);
+        tableRow.add(summerLabel);
+        tableRow.add(fallLabel);
+
+        return tableRow;
+    }
+
     @Override
     protected Component getComponent() {
 //        panel.setBackground(Color.white);
@@ -30,47 +57,92 @@ public class SemesterOfferingsPanel extends GUIPanel{
         panel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
+        // 550 is the maximum height of the table
 
-        int rows = 10;
-        for (int i = 0; i < rows; i++){
+        int maximum_height = 550;
 
-            JLabel spring = new JLabel("Spring");
-            spring.setBackground(Color.white);
-            spring.setBorder(BorderFactory.createLineBorder(Color.black));
-            spring.setOpaque(true);
+        int years = 10;
 
-            JLabel summer = new JLabel("Summer");
-            summer.setBackground(Color.white);
-            summer.setBorder(BorderFactory.createLineBorder(Color.black));
-            summer.setOpaque(true);
+        int cell_height = maximum_height/years;
 
-            JLabel fall = new JLabel("Fall");
-            fall.setBackground(Color.white);
-            fall.setBorder(BorderFactory.createLineBorder(Color.black));
-            fall.setOpaque(true);
+        for (int i = 0; i < years+1; i++){
 
-            c.fill = GridBagConstraints.HORIZONTAL;
+            if (i == 0){
+                JLabel springLabel = new JLabel("Spring", SwingConstants.CENTER);
+                springLabel.setOpaque(true);
+                springLabel.setPreferredSize(new Dimension(200,15));
 
-            c.weightx = 0.5;
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 0;
-            c.gridy = i;
-            panel.add(spring,c);
+                JLabel summerLabel = new JLabel("Summer", SwingConstants.CENTER);
+                summerLabel.setOpaque(true);
+                summerLabel.setPreferredSize(new Dimension(200,15));
 
-            c.weightx = 0.5;
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 1;
-            c.gridy = i;
-            panel.add(summer,c);
+                JLabel fallLabel = new JLabel("Fall", SwingConstants.CENTER);
+                fallLabel.setOpaque(true);
+                fallLabel.setPreferredSize(new Dimension(200,15));
+                c.fill = GridBagConstraints.HORIZONTAL;
 
-            c.weightx = 0.5;
-            c.fill = GridBagConstraints.HORIZONTAL;
-            c.gridx = 2;
-            c.gridy = i;
-            panel.add(fall,c);
+                c.weightx = 0.5;
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.gridx = 0;
+                c.gridy = i;
+                panel.add(springLabel, c);
+
+                c.weightx = 0.5;
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.gridx = 1;
+                c.gridy = i;
+                panel.add(summerLabel, c);
+
+                c.weightx = 0.5;
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.gridx = 2;
+                c.gridy = i;
+                panel.add(fallLabel, c);
+            }
+
+            // Years
+            else if (i >= 1) {
+                JLabel spring = new JLabel("", SwingConstants.CENTER);
+                spring.setBackground(Color.white);
+                spring.setBorder(BorderFactory.createLineBorder(Color.black));
+                spring.setOpaque(true);
+                spring.setPreferredSize(new Dimension(200, cell_height));
+
+                JLabel summer = new JLabel("", SwingConstants.CENTER);
+                summer.setBackground(Color.white);
+                summer.setBorder(BorderFactory.createLineBorder(Color.black));
+                summer.setOpaque(true);
+                summer.setPreferredSize(new Dimension(200, cell_height));
+
+                JLabel fall = new JLabel("", SwingConstants.CENTER);
+                fall.setBackground(Color.white);
+                fall.setBorder(BorderFactory.createLineBorder(Color.black));
+                fall.setOpaque(true);
+                fall.setPreferredSize(new Dimension(200, cell_height));
+
+                c.fill = GridBagConstraints.HORIZONTAL;
+
+                c.weightx = 0.5;
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.gridx = 0;
+                c.gridy = i;
+                panel.add(spring, c);
+
+                c.weightx = 0.5;
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.gridx = 1;
+                c.gridy = i;
+                panel.add(summer, c);
+
+                c.weightx = 0.5;
+                c.fill = GridBagConstraints.HORIZONTAL;
+                c.gridx = 2;
+                c.gridy = i;
+                panel.add(fall, c);
+            }
         }
 
-        // Default number of rows is 10 years.
+        // Default number of years is 10 years.
 
         return panel;
     }
@@ -89,7 +161,9 @@ public class SemesterOfferingsPanel extends GUIPanel{
         tablePanel.add(getComponent(),BorderLayout.CENTER);
         semesterOfferingsPanel.add(tablePanel);
 
+
         semesterOfferingsPanel.setPreferredSize(new Dimension(800,HEIGHT));
+
         return semesterOfferingsPanel;
     }
 }
