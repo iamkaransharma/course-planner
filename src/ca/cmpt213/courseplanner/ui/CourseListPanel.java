@@ -29,12 +29,12 @@ public class CourseListPanel extends GUIPanel{
         ,"CMPT 471","CMPT 470","CMPT 454","CMPT 125","CMPT 150","CMPT 310"};
         listOfCourses = new JList(temporarytestdata);
         listOfCourses.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        listOfCourses.setLayoutOrientation(JList.VERTICAL_WRAP);
+        listOfCourses.setLayoutOrientation(JList.HORIZONTAL_WRAP);
         listOfCourses.setFixedCellWidth(90);
         listOfCourses.setVisibleRowCount(-1);
 
         JScrollPane scrollPane = new JScrollPane(listOfCourses);
-        scrollPane.setPreferredSize(new Dimension(200,100));
+        scrollPane.setPreferredSize(new Dimension(200,400));
 
 
 

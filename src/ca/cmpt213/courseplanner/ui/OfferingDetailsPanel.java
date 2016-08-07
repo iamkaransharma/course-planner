@@ -29,6 +29,11 @@ public class OfferingDetailsPanel extends GUIPanel {
         labelsPanel.add(new JLabel("Location:"));
         labelsPanel.add(new JLabel("Instructors:"));
 
+        JPanel hiddenPanel = new JPanel();
+        hiddenPanel.add(new JLabel("Section Type:"));
+        hiddenPanel.add(new JLabel("LAB"));
+        hiddenPanel.add(new JLabel("LEC"));
+
         panel.add(labelsPanel);
 
         return panel;
