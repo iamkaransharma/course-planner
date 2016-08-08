@@ -28,7 +28,7 @@ public class CoursePlannerGUI extends JFrame {
         westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.PAGE_AXIS));
         westPanel.add(new CourseListFilterPanel(coursePlanner));
         westPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-//        westPanel.add(new CourseListPanel(coursePlanner).getPanel());
+        westPanel.add(new CourseListPanel(coursePlanner));
         windowContainer.add(westPanel, BorderLayout.WEST);
 
         // Center

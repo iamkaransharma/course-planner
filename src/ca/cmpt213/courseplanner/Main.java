@@ -17,9 +17,9 @@ public class Main {
 
         try {
             CoursePlanner coursePlanner = new CoursePlanner(CSV_FILE_PATH);
-            coursePlanner.dumpModel();
-//            CoursePlannerGUI coursePlannerGUI = new CoursePlannerGUI(coursePlanner);
-//            coursePlannerGUI.start();
+//            coursePlanner.dumpModel();
+            CoursePlannerGUI coursePlannerGUI = new CoursePlannerGUI(coursePlanner);
+            coursePlannerGUI.start();
         } catch (FileNotFoundException e) {
             CoursePlannerGUI.displayDialogBox("Data file (" + CSV_FILE_PATH + ") not found.");
         }

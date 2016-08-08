@@ -2,7 +2,6 @@ package ca.cmpt213.courseplanner.ui;
 
 import ca.cmpt213.courseplanner.model.CourseListFilter;
 import ca.cmpt213.courseplanner.model.CoursePlanner;
-import ca.cmpt213.courseplanner.model.CoursePlannerObserver;
 import ca.cmpt213.courseplanner.model.Department;
 
 import javax.swing.*;
@@ -15,13 +14,13 @@ import java.util.Set;
 /**
  * Created by Thomas_Ngo on 2016-07-30.
  */
-public class CourseListFilterPanel extends GUIPanel implements CoursePlannerObserver {
+public class CourseListFilterPanel extends GUIPanel {
 
     private static final String TITLE = "Course List Filter";
 
     private List<Department> departmentList;
 
-//    JCheckBox undergradCoursesButton;
+    //    JCheckBox undergradCoursesButton;
 //    JCheckBox gradCoursesButton;
 //
 //    JComboBox<String> departmentList;
@@ -33,20 +32,21 @@ public class CourseListFilterPanel extends GUIPanel implements CoursePlannerObse
 
     public CourseListFilterPanel(CoursePlanner coursePlanner) {
         super(coursePlanner, TITLE);
+
         Set<Department> departmentSet = coursePlanner.getDepartmentManager().getDepartments();
         this.departmentList = new ArrayList<>();
         this.departmentList.addAll(departmentSet);
-//        this.setLabel("Course List Filter");
+
         selectedDepartment = null;
         selectedFilter = null;
-        JPanel contentPanel = getContentPanel();
-        setInternalPanel(contentPanel);
+        setInternalPanel(getContentPanel());
     }
 
     private JPanel getContentPanel() {
         // Dropdown
         String[] departmentNames = createDepartmentNamesList();
         JComboBox<String> departmentNamesBox = new JComboBox<>(departmentNames);
+        selectedDepartment = departmentList.get(0);
         departmentNamesBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,24 +62,26 @@ public class CourseListFilterPanel extends GUIPanel implements CoursePlannerObse
         // Checkboxes
         JCheckBox undergradSelectButton = new JCheckBox("Include undergrad courses");
         undergradSelectButton.setMnemonic(KeyEvent.VK_C);
-        undergradSelectButton.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-//                getModel().selectDepartment(selectedDepartment, CourseListFilter.UNDERGRADUATE_COURSES);
-                selectedFilter = CourseListFilter.UNDERGRADUATE_COURSES;
-            }
-        });
+//        undergradSelectButton.addItemListener(new ItemListener() {
+//            @Override
+//            public void itemStateChanged(ItemEvent e) {
+//                if (undergradSelectButton.isSelected()) {
+//                    selectedFilter = CourseListFilter.UNDERGRADUATE_COURSES;
+//                }
+//            }
+//        });
         undergradSelectButton.setSelected(true);
 
         JCheckBox gradSelectButton = new JCheckBox("Include grad courses");
         gradSelectButton.setMnemonic(KeyEvent.VK_C);
-        gradSelectButton.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-//                getModel().selectDepartment(selectedDepartment, CourseListFilter.GRADUATE_COURSES);
-                selectedFilter = CourseListFilter.GRADUATE_COURSES;
-            }
-        });
+//        gradSelectButton.addItemListener(new ItemListener() {
+//            @Override
+//            public void itemStateChanged(ItemEvent e) {
+//                if (gradSelectButton.isSelected()) {
+//                    selectedFilter = CourseListFilter.GRADUATE_COURSES;
+//                }
+//            }
+//        });
         gradSelectButton.setSelected(false);
 
         JPanel checkBoxes = new JPanel();
@@ -90,9 +92,21 @@ public class CourseListFilterPanel extends GUIPanel implements CoursePlannerObse
         // Button to update the list
         JButton updateListButton = new JButton("Update Course List");
 
-        updateListButton.addActionListener(
-                event -> updateSelectedDepartment()
-        );
+        updateListButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (undergradSelectButton.isSelected() && gradSelectButton.isSelected()) {
+                    selectedFilter = CourseListFilter.ALL_COURSES;
+                } else if (undergradSelectButton.isSelected()) {
+                    selectedFilter = CourseListFilter.UNDERGRADUATE_COURSES;
+                } else if (gradSelectButton.isSelected()) {
+                    selectedFilter = CourseListFilter.GRADUATE_COURSES;
+                } else {
+                    selectedFilter = CourseListFilter.NO_COURSES;
+                }
+                getModel().selectDepartment(selectedDepartment, selectedFilter);
+            }
+        });
 
 //        panel.add(new JLabel("Department:"));
         JPanel contentPanel = new JPanel(new BorderLayout());
@@ -177,13 +191,8 @@ public class CourseListFilterPanel extends GUIPanel implements CoursePlannerObse
 //
 //    }
 
-    private void updateSelectedDepartment() {
-        getModel().selectDepartment(selectedDepartment, selectedFilter);
-    }
-
-
-    @Override
-    public void modelStateChanged() {
-
-    }
+//    private void updateSelectedDepartment() {
+//        getModel().selectDepartment(selectedDepartment, selectedFilter);
+//        System.out.println(getModel().getActiveCourseList());
+//    }
 }

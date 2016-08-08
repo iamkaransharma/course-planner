@@ -6,5 +6,6 @@ package ca.cmpt213.courseplanner.model;
 public enum CourseListFilter {
     UNDERGRADUATE_COURSES,
     GRADUATE_COURSES,
-    ALL_COURSES
+    ALL_COURSES,
+    NO_COURSES
 }

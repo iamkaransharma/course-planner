@@ -1,93 +1,91 @@
-//package ca.cmpt213.courseplanner.ui;
-//
-//import ca.cmpt213.courseplanner.model.*;
-//import ca.cmpt213.courseplanner.model.CoursePlannerObserver;
-//
-//import javax.swing.*;
-//import javax.swing.border.BevelBorder;
-//import java.awt.*;
-//import java.awt.event.*;
-//import java.util.List;
-//
-///**
-// * Created by Thomas_Ngo on 2016-07-30.
-// */
-//public class CourseListPanel extends GUIPanel{
-//
-//    private JList listOfCourses;
-//    private List<Course> coursesInsideSelectedDepartment;
-//    private String[] courses;
-//
-//    public CourseListPanel(CoursePlanner coursePlanner){
-//        super(coursePlanner);
-//        this.setLabel("Course List");
-//        registerAsObserver();
-//    }
-//
-//    @Override
-//    protected Component getComponent(){
-//        panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
-//        panel.setBackground(Color.white);
-//
-//        // Need to insert list of courses from selected department inside this parameter.
-//
-//        listOfCourses = new JList();
-//        listOfCourses.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-//        listOfCourses.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-//        listOfCourses.setFixedCellWidth(90);
-//        listOfCourses.setVisibleRowCount(-1);
-//
-//        JScrollPane scrollPane = new JScrollPane(listOfCourses);
-//        scrollPane.setPreferredSize(new Dimension(200,400));
-//
-////        listOfCourses.addMouseListener(new MouseAdapter() {
-////            public void mouseClicked(MouseEvent e) {
-////
-////            }
-////         });
-//
-//
-//        panel.add(scrollPane);
-//
-//        return panel;
-//    }
-//
-//    @Override
-//    protected JPanel getPanel(){
-//        JPanel courseListPanel = new JPanel();
-//        courseListPanel.setLayout(new BorderLayout());
-//        courseListPanel.add(getLabel(),BorderLayout.NORTH);
-//        courseListPanel.add(getComponent(),BorderLayout.CENTER);
-//        courseListPanel.setMinimumSize(new Dimension(200,425));
-//        courseListPanel.setPreferredSize(new Dimension(200,425));
-//        return courseListPanel;
-//    }
-//
-//
-//    private void registerAsObserver() {
-//        coursePlanner.addCourseListObserver(
-//                new CoursePlannerObserver() {
-//                    @Override
-//                    public void modelStateChanged() {
-//                        updateCourseList();
-//                    }
-//                }
-//        );
-//    }
-//
-//    private void updateCourseList(){
-//        coursesInsideSelectedDepartment = coursePlanner.getActiveDepartment().getCourses();
-//        courses = new String[coursesInsideSelectedDepartment.size()];
-//
-//        System.out.println(coursesInsideSelectedDepartment.size());
-//
-//        for (int i = 0; i < coursesInsideSelectedDepartment.size(); i++){
-//            courses[i] = coursesInsideSelectedDepartment.get(i).getFullName();
-//        }
-//
-//        listOfCourses.setListData(courses);
-//    }
-//
-//    //modelStateChanged is where you get the actual data.
-//
-//}
+package ca.cmpt213.courseplanner.ui;
+
+import ca.cmpt213.courseplanner.model.Course;
+import ca.cmpt213.courseplanner.model.CoursePlanner;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Thomas_Ngo on 2016-07-30.
+ */
+public class CourseListPanel extends GUIPanel {
+
+    private static final String TITLE = "Course List";
+
+    private List<Course> selectedCourseList;
+    private DefaultListModel<String> defaultListModel;
+
+    public CourseListPanel(CoursePlanner coursePlanner) {
+        super(coursePlanner, TITLE);
+
+        this.selectedCourseList = new ArrayList<>();
+        this.defaultListModel = new DefaultListModel<>();
+        setInternalPanel(getContentPanel());
+        registerAsObserver();
+    }
+
+    private JPanel getContentPanel() {
+        // Split list view of courses
+        updateListModelWithCourses();
+
+        JList<String> courseListView = new JList<>(defaultListModel);
+        courseListView.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        courseListView.setFixedCellWidth(90);
+        courseListView.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        courseListView.setVisibleRowCount(-1);
+
+        courseListView.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedIndex = courseListView.getSelectedIndex();
+                if (selectedIndex != -1) {
+                    Course selectedCourse = selectedCourseList.get(selectedIndex);
+                    getModel().selectCourse(selectedCourse);
+                }
+            }
+        });
+
+        JScrollPane listScroller = new JScrollPane(courseListView);
+        listScroller.setPreferredSize(new Dimension(200, 400));
+
+        JPanel listContainer = new JPanel();
+        listContainer.add(listScroller);
+
+        listContainer.setMinimumSize(new Dimension(200, 425));
+        listContainer.setPreferredSize(new Dimension(200, 425));
+
+        return listContainer;
+    }
+
+    private String[] createCourseNamesList() {
+        String[] courseNames = new String[selectedCourseList.size()];
+        for (int i = 0; i < selectedCourseList.size(); i++) {
+            courseNames[i] = selectedCourseList.get(i).getFullName();
+        }
+        return courseNames;
+    }
+
+    private void registerAsObserver() {
+        getModel().addCourseListObserver(
+                () -> updateCourseList()
+        );
+    }
+
+    private void updateCourseList() {
+        selectedCourseList.clear();
+        selectedCourseList.addAll(getModel().getActiveCourseList());
+        updateListModelWithCourses();
+    }
+
+    private void updateListModelWithCourses() {
+        defaultListModel.clear();
+        for (Course currentCourse : selectedCourseList) {
+            defaultListModel.addElement(currentCourse.getFullName());
+        }
+    }
+}

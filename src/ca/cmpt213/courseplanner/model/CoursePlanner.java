@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by Thomas_Ngo on 2016-07-30.
@@ -29,6 +30,7 @@ public class CoursePlanner{
     }
 
     public void selectDepartment(Department selectedDepartment, CourseListFilter filter) {
+        assert selectedDepartment != null;
         switch (filter) {
             case UNDERGRADUATE_COURSES:
                 activeCourseList = selectedDepartment.getUndergraduateCourses();
@@ -39,9 +41,14 @@ public class CoursePlanner{
             case ALL_COURSES:
                 activeCourseList = selectedDepartment.getCourses();
                 break;
+            case NO_COURSES:
+                activeCourseList = new TreeSet<>();
+                break;
             default:
                 throw new RuntimeException("Unexpected CourseListFilter received");
         }
+        activeCourse = null;
+        notifyActiveCourseObservers();
         notifyCourseListObservers();
     }
 
