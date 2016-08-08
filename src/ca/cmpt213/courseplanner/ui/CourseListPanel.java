@@ -83,7 +83,6 @@ public class CourseListPanel extends GUIPanel{
 
         for (int i = 0; i < coursesInsideSelectedDepartment.size(); i++){
             courses[i] = coursesInsideSelectedDepartment.get(i).getFullName();
-//            System.out.println(courses[i]);
         }
 
         listOfCourses.setListData(courses);

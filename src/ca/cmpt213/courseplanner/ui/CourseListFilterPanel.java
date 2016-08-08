@@ -28,7 +28,6 @@ public class CourseListFilterPanel extends GUIPanel implements ItemListener{
         super(coursePlanner);
         departments = coursePlanner.getDepartmentManager().getDepartments();
         this.setLabel("Course List Filter");
-
     }
 
     @Override
@@ -105,12 +104,6 @@ public class CourseListFilterPanel extends GUIPanel implements ItemListener{
     @Override
     public void itemStateChanged(ItemEvent e) {
 
-    }
-
-    private void registerAsObserver() {
-        coursePlanner.addCourseListObserver(
-                ()->updateSelectedDepartment()
-        );
     }
 
     private void updateSelectedDepartment(){
