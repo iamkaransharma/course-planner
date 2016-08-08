@@ -1,38 +1,64 @@
 package ca.cmpt213.courseplanner.model;
 
-import javax.swing.*;
-
 /**
  * Created by Thomas_Ngo on 2016-07-30.
  */
 public class Semester {
+    private static final int CENTURY_INDEX = 0;
+    private static final int YEAR_SECOND_LAST_DIGIT = 1;
+    private static final int YEAR_LAST_DIGIT = 2;
+    private static final int SEASON_ID_INDEX = 3;
 
-    private String semester;
-
+    private String semesterCode;
     private Season season;
     private String year;
 
-    private String twenty_first_century = "20";
-
-    public Semester(String semester){
-        this.semester = semester;
+    public Semester(String semesterCode) {
+        this.semesterCode = semesterCode;
+        this.season = getSeasonFromSemesterCode(semesterCode);
+        this.year = getYearFromSemesterCode(semesterCode);
     }
 
-    public Season getSeason(){
-
-        if (semester.charAt(semester.length()) == 1) {
-            return Season.Spring;
-        } else if (semester.charAt(semester.length()) == 4){
-            return Season.Summer;
-        } else {
-            return Season.Fall;
-        }
+    private Season getSeasonFromSemesterCode(String semesterCode) {
+        int seasonId = parseIntFromStringElement(semesterCode, SEASON_ID_INDEX);
+        return Season.valueOf(seasonId);
     }
 
-    public String getYear(){
-        year = twenty_first_century + semester.substring(1,2);
+    private String getYearFromSemesterCode(String semesterCode) {
+        final int CENTURY_OFFSET = 19;
+
+        int centuryId = parseIntFromStringElement(semesterCode, CENTURY_INDEX);
+        String firstTwoDigits = Integer.toString(centuryId + CENTURY_OFFSET);
+
+        String lastTwoDigits = semesterCode.substring(YEAR_SECOND_LAST_DIGIT, YEAR_LAST_DIGIT + 1);
+        return firstTwoDigits + lastTwoDigits;
+    }
+
+    private int parseIntFromStringElement(String string, int index) {
+        return Character.getNumericValue(string.charAt(index));
+    }
+
+    public Season getSeason() {
+        return season;
+    }
+
+    public String getYear() {
         return year;
     }
 
+    public String getSemesterCode() {
+        return semesterCode;
+    }
 
+    @Override
+    public boolean equals(Object otherObject) {
+        if (otherObject == null) {
+            return false;
+        }
+        if (otherObject.getClass() != this.getClass()) {
+            return false;
+        }
+        Semester other = (Semester) otherObject;
+        return (this.semesterCode.equals(other.semesterCode));
+    }
 }

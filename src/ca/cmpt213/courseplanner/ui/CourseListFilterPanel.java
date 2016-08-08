@@ -15,7 +15,7 @@ public class CourseListFilterPanel extends GUIPanel{
 
     public CourseListFilterPanel(CoursePlanner coursePlanner, String title){
         super(coursePlanner,title);
-        departments = coursePlanner.getDepartments();
+//        departments = coursePlanner.getDepartments();
     }
 
 }
