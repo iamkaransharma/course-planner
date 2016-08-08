@@ -1,14 +1,15 @@
 package ca.cmpt213.courseplanner.ui;
 
+import ca.cmpt213.courseplanner.model.CoursePlanner;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
-import ca.cmpt213.courseplanner.model.*;
 
 /**
  * Created by Thomas_Ngo on 2016-08-03.
  */
-abstract class GUIPanel extends JPanel{
+abstract public class GUIPanel extends JPanel {
 
     // Fields
     // Same color border
@@ -18,28 +19,28 @@ abstract class GUIPanel extends JPanel{
     CoursePlanner coursePlanner;
     private String title;
 
-    public GUIPanel (CoursePlanner coursePlanner){
+    public GUIPanel(CoursePlanner coursePlanner) {
         this.coursePlanner = coursePlanner;
     }
 
     // Required methods
-    protected Component getComponent(){
+    protected Component getComponent() {
         panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
         panel.setBackground(Color.white);
         return panel;
     }
 
-    JLabel getLabel(){
-        JLabel label = new JLabel(title,JLabel.LEFT);
+    JLabel getLabel() {
+        JLabel label = new JLabel(title, JLabel.LEFT);
         label.setForeground(Color.blue);
         return label;
     }
 
-    void setLabel(String title){
+    void setLabel(String title) {
         this.title = title;
     }
 
-    protected JPanel getPanel(){
+    protected JPanel getPanel() {
         panel.setLayout(new BorderLayout());
         panel.add(this.getLabel());
         panel.add(this.getComponent());

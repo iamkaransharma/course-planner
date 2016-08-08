@@ -2,73 +2,58 @@ package ca.cmpt213.courseplanner.ui;
 
 import ca.cmpt213.courseplanner.model.CoursePlanner;
 
-
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
  * Created by Thomas_Ngo on 2016-07-30.
  */
-public class CoursePlannerGUI extends JPanel {
-
-    // Receive instances of CourseListFilterPanel, CourseListPanel, CoursePlannerPanel, OfferingDetailsPanel
-    // and SemesterOfferingsPanel. Use them as arguments for JPanels and put those JPanels into JFrame.
-
+public class CoursePlannerGUI extends JFrame {
+    private static final String WINDOW_TITLE = "FAS Course Planner";
     private CoursePlanner coursePlanner;
 
-    public CoursePlannerGUI(CoursePlanner coursePlanner){
+    public CoursePlannerGUI(CoursePlanner coursePlanner) {
         this.coursePlanner = coursePlanner;
+        new JFrame(WINDOW_TITLE);
     }
 
-    public void startProgram(){
-
-        JFrame frame = new JFrame();
-        frame.setTitle("FAS Course Planner");
-
+    public void startProgram() {
         // Stores the entire GUI
-        JPanel coursePlannerUI = new JPanel();
-        coursePlannerUI.setLayout(new BoxLayout(coursePlannerUI,BoxLayout.PAGE_AXIS));
-
-        // Stores all of the panels in CoursePlanner
-        JPanel coursePlannerPanels = new JPanel();
-        coursePlannerPanels.setLayout(new BoxLayout(coursePlannerPanels,BoxLayout.LINE_AXIS));
-
-        // Top Padding
-        coursePlannerPanels.add(Box.createRigidArea(new Dimension(5,0)));
+        JPanel windowContainer = new JPanel();
+        windowContainer.setLayout(new BorderLayout());
+        windowContainer.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         // West Side
-        JPanel westSide = new JPanel();
-        westSide.setLayout(new BoxLayout(westSide, BoxLayout.PAGE_AXIS));
-        westSide.add(new CourseListFilterPanel(coursePlanner).getPanel());
-        westSide.add(Box.createRigidArea(new Dimension(0,5)));
-        westSide.add(new CourseListPanel(coursePlanner).getPanel());
-        coursePlannerPanels.add(westSide);
-        coursePlannerPanels.add(Box.createRigidArea(new Dimension(5,0)));
+        JPanel westPanel = new JPanel();
+        westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.PAGE_AXIS));
+        westPanel.add(new CourseListFilterPanel(coursePlanner).getPanel());
+        westPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        westPanel.add(new CourseListPanel(coursePlanner).getPanel());
+        windowContainer.add(westPanel, BorderLayout.WEST);
 
         // Center
-        coursePlannerPanels.add(new SemesterOfferingsPanel(coursePlanner).getPanel());
-        coursePlannerPanels.add(Box.createRigidArea(new Dimension(5,0)));
+        JPanel centerPanel = new SemesterOfferingsPanel(coursePlanner).getPanel();
+        centerPanel.setBorder(new EmptyBorder(0, 5, 0, 5));
+        windowContainer.add(centerPanel, BorderLayout.CENTER);
 
         // East Side
+        JPanel eastPanel = new JPanel();
+        eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.PAGE_AXIS));
+        eastPanel.add(new BarGraphPanel(coursePlanner).getPanel());
+        eastPanel.add(Box.createRigidArea(new Dimension(0, 5)));
+        eastPanel.add(new OfferingDetailsPanel(coursePlanner).getPanel());
+        windowContainer.add(eastPanel, BorderLayout.EAST);
 
-        JPanel eastSide = new JPanel();
-        eastSide.setLayout(new BoxLayout(eastSide, BoxLayout.PAGE_AXIS));
-        eastSide.add(new BarGraphPanel(coursePlanner).getPanel());
-        eastSide.add(Box.createRigidArea(new Dimension(0,5)));
-        eastSide.add(new OfferingDetailsPanel(coursePlanner).getPanel());
-        coursePlannerPanels.add(eastSide);
-        coursePlannerPanels.add(Box.createRigidArea(new Dimension(5,0)));
+        add(windowContainer);
 
-        // Add everything into coursePlannerUI
-        coursePlannerUI.add(coursePlannerPanels);
-        coursePlannerUI.add(Box.createRigidArea(new Dimension(0,5)));
+        pack();
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
 
-        frame.add(coursePlannerUI);
-
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
+    public static void displayDialogBox(String text) {
+        JOptionPane.showMessageDialog(null, text);
     }
 
 }
