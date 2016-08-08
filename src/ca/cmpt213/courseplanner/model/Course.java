@@ -87,10 +87,14 @@ public class Course implements Iterable<Offering>, Comparable<Course> {
 
     @Override
     public int compareTo(Course other) {
-        String otherCatalogNumber = other.catalogNumber;
         // treat catalog numbers like "XX1" as "001"
+        String thisCatalogNumber = convertWildcardsToZeroes(this.catalogNumber);
+        String otherCatalogNumber = convertWildcardsToZeroes(other.catalogNumber);
+        return thisCatalogNumber.compareTo(otherCatalogNumber);
+    }
+
+    private String convertWildcardsToZeroes(String rawString) {
         final String WILDCARD_CHARACTER = "X";
-        otherCatalogNumber = otherCatalogNumber.replaceAll(WILDCARD_CHARACTER, "0");
-        return this.catalogNumber.compareTo(otherCatalogNumber);
+        return rawString.replaceAll(WILDCARD_CHARACTER, "0");
     }
 }

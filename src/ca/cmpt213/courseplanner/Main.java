@@ -11,11 +11,11 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-//            CoursePlanner coursePlanner = new CoursePlanner("D:\\Karan\\Documents\\GitHub Repos\\asn4-course-planner\\data\\course_data_2016.csv");
-            CoursePlanner coursePlanner = new CoursePlanner("data/course_data_2016.csv");
+            CoursePlanner coursePlanner = new CoursePlanner("D:\\Karan\\Documents\\GitHub Repos\\asn4-course-planner\\data\\course_data_2016.csv");
+//            CoursePlanner coursePlanner = new CoursePlanner("data/course_data_2016.csv");
             coursePlanner.dumpModel();
-            CoursePlannerGUI coursePlannerGUI = new CoursePlannerGUI(coursePlanner);
-            coursePlannerGUI.startProgram();
+//            CoursePlannerGUI coursePlannerGUI = new CoursePlannerGUI(coursePlanner);
+//            coursePlannerGUI.startProgram();
         } catch (Exception e) {
             e.printStackTrace();
         }
