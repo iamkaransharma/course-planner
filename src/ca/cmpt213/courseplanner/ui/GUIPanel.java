@@ -15,7 +15,7 @@ abstract class GUIPanel extends JPanel{
 
     // JPanel variable
     JPanel panel = new JPanel();
-    private CoursePlanner coursePlanner;
+    CoursePlanner coursePlanner;
     private String title;
 
     public GUIPanel (CoursePlanner coursePlanner){

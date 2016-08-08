@@ -34,6 +34,9 @@ public class OfferingDetailsPanel extends GUIPanel {
         hiddenPanel.add(new JLabel("LAB"));
         hiddenPanel.add(new JLabel("LEC"));
 
+        JPanel offeringDetailsPanel = new JPanel();
+        // Store course name, semester, location, instructors, section type, lab and lec
+
         panel.add(labelsPanel);
 
         return panel;

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Thomas_Ngo on 2016-07-30.
  */
-public class CoursePlanner {
+public class CoursePlanner{
     private DepartmentManager departmentManager;
     private Department activeDepartment;
     private Course activeCourse;

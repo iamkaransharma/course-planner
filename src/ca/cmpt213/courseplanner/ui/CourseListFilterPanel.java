@@ -7,20 +7,26 @@ import javax.swing.border.BevelBorder;
 import java.awt.event.*;
 import java.util.*;
 import java.awt.*;
+import java.util.List;
 
 /**
  * Created by Thomas_Ngo on 2016-07-30.
  */
 public class CourseListFilterPanel extends GUIPanel implements ItemListener{
 
-    private ArrayList<Department> departments = new ArrayList<>();
+    private List<Department> departments;
 
     JCheckBox undergradCoursesButton;
     JCheckBox gradCoursesButton;
 
+    JComboBox <String> departmentList;
+
+    Department selectedDepartment;
+    Integer selectedIndex;
+
     public CourseListFilterPanel(CoursePlanner coursePlanner){
         super(coursePlanner);
-//        departments = coursePlanner.getDepartments();
+        departments = coursePlanner.getDepartmentManager().getDepartments();
         this.setLabel("Course List Filter");
 
     }
@@ -31,14 +37,14 @@ public class CourseListFilterPanel extends GUIPanel implements ItemListener{
         panel.setBackground(Color.white);
 
         String[] departmentNameList = createDepartmentNamesList();
-        JComboBox <String> departmentList = new JComboBox(departmentNameList);
+        departmentList = new JComboBox(departmentNameList);
 
         departmentList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedDepartment = (String) departmentList.getSelectedItem();
-                Integer selectedIndex = (Integer) departmentList.getSelectedIndex();
-                System.out.println(selectedDepartment + " at index: " + selectedIndex);
+                selectedIndex = (Integer) departmentList.getSelectedIndex();
+                selectedDepartment = coursePlanner.getDepartmentManager().getDepartments().get(selectedIndex);
+                //System.out.println(selectedDepartment.getCourses().size());
             }
         });
 
@@ -64,12 +70,9 @@ public class CourseListFilterPanel extends GUIPanel implements ItemListener{
         // Button to update the list
         JButton updateListButton = new JButton("Update Course List");
 
-        updateListButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
+        updateListButton.addActionListener(
+                event -> updateSelectedDepartment()
+        );
 
         panel.add(new JLabel("Department:"));
         panel.add(departmentList);
@@ -84,7 +87,7 @@ public class CourseListFilterPanel extends GUIPanel implements ItemListener{
         for (int i = 0; i < departments.size(); i++){
             departmentNames[i] = departments.get(i).getName();
         }
-        Arrays.sort(departmentNames);
+        //Arrays.sort(departmentNames);
         return departmentNames;
     }
 
@@ -103,4 +106,17 @@ public class CourseListFilterPanel extends GUIPanel implements ItemListener{
     public void itemStateChanged(ItemEvent e) {
 
     }
+
+    private void registerAsObserver() {
+        coursePlanner.addCourseListObserver(
+                ()->updateSelectedDepartment()
+        );
+    }
+
+    private void updateSelectedDepartment(){
+        coursePlanner.selectDepartment(selectedDepartment);
+    }
+
+
+
 }
