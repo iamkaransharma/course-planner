@@ -6,7 +6,6 @@ import java.util.*;
  * Created by Thomas_Ngo on 2016-07-30.
  */
 public class Department implements Comparable<Department> {
-    private static final String GRADUATE_COURSES_BEGIN = "500";
     private String name;
     private TreeSet<Course> courses;
 
@@ -40,27 +39,50 @@ public class Department implements Comparable<Department> {
 
     public void merge(Department other) {
         if (other.equals(this)) {
-            for (Course otherCourse : other.getCourses()) {
+            for (Course otherCourse : other.getCourses(CourseListFilter.ALL_COURSES)) {
                 addCourse(otherCourse);
             }
         }
     }
 
-    public Set<Course> getCourses() {
-        return courses;
+    public Set<Course> getCourses(CourseListFilter filter) {
+        final String GRADUATE_COURSES_BEGIN = "500";
+        Course firstGraduateCourse = new Course(name, GRADUATE_COURSES_BEGIN);
+        Set<Course> filteredCourses;
+        switch (filter) {
+            case UNDERGRADUATE_COURSES:
+                filteredCourses = courses.headSet(firstGraduateCourse, false);
+                break;
+            case GRADUATE_COURSES:
+                filteredCourses = courses.tailSet(firstGraduateCourse, true);
+                break;
+            case ALL_COURSES:
+                filteredCourses = courses;
+                break;
+            case NO_COURSES:
+                filteredCourses = new TreeSet<>();
+                break;
+            default:
+                throw new RuntimeException("Unexpected CourseListFilter received");
+        }
+        return filteredCourses;
     }
 
-    public Set<Course> getUndergraduateCourses() {
-        Course firstGraduateCourse = new Course(name, GRADUATE_COURSES_BEGIN);
-//        int firstGraduateCourseIdx = courses.indexOf(firstGraduateCourse);
-        return courses.headSet(firstGraduateCourse, false);
-    }
-
-    public Set<Course> getGraduateCourses() {
-        Course firstGraduateCourse = new Course(name, GRADUATE_COURSES_BEGIN);
-//        int firstGraduateCourseIdx = courses.indexOf(firstGraduateCourse);
-        return courses.tailSet(firstGraduateCourse, true);
-    }
+//    public Set<Course> getCourses() {
+//        return courses;
+//    }
+//
+//    public Set<Course> getUndergraduateCourses() {
+//        Course firstGraduateCourse = new Course(name, GRADUATE_COURSES_BEGIN);
+////        int firstGraduateCourseIdx = courses.indexOf(firstGraduateCourse);
+//        return courses.headSet(firstGraduateCourse, false);
+//    }
+//
+//    public Set<Course> getGraduateCourses() {
+//        Course firstGraduateCourse = new Course(name, GRADUATE_COURSES_BEGIN);
+////        int firstGraduateCourseIdx = courses.indexOf(firstGraduateCourse);
+//        return courses.tailSet(firstGraduateCourse, true);
+//    }
 
     public String getName() {
         return name;

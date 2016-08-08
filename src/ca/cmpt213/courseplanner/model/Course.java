@@ -53,7 +53,6 @@ public class Course implements Comparable<Course> {
 
     @Override
     public String toString() {
-//        sortBySemester();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(catalogNumber);
         for (Offering offering : offerings) {
@@ -65,6 +64,21 @@ public class Course implements Comparable<Course> {
 
     public Set<Offering> getOfferings() {
         return offerings;
+    }
+
+    public Set<Offering> getOfferingsBySeason(Season seasonFilter) {
+        return filterOfferingsBySeason(seasonFilter);
+    }
+
+    private Set<Offering> filterOfferingsBySeason(Season seasonFilter) {
+        Set<Offering> filteredOfferings = new TreeSet<>();
+        for (Offering currentOffering : offerings) {
+            String semesterCode = currentOffering.getSemester().getSemesterCode();
+            if (semesterCode.endsWith(seasonFilter.value())) {
+                filteredOfferings.add(currentOffering);
+            }
+        }
+        return filteredOfferings;
     }
 
     public String getFullName() {

@@ -46,6 +46,10 @@ public class Offering implements Comparable<Offering> {
         }
     }
 
+    public Semester getSemester() {
+        return semester;
+    }
+
     public String getCatalogNumber() {
         return catalogNumber;
     }

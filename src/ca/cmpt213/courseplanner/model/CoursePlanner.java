@@ -31,22 +31,7 @@ public class CoursePlanner{
 
     public void selectDepartment(Department selectedDepartment, CourseListFilter filter) {
         assert selectedDepartment != null;
-        switch (filter) {
-            case UNDERGRADUATE_COURSES:
-                activeCourseList = selectedDepartment.getUndergraduateCourses();
-                break;
-            case GRADUATE_COURSES:
-                activeCourseList = selectedDepartment.getGraduateCourses();
-                break;
-            case ALL_COURSES:
-                activeCourseList = selectedDepartment.getCourses();
-                break;
-            case NO_COURSES:
-                activeCourseList = new TreeSet<>();
-                break;
-            default:
-                throw new RuntimeException("Unexpected CourseListFilter received");
-        }
+        activeCourseList = selectedDepartment.getCourses(filter);
         activeCourse = null;
         notifyActiveCourseObservers();
         notifyCourseListObservers();
