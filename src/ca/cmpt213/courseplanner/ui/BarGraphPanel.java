@@ -12,16 +12,16 @@ import java.awt.*;
  */
 public class BarGraphPanel extends GUIPanel {
 
+    private static final String TITLE = "Statistics";
+
     public BarGraphPanel(CoursePlanner coursePlanner){
-        super(coursePlanner);
-        this.setLabel("Statistics");
+        super(coursePlanner,TITLE);
     }
 
-    @Override
-    protected Component getComponent() {
-        panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
-        panel.setBackground(Color.white);
-        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+    protected Component getContentPanel() {
+
+        JPanel graphs = new JPanel();
+        graphs.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         // Testing out the graphs
 
@@ -48,22 +48,18 @@ public class BarGraphPanel extends GUIPanel {
         JLabel semesterOfferingsLabel = new JLabel("Semester Offerings:",JLabel.LEFT);
         JLabel campusOfferingsLabel = new JLabel("Campus Offerings:",JLabel.LEFT);
 
-        panel.add(courseLabel);
-        panel.add(semesterOfferingsLabel);
-        panel.add(semesterGraphs);
-        panel.add(campusOfferingsLabel);
-        panel.add(locationGraphs);
+        // Adding elements to graphs
+        graphs.add(courseLabel);
+        graphs.add(semesterOfferingsLabel);
+        graphs.add(semesterGraphs);
+        graphs.add(campusOfferingsLabel);
+        graphs.add(locationGraphs);
 
-        return panel;
-    }
-
-    @Override
-    protected JPanel getPanel(){
         JPanel barGraphPanel = new JPanel();
+        barGraphPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
+        barGraphPanel.setBackground(Color.white);
         barGraphPanel.setLayout(new BoxLayout(barGraphPanel, BoxLayout.PAGE_AXIS));
-        barGraphPanel.setLayout(new BorderLayout());
-        barGraphPanel.add(getLabel(),BorderLayout.NORTH);
-        barGraphPanel.add(getComponent(),BorderLayout.CENTER);
+        barGraphPanel.add(graphs);
         barGraphPanel.setPreferredSize(new Dimension(250,425));
         return barGraphPanel;
     }

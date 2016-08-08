@@ -27,4 +27,8 @@ public enum Season {
     public static Season valueOf(int seasonID) {
         return seasonIdToSeason.get(seasonID);
     }
+
+    public String value() {
+        return String.valueOf(seasonID);
+    }
 }

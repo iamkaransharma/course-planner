@@ -3,7 +3,7 @@ package ca.cmpt213.courseplanner.model;
 /**
  * Created by Karan on 02/08/2016.
  */
-public class CourseComponent {
+public class CourseComponent implements Comparable<CourseComponent> {
     private String componentCode;
     private int enrollmentTotal;
     private int enrollmentCapacity;
@@ -54,5 +54,10 @@ public class CourseComponent {
     @Override
     public int hashCode() {
         return componentCode.hashCode() * 43;
+    }
+
+    @Override
+    public int compareTo(CourseComponent other) {
+        return this.componentCode.compareTo(other.componentCode);
     }
 }

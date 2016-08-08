@@ -5,51 +5,64 @@ import java.util.*;
 /**
  * Created by Karan on 01/08/2016.
  */
-public class Location {
+public class Location implements Comparable<Location> {
     private String name;
-    private List<String> instructors;
-    private List<CourseComponent> courseComponents;
+    private Set<String> instructors;
+    private Set<CourseComponent> courseComponents;
     private static final Set<String> recognizedNames = new HashSet<>(
             Arrays.asList("BURNABY", "SURREY", "HRBRCNTR")
     );
 
     public Location(String name) {
         this.name = normalizeName(name);
-        courseComponents = new ArrayList<>();
-        instructors = new ArrayList<>();
+        courseComponents = new TreeSet<>();
+        instructors = new TreeSet<>();
     }
 
     public void addCourseComponent(CourseComponent newComponent) {
-        final int NOT_FOUND = -1;
-        int currentIndex = this.courseComponents.indexOf(newComponent);
-        if (currentIndex != NOT_FOUND) {
-            CourseComponent currentComponent = this.courseComponents.get(currentIndex);
-            currentComponent.merge(newComponent);
-        } else {
+        boolean foundComponent = false;
+        for (CourseComponent currentComponent : courseComponents) {
+            if (currentComponent.equals(newComponent)) {
+                currentComponent.merge(newComponent);
+                foundComponent = true;
+                break;
+            }
+        }
+        if (!foundComponent) {
             this.courseComponents.add(newComponent);
         }
+//        final int NOT_FOUND = -1;
+//        int currentIndex = this.courseComponents.indexOf(newComponent);
+//        if (currentIndex != NOT_FOUND) {
+//            CourseComponent currentComponent = this.courseComponents.get(currentIndex);
+//            currentComponent.merge(newComponent);
+//        } else {
+//            this.courseComponents.add(newComponent);
+//        }
     }
 
     public void merge(Location other) {
         if (other.equals(this)) {
-            addInstructors(other.getInstructors());
-
+//            addInstructors(other.getInstructors());
+            this.instructors.addAll(other.getInstructors());
             for (CourseComponent otherComponent : other.getCourseComponents()) {
                 addCourseComponent(otherComponent);
             }
         }
     }
 
+    // Convenience method
     public void addInstructors(List<String> newInstructors) {
-        this.instructors = mergeDistinct(this.instructors, newInstructors);
+        this.instructors.addAll(newInstructors);
     }
 
-    private List<String> mergeDistinct(List<String> list1, List<String> list2) {
-        assert list1 != null && list2 != null;
-        list1.addAll(list2);
-        Set<String> distinctSet = new LinkedHashSet<>(list1);
-        return new ArrayList<>(distinctSet);
-    }
+//
+//    private List<String> mergeDistinct(List<String> list1, List<String> list2) {
+//        assert list1 != null && list2 != null;
+//        list1.addAll(list2);
+//        Set<String> distinctSet = new LinkedHashSet<>(list1);
+//        return new ArrayList<>(distinctSet);
+//    }
 
     private String normalizeName(String name) {
         if (recognizedNames.contains(name)) {
@@ -63,11 +76,11 @@ public class Location {
         return name;
     }
 
-    public List<String> getInstructors() {
+    public Set<String> getInstructors() {
         return instructors;
     }
 
-    public List<CourseComponent> getCourseComponents() {
+    public Set<CourseComponent> getCourseComponents() {
         return courseComponents;
     }
 
@@ -107,6 +120,11 @@ public class Location {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    @Override
+    public int compareTo(Location other) {
+        return this.name.compareTo(other.name);
     }
 
     //    BURNABY("BURNABY"),

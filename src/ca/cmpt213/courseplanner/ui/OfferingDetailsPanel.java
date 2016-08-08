@@ -11,16 +11,13 @@ import java.awt.*;
  */
 public class OfferingDetailsPanel extends GUIPanel {
 
+    private static final String TITLE = "Details of Course Offering";
+
     public OfferingDetailsPanel(CoursePlanner coursePlanner){
-        super(coursePlanner);
-        this.setLabel("Details of Course Offering");
+        super(coursePlanner,TITLE);
     }
 
-    @Override
-    protected Component getComponent() {
-        panel.setLayout(new GridLayout(0,2));
-        panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
-        panel.setBackground(Color.white);
+    protected JPanel getComponentPanel(){
 
         JPanel labelsPanel = new JPanel();
         labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.PAGE_AXIS));
@@ -35,20 +32,13 @@ public class OfferingDetailsPanel extends GUIPanel {
         hiddenPanel.add(new JLabel("LEC"));
 
         JPanel offeringDetailsPanel = new JPanel();
-        // Store course name, semester, location, instructors, section type, lab and lec
-
-        panel.add(labelsPanel);
-
-        return panel;
-    }
-
-    @Override
-    protected JPanel getPanel(){
-        JPanel offeringDetailsPanel = new JPanel();
-        offeringDetailsPanel.setLayout(new BorderLayout());
-        offeringDetailsPanel.add(getLabel(),BorderLayout.NORTH);
-        offeringDetailsPanel.add(getComponent(),BorderLayout.CENTER);
+        offeringDetailsPanel.setLayout(new GridLayout(0,2));
+        offeringDetailsPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
+        offeringDetailsPanel.setBackground(Color.white);
+        offeringDetailsPanel.add(labelsPanel);
+        offeringDetailsPanel.add(hiddenPanel);
         offeringDetailsPanel.setPreferredSize(new Dimension(250,175));
+
         return offeringDetailsPanel;
     }
 
