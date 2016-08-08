@@ -1,31 +1,41 @@
 package ca.cmpt213.courseplanner.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Thomas_Ngo on 2016-07-30.
  */
 public class Offering implements Comparable<Offering> {
     private String catalogNumber;
-    private List<Location> locations;
+    private Set<Location> locations;
     private Semester semester;
 
     public Offering(String catalogNumber, Semester semester) {
         this.catalogNumber = catalogNumber;
         this.semester = semester;
-        this.locations = new ArrayList<>();
+        this.locations = new TreeSet<>();
     }
 
     public void addLocation(Location newLocation) {
-        final int NOT_FOUND = -1;
-        int currentIndex = this.locations.indexOf(newLocation);
-        if (currentIndex != NOT_FOUND) {
-            Location currentLocation = this.locations.get(currentIndex);
-            currentLocation.merge(newLocation);
-        } else {
+        boolean foundLocation = false;
+        for (Location currentLocation : locations) {
+            if (currentLocation.equals(newLocation)) {
+                currentLocation.merge(newLocation);
+                foundLocation = true;
+                break;
+            }
+        }
+        if (!foundLocation) {
             this.locations.add(newLocation);
         }
+//        final int NOT_FOUND = -1;
+//        int currentIndex = this.locations.indexOf(newLocation);
+//        if (currentIndex != NOT_FOUND) {
+//            Location currentLocation = this.locations.get(currentIndex);
+//            currentLocation.merge(newLocation);
+//        } else {
+//            this.locations.add(newLocation);
+//        }
     }
 
     public void merge(Offering other) {
@@ -40,28 +50,40 @@ public class Offering implements Comparable<Offering> {
         return catalogNumber;
     }
 
-    public List<Location> getLocations() {
+    public Set<Location> getLocations() {
         return locations;
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < locations.size(); i++) {
-            Location location = locations.get(i);
+        int lastElementIndex = locations.size() - 1;
+        Iterator<Location> iterator = locations.iterator();
+        while (iterator.hasNext()) {
+            Location location = iterator.next();
             stringBuilder.append(semester.getSemesterCode() + " in " + location.getName() + " by ");
             appendCommaSeparatedWords(stringBuilder, location.getInstructors());
             stringBuilder.append(location.toString());
-            if (i < locations.size() - 1) {
+            if (lastElementIndex > 0) {
                 stringBuilder.append("\n");
             }
             stringBuilder.append("\t");
+            lastElementIndex--;
         }
-
+//        for (Iterator<Location> it = locations.iterator(); it.hasNext(); i++) {
+//            Location location = locations.get(i);
+//            stringBuilder.append(semester.getSemesterCode() + " in " + location.getName() + " by ");
+//            appendCommaSeparatedWords(stringBuilder, location.getInstructors());
+//            stringBuilder.append(location.toString());
+//            if (i < locations.size() - 1) {
+//                stringBuilder.append("\n");
+//            }
+//            stringBuilder.append("\t");
+//        }
         return stringBuilder.toString();
     }
 
-    private void appendCommaSeparatedWords(StringBuilder stringBuilder, List<String> words) {
+    private void appendCommaSeparatedWords(StringBuilder stringBuilder, Set<String> words) {
         String commaPrefix = "";
         for (String word : words) {
             stringBuilder.append(commaPrefix);

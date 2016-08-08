@@ -11,40 +11,56 @@ import java.awt.*;
  */
 abstract public class GUIPanel extends JPanel {
 
-    // Fields
-    // Same color border
+    //    JPanel panel = new JPanel();
+    private CoursePlanner coursePlanner;
+    private JPanel internalPanel;
+//    private String title;
 
-    // JPanel variable
-    JPanel panel = new JPanel();
-    CoursePlanner coursePlanner;
-    private String title;
-
-    public GUIPanel(CoursePlanner coursePlanner) {
+    public GUIPanel(CoursePlanner coursePlanner, String title) {
         this.coursePlanner = coursePlanner;
+//        this.title = title;
+        JLabel titleLabel = new JLabel(title, JLabel.LEFT);
+        titleLabel.setForeground(Color.blue);
+        this.setLayout(new BorderLayout());
+        this.add(titleLabel, BorderLayout.NORTH);
+        this.internalPanel = new JPanel();
+//        this.add(internalPanel, BorderLayout.CENTER);
+        this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
     }
 
     // Required methods
-    protected Component getComponent() {
-        panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
-        panel.setBackground(Color.white);
-        return panel;
+//    protected Component getComponent() {
+//        panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
+//        panel.setBackground(Color.white);
+//        return panel;
+//    }
+
+//    JLabel getLabel() {
+//        JLabel label = new JLabel(title, JLabel.LEFT);
+//        label.setForeground(Color.blue);
+//        return label;
+//    }
+
+//    void setLabel(String title) {
+//        this.title = title;
+//    }
+
+    protected void setInternalPanel(JPanel internalPanel) {
+        this.internalPanel = internalPanel;
+        this.add(internalPanel, BorderLayout.CENTER);
     }
 
-    JLabel getLabel() {
-        JLabel label = new JLabel(title, JLabel.LEFT);
-        label.setForeground(Color.blue);
-        return label;
+    protected void preventHorizontalResizing() {
+        Dimension prefSize = getPreferredSize();
+        Dimension newSize = new Dimension(
+                Integer.MAX_VALUE,
+                (int) prefSize.getHeight()
+        );
+        setMaximumSize(newSize);
     }
 
-    void setLabel(String title) {
-        this.title = title;
-    }
-
-    protected JPanel getPanel() {
-        panel.setLayout(new BorderLayout());
-        panel.add(this.getLabel());
-        panel.add(this.getComponent());
-        return panel;
+    protected CoursePlanner getModel() {
+        return coursePlanner;
     }
 
 

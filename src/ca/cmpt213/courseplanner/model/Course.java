@@ -1,34 +1,42 @@
 package ca.cmpt213.courseplanner.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Thomas_Ngo on 2016-07-30.
  */
-public class Course implements Iterable<Offering>, Comparable<Course> {
+public class Course implements Comparable<Course> {
     private String departmentName;
     private String catalogNumber;
-    private ArrayList<Offering> offerings;
+    private Set<Offering> offerings;
 
     public Course(String departmentName, String catalogNumber) {
         this.departmentName = departmentName;
         this.catalogNumber = catalogNumber;
-        offerings = new ArrayList<>();
+        offerings = new TreeSet<>();
     }
 
     public void addOffering(Offering newOffering) {
-        final int NOT_FOUND = -1;
-        int currentIndex = this.offerings.indexOf(newOffering);
-        if (currentIndex != NOT_FOUND) {
-            Offering currentOffering = this.offerings.get(currentIndex);
-            currentOffering.merge(newOffering);
-        } else {
+        boolean foundOffering = false;
+        for (Offering currentOffering : offerings) {
+            if (currentOffering.equals(newOffering)) {
+                currentOffering.merge(newOffering);
+                foundOffering = true;
+                break;
+            }
+        }
+        if (!foundOffering) {
             this.offerings.add(newOffering);
         }
-        Collections.sort(offerings);
+//        final int NOT_FOUND = -1;
+//        int currentIndex = this.offerings.indexOf(newOffering);
+//        if (currentIndex != NOT_FOUND) {
+//            Offering currentOffering = this.offerings.get(currentIndex);
+//            currentOffering.merge(newOffering);
+//        } else {
+//            this.offerings.add(newOffering);
+//        }
+//        Collections.sort(offerings);
     }
 
     public void merge(Course other) {
@@ -39,9 +47,9 @@ public class Course implements Iterable<Offering>, Comparable<Course> {
         }
     }
 
-    public void sortBySemester() {
-        Collections.sort(offerings);
-    }
+//    public void sortBySemester() {
+//        Collections.sort(offerings);
+//    }
 
     @Override
     public String toString() {
@@ -55,7 +63,7 @@ public class Course implements Iterable<Offering>, Comparable<Course> {
         return stringBuilder.toString();
     }
 
-    public ArrayList<Offering> getOfferings() {
+    public Set<Offering> getOfferings() {
         return offerings;
     }
 
@@ -80,10 +88,10 @@ public class Course implements Iterable<Offering>, Comparable<Course> {
         return catalogNumber.hashCode() * 17;
     }
 
-    @Override
-    public Iterator<Offering> iterator() {
-        return Collections.unmodifiableList(offerings).iterator();
-    }
+//    @Override
+//    public Iterator<Offering> iterator() {
+//        return Collections.unmodifiableList(offerings).iterator();
+//    }
 
     @Override
     public int compareTo(Course other) {

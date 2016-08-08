@@ -1,33 +1,41 @@
 package ca.cmpt213.courseplanner.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Thomas_Ngo on 2016-07-30.
  */
-public class Department implements Iterable<Course> {
+public class Department implements Comparable<Department> {
     private static final String GRADUATE_COURSES_BEGIN = "500";
     private String name;
-    private List<Course> courses;
+    private TreeSet<Course> courses;
 
     public Department(String name) {
         this.name = name;
-        courses = new ArrayList<>();
+        courses = new TreeSet<>();
     }
 
     public void addCourse(Course newCourse) {
-        final int NOT_FOUND = -1;
-        int currentIndex = this.courses.indexOf(newCourse);
-        if (currentIndex != NOT_FOUND) {
-            Course currentCourse = this.courses.get(currentIndex);
-            currentCourse.merge(newCourse);
-        } else {
+        boolean foundCourse = false;
+        for (Course currentCourse : courses) {
+            if (currentCourse.equals(newCourse)) {
+                currentCourse.merge(newCourse);
+                foundCourse = true;
+                break;
+            }
+        }
+        if (!foundCourse) {
             this.courses.add(newCourse);
         }
-        Collections.sort(courses);
+//        final int NOT_FOUND = -1;
+//        int currentIndex = this.courses.indexOf(newCourse);
+//        if (currentIndex != NOT_FOUND) {
+//            Course currentCourse = this.courses.get(currentIndex);
+//            currentCourse.merge(newCourse);
+//        } else {
+//            this.courses.add(newCourse);
+//        }
+//        Collections.sort(courses);
     }
 
     public void merge(Department other) {
@@ -38,20 +46,20 @@ public class Department implements Iterable<Course> {
         }
     }
 
-    public List<Course> getCourses() {
+    public Set<Course> getCourses() {
         return courses;
     }
 
-    public List<Course> getUndergraduateCourses() {
+    public Set<Course> getUndergraduateCourses() {
         Course firstGraduateCourse = new Course(name, GRADUATE_COURSES_BEGIN);
-        int firstGraduateCourseIdx = courses.indexOf(firstGraduateCourse);
-        return courses.subList(0, firstGraduateCourseIdx - 1);
+//        int firstGraduateCourseIdx = courses.indexOf(firstGraduateCourse);
+        return courses.headSet(firstGraduateCourse, false);
     }
 
-    public List<Course> getGraduateCourses() {
+    public Set<Course> getGraduateCourses() {
         Course firstGraduateCourse = new Course(name, GRADUATE_COURSES_BEGIN);
-        int firstGraduateCourseIdx = courses.indexOf(firstGraduateCourse);
-        return courses.subList(firstGraduateCourseIdx, courses.size() - 1);
+//        int firstGraduateCourseIdx = courses.indexOf(firstGraduateCourse);
+        return courses.tailSet(firstGraduateCourse, true);
     }
 
     public String getName() {
@@ -86,9 +94,14 @@ public class Department implements Iterable<Course> {
     public int hashCode() {
         return name.hashCode() * 19;
     }
+//
+//    @Override
+//    public Iterator<Course> iterator() {
+//        return Collections.unmodifiableList(courses).iterator();
+//    }
 
     @Override
-    public Iterator<Course> iterator() {
-        return Collections.unmodifiableList(courses).iterator();
+    public int compareTo(Department other) {
+        return name.compareTo(other.name);
     }
 }

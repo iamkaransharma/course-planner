@@ -3,13 +3,15 @@ package ca.cmpt213.courseplanner.model;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Thomas_Ngo on 2016-07-30.
  */
 public class CoursePlanner{
     private DepartmentManager departmentManager;
-    private Department activeDepartment;
+    private Set<Course> activeCourseList;
+//    private Department activeDepartment;
     private Course activeCourse;
     private Offering activeOffering;
 //    private List<CoursePlannerObserver> departmentListObservers;
@@ -26,8 +28,20 @@ public class CoursePlanner{
         activeOfferingObserver = new ArrayList<>();
     }
 
-    public void selectDepartment(Department selectedDepartment) {
-        activeDepartment = selectedDepartment;
+    public void selectDepartment(Department selectedDepartment, CourseListFilter filter) {
+        switch (filter) {
+            case UNDERGRADUATE_COURSES:
+                activeCourseList = selectedDepartment.getUndergraduateCourses();
+                break;
+            case GRADUATE_COURSES:
+                activeCourseList = selectedDepartment.getGraduateCourses();
+                break;
+            case ALL_COURSES:
+                activeCourseList = selectedDepartment.getCourses();
+                break;
+            default:
+                throw new RuntimeException("Unexpected CourseListFilter received");
+        }
         notifyCourseListObservers();
     }
 
@@ -53,8 +67,8 @@ public class CoursePlanner{
         return departmentManager;
     }
 
-    public Department getActiveDepartment() {
-        return activeDepartment;
+    public Set<Course> getActiveCourseList() {
+        return activeCourseList;
     }
 
     public Course getActiveCourse() {
@@ -87,25 +101,25 @@ public class CoursePlanner{
 
 //    private void notifyDepartmentListObservers() {
 //        for (CoursePlannerObserver observer : departmentListObservers) {
-//            observer.stateChanged();
+//            observer.modelStateChanged();
 //        }
 //    }
 
     private void notifyCourseListObservers() {
         for (CoursePlannerObserver observer : courseListObservers) {
-            observer.stateChanged();
+            observer.modelStateChanged();
         }
     }
 
     private void notifyActiveCourseObservers() {
         for (CoursePlannerObserver observer : activeCourseObservers) {
-            observer.stateChanged();
+            observer.modelStateChanged();
         }
     }
 
     private void notifyActiveOfferingObservers() {
         for (CoursePlannerObserver observer : activeOfferingObserver) {
-            observer.stateChanged();
+            observer.modelStateChanged();
         }
     }
 }

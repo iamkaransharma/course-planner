@@ -18,8 +18,7 @@ public class CoursePlannerGUI extends JFrame {
         new JFrame(WINDOW_TITLE);
     }
 
-    public void startProgram() {
-        // Stores the entire GUI
+    public void start() {
         JPanel windowContainer = new JPanel();
         windowContainer.setLayout(new BorderLayout());
         windowContainer.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -27,22 +26,22 @@ public class CoursePlannerGUI extends JFrame {
         // West Side
         JPanel westPanel = new JPanel();
         westPanel.setLayout(new BoxLayout(westPanel, BoxLayout.PAGE_AXIS));
-        westPanel.add(new CourseListFilterPanel(coursePlanner).getPanel());
+        westPanel.add(new CourseListFilterPanel(coursePlanner));
         westPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-        westPanel.add(new CourseListPanel(coursePlanner).getPanel());
+//        westPanel.add(new CourseListPanel(coursePlanner).getPanel());
         windowContainer.add(westPanel, BorderLayout.WEST);
 
         // Center
-        JPanel centerPanel = new SemesterOfferingsPanel(coursePlanner).getPanel();
-        centerPanel.setBorder(new EmptyBorder(0, 5, 0, 5));
-        windowContainer.add(centerPanel, BorderLayout.CENTER);
+//        JPanel centerPanel = new SemesterOfferingsPanel(coursePlanner).getPanel();
+//        centerPanel.setBorder(new EmptyBorder(0, 5, 0, 5));
+//        windowContainer.add(centerPanel, BorderLayout.CENTER);
 
         // East Side
         JPanel eastPanel = new JPanel();
         eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.PAGE_AXIS));
-        eastPanel.add(new BarGraphPanel(coursePlanner).getPanel());
+//        eastPanel.add(new BarGraphPanel(coursePlanner).getPanel());
         eastPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-        eastPanel.add(new OfferingDetailsPanel(coursePlanner).getPanel());
+//        eastPanel.add(new OfferingDetailsPanel(coursePlanner).getPanel());
         windowContainer.add(eastPanel, BorderLayout.EAST);
 
         add(windowContainer);
