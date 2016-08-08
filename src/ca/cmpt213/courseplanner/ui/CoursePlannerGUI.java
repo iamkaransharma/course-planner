@@ -4,7 +4,6 @@ import ca.cmpt213.courseplanner.model.CoursePlanner;
 
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -24,71 +23,47 @@ public class CoursePlannerGUI extends JPanel {
     public void startProgram(){
 
         JFrame frame = new JFrame();
+        frame.setTitle("FAS Course Planner");
 
-        frame.setLayout(new BorderLayout());
+        // Stores the entire GUI
+        JPanel coursePlannerUI = new JPanel();
+        coursePlannerUI.setLayout(new BoxLayout(coursePlannerUI,BoxLayout.PAGE_AXIS));
+
+        // Stores all of the panels in CoursePlanner
+        JPanel coursePlannerPanels = new JPanel();
+        coursePlannerPanels.setLayout(new BoxLayout(coursePlannerPanels,BoxLayout.LINE_AXIS));
+
+        // Top Padding
+        coursePlannerPanels.add(Box.createRigidArea(new Dimension(5,0)));
 
         // West Side
-
         JPanel westSide = new JPanel();
         westSide.setLayout(new BoxLayout(westSide, BoxLayout.PAGE_AXIS));
-
-        JPanel panel1 = new JPanel();
-        panel1.setLayout(new BoxLayout(panel1, BoxLayout.PAGE_AXIS));
-
-        CourseListFilterPanel clfp = new CourseListFilterPanel(coursePlanner,"Course List Filter Panel");
-        panel1.add(clfp.getLabel(),BorderLayout.NORTH);
-        panel1.add(clfp.getCoursePanel(),BorderLayout.CENTER);
-        panel1.setPreferredSize(new Dimension(200,200));
-        westSide.add(panel1);
-
-        JPanel panel2 = new JPanel();
-        panel2.setLayout(new BoxLayout(panel2, BoxLayout.PAGE_AXIS));
-
-        CourseListPanel clp = new CourseListPanel(coursePlanner, "Course List");
-        panel2.add(clp.getLabel(),BorderLayout.NORTH);
-        panel2.add(clp.getCoursePanel(),BorderLayout.CENTER);
-        panel2.setPreferredSize(new Dimension(200,500));
-        westSide.add(panel2);
-
-        frame.add(westSide,BorderLayout.WEST);
+        westSide.add(new CourseListFilterPanel(coursePlanner).getPanel());
+        westSide.add(Box.createRigidArea(new Dimension(0,5)));
+        westSide.add(new CourseListPanel(coursePlanner).getPanel());
+        coursePlannerPanels.add(westSide);
+        coursePlannerPanels.add(Box.createRigidArea(new Dimension(5,0)));
 
         // Center
-
-        JPanel panel3 = new JPanel();
-        panel3.setLayout(new BoxLayout(panel3, BoxLayout.PAGE_AXIS));
-
-        SemesterOfferingsPanel sop = new SemesterOfferingsPanel(coursePlanner, "Course Offerings by Semester");
-        panel3.add(sop.getLabel());
-        panel3.add(sop.getCoursePanel());
-        panel3.setPreferredSize(new Dimension(800,250));
-        frame.add(panel3,BorderLayout.CENTER);
+        coursePlannerPanels.add(new SemesterOfferingsPanel(coursePlanner).getPanel());
+        coursePlannerPanels.add(Box.createRigidArea(new Dimension(5,0)));
 
         // East Side
 
         JPanel eastSide = new JPanel();
         eastSide.setLayout(new BoxLayout(eastSide, BoxLayout.PAGE_AXIS));
+        eastSide.add(new BarGraphPanel(coursePlanner).getPanel());
+        eastSide.add(Box.createRigidArea(new Dimension(0,5)));
+        eastSide.add(new OfferingDetailsPanel(coursePlanner).getPanel());
+        coursePlannerPanels.add(eastSide);
+        coursePlannerPanels.add(Box.createRigidArea(new Dimension(5,0)));
 
-        JPanel panel4 = new JPanel();
-        panel4.setLayout(new BoxLayout(panel4, BoxLayout.PAGE_AXIS));
+        // Add everything into coursePlannerUI
+        coursePlannerUI.add(coursePlannerPanels);
+        coursePlannerUI.add(Box.createRigidArea(new Dimension(0,5)));
 
-        BarGraphPanel barGraph = new BarGraphPanel(coursePlanner, "Statistics");
-        panel4.add(barGraph.getLabel(),BorderLayout.NORTH);
-        panel4.add(barGraph.getCoursePanel(),BorderLayout.CENTER);
-
-        panel4.setPreferredSize(new Dimension(250,350));
-        eastSide.add(panel4);
-
-        JPanel panel5 = new JPanel();
-        panel5.setLayout(new BoxLayout(panel5, BoxLayout.PAGE_AXIS));
-        OfferingDetailsPanel odp = new OfferingDetailsPanel(coursePlanner, "Details of Course Offering");
-        panel5.add(odp.getLabel(),BorderLayout.NORTH);
-        panel5.add(odp.getCoursePanel(),BorderLayout.CENTER);
-
-        panel5.setPreferredSize(new Dimension(250,500));
-
-        eastSide.add(panel5);
-
-        frame.add(eastSide,BorderLayout.EAST);
+        frame.add(coursePlannerUI);
 
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
