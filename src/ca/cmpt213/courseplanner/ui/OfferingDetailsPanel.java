@@ -15,9 +15,10 @@ public class OfferingDetailsPanel extends GUIPanel {
 
     public OfferingDetailsPanel(CoursePlanner coursePlanner){
         super(coursePlanner,TITLE);
+        setInternalPanel(getContentPanel());
     }
 
-    protected JPanel getComponentPanel(){
+    protected JPanel getContentPanel(){
 
         JPanel labelsPanel = new JPanel();
         labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.PAGE_AXIS));

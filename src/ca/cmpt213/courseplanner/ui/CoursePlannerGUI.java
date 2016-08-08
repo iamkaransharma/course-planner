@@ -39,9 +39,9 @@ public class CoursePlannerGUI extends JFrame {
         // East Side
         JPanel eastPanel = new JPanel();
         eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.PAGE_AXIS));
-//        eastPanel.add(new BarGraphPanel(coursePlanner).getPanel());
+        eastPanel.add(new BarGraphPanel(coursePlanner));
         eastPanel.add(Box.createRigidArea(new Dimension(0, 5)));
-//        eastPanel.add(new OfferingDetailsPanel(coursePlanner).getPanel());
+        eastPanel.add(new OfferingDetailsPanel(coursePlanner));
         windowContainer.add(eastPanel, BorderLayout.EAST);
 
         add(windowContainer);
