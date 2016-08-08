@@ -48,7 +48,7 @@ public class OfferingDetailsPanel extends GUIPanel {
         offeringDetailsPanel.setLayout(new BorderLayout());
         offeringDetailsPanel.add(getLabel(),BorderLayout.NORTH);
         offeringDetailsPanel.add(getComponent(),BorderLayout.CENTER);
-        offeringDetailsPanel.setPreferredSize(new Dimension(250,300));
+        offeringDetailsPanel.setPreferredSize(new Dimension(250,175));
         return offeringDetailsPanel;
     }
 

@@ -21,22 +21,38 @@ public class BarGraphPanel extends GUIPanel {
     protected Component getComponent() {
         panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
         panel.setBackground(Color.white);
-        // Constructor for BarGraphModel and BarGraphIcon
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        // Testing out the graphs
 
         JPanel semesterGraphs = new JPanel();
-        int[] data = {8,7,9};
+        int[] semesterData = {8,7,9};
         String[] titles = {"Spring","Summer","Fall"};
-        BarGraphModel testGraphModel = new BarGraphModel(data,titles);
-        testGraphModel.setData(data);
+        BarGraphModel testGraphModel = new BarGraphModel(semesterData,titles);
+        testGraphModel.setData(semesterData);
 
-        BarGraphIcon testGraph = new BarGraphIcon(testGraphModel,50,100);
-
-        //Graphics g = new Graphics();
-        //testGraph.paintIcon(testGraphModel,,0,0);
+        BarGraphIcon testGraph = new BarGraphIcon(testGraphModel,200,150);
+        semesterGraphs.add(new JLabel(testGraph));
 
         JPanel locationGraphs = new JPanel();
+        int[] locationData = {7,5,3,0};
+        String[] campuses = {"Bby","Sry","Van","Other"};
+        BarGraphModel testGraphModel2 = new BarGraphModel(locationData,campuses);
+        testGraphModel2.setData(locationData);
 
+        BarGraphIcon testGraph2 = new BarGraphIcon(testGraphModel2,200,150);
+        locationGraphs.add(new JLabel(testGraph2));
+
+        String selectedCourse = "CMPT 213";
+        JLabel courseLabel = new JLabel("Course: " + selectedCourse);
+        JLabel semesterOfferingsLabel = new JLabel("Semester Offerings:",JLabel.LEFT);
+        JLabel campusOfferingsLabel = new JLabel("Campus Offerings:",JLabel.LEFT);
+
+        panel.add(courseLabel);
+        panel.add(semesterOfferingsLabel);
         panel.add(semesterGraphs);
+        panel.add(campusOfferingsLabel);
+        panel.add(locationGraphs);
 
         return panel;
     }
@@ -44,10 +60,11 @@ public class BarGraphPanel extends GUIPanel {
     @Override
     protected JPanel getPanel(){
         JPanel barGraphPanel = new JPanel();
+        barGraphPanel.setLayout(new BoxLayout(barGraphPanel, BoxLayout.PAGE_AXIS));
         barGraphPanel.setLayout(new BorderLayout());
         barGraphPanel.add(getLabel(),BorderLayout.NORTH);
         barGraphPanel.add(getComponent(),BorderLayout.CENTER);
-        barGraphPanel.setPreferredSize(new Dimension(250,300));
+        barGraphPanel.setPreferredSize(new Dimension(250,425));
         return barGraphPanel;
     }
 }

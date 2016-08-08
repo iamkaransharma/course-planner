@@ -38,6 +38,9 @@ public class CourseListFilterPanel extends GUIPanel implements ItemListener{
         String[] departmentNameList = createDepartmentNamesList();
         departmentList = new JComboBox(departmentNameList);
 
+        // Default selected department
+        selectedDepartment = coursePlanner.getDepartmentManager().getDepartments().get(0);
+
         departmentList.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
