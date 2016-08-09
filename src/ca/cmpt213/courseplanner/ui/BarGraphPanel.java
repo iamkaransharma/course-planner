@@ -133,7 +133,7 @@ public class BarGraphPanel extends GUIBasePanel {
                 }
             }
         } else {
-            courseLabel.setText("");
+            courseLabel.setText("Course: ");
         }
 
         int[] locationData = {burnabyCoursesCount, surreyCoursesCount, vancouverCoursesCount, otherCoursesCount};
