@@ -52,6 +52,10 @@ public class Offering implements Comparable<Offering> {
         }
     }
 
+    public boolean belongsToYear(int year) {
+        return this.semester.matchesYear(year);
+    }
+
     public Semester getSemester() {
         return semester;
     }

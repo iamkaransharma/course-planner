@@ -15,7 +15,7 @@ import java.util.*;
 public class Course implements Comparable<Course> {
     private String departmentName;
     private String catalogNumber;
-    private Set<Offering> offerings;
+    private TreeSet<Offering> offerings;
 
     public Course(String departmentName, String catalogNumber) {
         this.departmentName = departmentName;
@@ -35,15 +35,6 @@ public class Course implements Comparable<Course> {
         if (!foundOffering) {
             this.offerings.add(newOffering);
         }
-//        final int NOT_FOUND = -1;
-//        int currentIndex = this.offerings.indexOf(newOffering);
-//        if (currentIndex != NOT_FOUND) {
-//            Offering currentOffering = this.offerings.get(currentIndex);
-//            currentOffering.merge(newOffering);
-//        } else {
-//            this.offerings.add(newOffering);
-//        }
-//        Collections.sort(offerings);
     }
 
     public void merge(Course other) {
@@ -54,9 +45,7 @@ public class Course implements Comparable<Course> {
         }
     }
 
-//    public void sortBySemester() {
-//        Collections.sort(offerings);
-//    }
+
 
     @Override
     public String toString() {
@@ -67,6 +56,33 @@ public class Course implements Comparable<Course> {
             stringBuilder.append(offering.toString());
         }
         return stringBuilder.toString();
+    }
+
+    public Offering getOldestOffering() {
+        return offerings.first();
+    }
+
+    public Offering getNewestOffering() {
+        return offerings.last();
+    }
+//
+//    public Set<Location> getLocationsByYearAndSeason(int year, Season season) {
+//        for (Offering currentOffering : offerings) {
+//            Semester semester = currentOffering.getSemester();
+//            if (semester.getSemesterCode().endsWith(season.value()) && semester) {
+//                return currentOffering;
+//            }
+//        }
+//    }
+
+    public Set<Location> getLocationsBySemesterCode(String semesterCode) {
+        for (Offering currentOffering : offerings) {
+            String currentSemesterCode = currentOffering.getSemester().getSemesterCode();
+            if (currentSemesterCode.equals(semesterCode)) {
+                return currentOffering.getLocations();
+            }
+        }
+        return new TreeSet<>();
     }
 
     public Set<Offering> getOfferings() {
@@ -108,11 +124,6 @@ public class Course implements Comparable<Course> {
     public int hashCode() {
         return catalogNumber.hashCode() * 17;
     }
-
-//    @Override
-//    public Iterator<Offering> iterator() {
-//        return Collections.unmodifiableList(offerings).iterator();
-//    }
 
     @Override
     public int compareTo(Course other) {

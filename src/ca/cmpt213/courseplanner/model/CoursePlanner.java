@@ -30,7 +30,6 @@ public class CoursePlanner{
     public CoursePlanner(String csvFileName) throws FileNotFoundException {
         CSVParser csvParser = new CSVParser(csvFileName);
         departmentManager = csvParser.getDepartmentManager();
-//        departmentListObservers = new ArrayList<>();
         courseListObservers = new ArrayList<>();
         activeCourseObservers = new ArrayList<>();
         activeOfferingObserver = new ArrayList<>();

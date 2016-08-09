@@ -21,6 +21,7 @@ public class OfferingDetailsPanel extends GUIPanel {
     public OfferingDetailsPanel(CoursePlanner coursePlanner){
         super(coursePlanner,TITLE);
         setInternalPanel(getContentPanel());
+        resizeHorizontallyOnly();
         registerAsObserver();
     }
 
@@ -28,8 +29,8 @@ public class OfferingDetailsPanel extends GUIPanel {
 
         JPanel courseSemesterLocationInstructorsPanel = new JPanel();
 
-        JPanel labelsPanel = new JPanel();
-        labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.PAGE_AXIS));
+        JPanel labelsPanel = new JPanel(new GridLayout(0, 2));
+//        labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.PAGE_AXIS));
         labelsPanel.add(new JLabel("Course Name:"));
         labelsPanel.add(new JLabel("Semester:"));
         labelsPanel.add(new JLabel("Location:"));
@@ -38,15 +39,18 @@ public class OfferingDetailsPanel extends GUIPanel {
         labelsPanel.setPreferredSize(new Dimension(100,80));
 
         // Placeholder for information from active offering
-        JPanel offeringInfoPanel = new JPanel();
-        offeringInfoPanel.setLayout(new BoxLayout(offeringInfoPanel, BoxLayout.PAGE_AXIS));
+        JTextArea offeringInfoPanel = new JTextArea();
         offeringInfoPanel.setBackground(Color.white);
-        offeringInfoPanel.add(new JLabel("Current Course"));
-        offeringInfoPanel.add(new JLabel("Current Semester"));
-        offeringInfoPanel.add(new JLabel("Current Location"));
-        offeringInfoPanel.add(new JLabel("Current Instructors"));
+        offeringInfoPanel.setLineWrap(true);
+        offeringInfoPanel.setWrapStyleWord(true);
+        offeringInfoPanel.setText("A B C DE FE GH ISD DSKS");
+//        offeringInfoPanel.setLayout(new BoxLayout(offeringInfoPanel, BoxLayout.PAGE_AXIS));
+//        offeringInfoPanel.add(new JLabel("Current Course"));
+//        offeringInfoPanel.add(new JLabel("Current Semester"));
+//        offeringInfoPanel.add(new JLabel("Current Location"));
+//        offeringInfoPanel.add(new JLabel("Current Instructors"));
 
-        offeringInfoPanel.setPreferredSize(new Dimension(150,80));
+        offeringInfoPanel.setPreferredSize(new Dimension(100,80));
 
         courseSemesterLocationInstructorsPanel.add(labelsPanel);
         courseSemesterLocationInstructorsPanel.add(offeringInfoPanel);

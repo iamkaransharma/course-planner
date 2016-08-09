@@ -47,8 +47,24 @@ public class Semester {
         return season;
     }
 
-    public String getYear() {
-        return year;
+    public int getYear() {
+        return Integer.parseInt(year);
+    }
+
+    public String getCenturyPrefix() {
+        return semesterCode.substring(0, CENTURY_INDEX + 1);
+    }
+
+    public String getYearInfix() {
+        return semesterCode.substring(YEAR_SECOND_LAST_DIGIT, YEAR_LAST_DIGIT + 1);
+    }
+
+    public String getSeasonSuffix() {
+        return semesterCode.substring(SEASON_ID_INDEX, SEASON_ID_INDEX + 1);
+    }
+
+    public boolean matchesYear(int year) {
+        return this.year.equals(String.valueOf(year));
     }
 
     public String getSemesterCode() {

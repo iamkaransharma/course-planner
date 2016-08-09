@@ -21,6 +21,7 @@ public class BarGraphPanel extends GUIPanel {
     public BarGraphPanel(CoursePlanner coursePlanner){
         super(coursePlanner,TITLE);
         setInternalPanel(getContentPanel());
+        resizeHorizontallyOnly();
         registerAsObserver();
     }
 
@@ -43,7 +44,7 @@ public class BarGraphPanel extends GUIPanel {
 
         JLabel semesterOfferingsLabel = new JLabel("Semester Offerings:");
 
-        BarGraphIcon semesterGraphIcon = new BarGraphIcon(semesterGraphModel,225,180);
+        BarGraphIcon semesterGraphIcon = new BarGraphIcon(semesterGraphModel,250,180);
         JLabel semesterGraph = new JLabel(semesterGraphIcon);
 
         semesterGraphs.add(semesterOfferingsLabel);
@@ -57,7 +58,7 @@ public class BarGraphPanel extends GUIPanel {
         BarGraphModel testGraphModel2 = new BarGraphModel(locationData,campuses);
         testGraphModel2.setData(locationData);
 
-        BarGraphIcon testGraph2 = new BarGraphIcon(testGraphModel2,225,180);
+        BarGraphIcon testGraph2 = new BarGraphIcon(testGraphModel2,250,180);
         JLabel campusOfferingsLabel = new JLabel("Campus Offerings:");
         locationGraphs.add(campusOfferingsLabel);
         locationGraphs.add(new JLabel(testGraph2));
@@ -67,6 +68,7 @@ public class BarGraphPanel extends GUIPanel {
 
         // Adding elements to graphs
         graphs.add(courseLabel);
+        graphs.add(Box.createRigidArea(new Dimension(0,5)));
         graphs.add(semesterGraphs);
         graphs.add(locationGraphs);
 

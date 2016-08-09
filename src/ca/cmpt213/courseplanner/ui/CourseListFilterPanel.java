@@ -25,14 +25,6 @@ public class CourseListFilterPanel extends GUIPanel {
     private static final String TITLE = "Course List Filter";
 
     private List<Department> departmentList;
-
-    //    JCheckBox undergradCoursesButton;
-//    JCheckBox gradCoursesButton;
-//
-//    JComboBox<String> departmentList;
-//
-//    Department selectedDepartment;
-//    Integer selectedIndex;
     private Department selectedDepartment;
     private CourseListFilter selectedFilter;
 
@@ -46,6 +38,7 @@ public class CourseListFilterPanel extends GUIPanel {
         selectedDepartment = null;
         selectedFilter = null;
         setInternalPanel(getContentPanel());
+        resizeHorizontallyOnly();
     }
 
     private JPanel getContentPanel() {
@@ -63,31 +56,16 @@ public class CourseListFilterPanel extends GUIPanel {
         JPanel dropdownPanel = new JPanel();
         dropdownPanel.setLayout(new BoxLayout(dropdownPanel, BoxLayout.LINE_AXIS));
         dropdownPanel.add(new JLabel("Department"));
+        dropdownPanel.add(Box.createRigidArea(new Dimension(5,0)));
         dropdownPanel.add(departmentNamesBox);
 
         // Checkboxes
         JCheckBox undergradSelectButton = new JCheckBox("Include undergrad courses");
         undergradSelectButton.setMnemonic(KeyEvent.VK_C);
-//        undergradSelectButton.addItemListener(new ItemListener() {
-//            @Override
-//            public void itemStateChanged(ItemEvent e) {
-//                if (undergradSelectButton.isSelected()) {
-//                    selectedFilter = CourseListFilter.UNDERGRADUATE_COURSES;
-//                }
-//            }
-//        });
         undergradSelectButton.setSelected(true);
 
         JCheckBox gradSelectButton = new JCheckBox("Include grad courses");
         gradSelectButton.setMnemonic(KeyEvent.VK_C);
-//        gradSelectButton.addItemListener(new ItemListener() {
-//            @Override
-//            public void itemStateChanged(ItemEvent e) {
-//                if (gradSelectButton.isSelected()) {
-//                    selectedFilter = CourseListFilter.GRADUATE_COURSES;
-//                }
-//            }
-//        });
         gradSelectButton.setSelected(false);
 
         JPanel checkBoxes = new JPanel();
@@ -114,11 +92,17 @@ public class CourseListFilterPanel extends GUIPanel {
             }
         });
 
-//        panel.add(new JLabel("Department:"));
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.add(dropdownPanel, BorderLayout.NORTH);
         contentPanel.add(checkBoxes, BorderLayout.CENTER);
-        contentPanel.add(updateListButton, BorderLayout.SOUTH);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(updateListButton);
+        contentPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        contentPanel.setPreferredSize(new Dimension(90, 105));
         return contentPanel;
     }
 //
