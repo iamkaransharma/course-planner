@@ -27,11 +27,6 @@ public class CourseComponent implements Comparable<CourseComponent> {
             this.enrollmentTotal += other.getEnrollmentTotal();
         }
     }
-//
-//    public void increaseEnrollment(String enrollmentTotal, String enrollmentCapacity) {
-//        this.enrollmentCapacity += enrollmentCapacity;
-//        this.enrollmentTotal += enrollmentTotal;
-//    }
 
     public int getEnrollmentTotal() {
         return enrollmentTotal;

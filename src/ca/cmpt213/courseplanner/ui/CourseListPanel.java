@@ -4,6 +4,7 @@ import ca.cmpt213.courseplanner.model.Course;
 import ca.cmpt213.courseplanner.model.CoursePlanner;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
@@ -27,7 +28,6 @@ public class CourseListPanel extends GUIPanel {
 
     public CourseListPanel(CoursePlanner coursePlanner) {
         super(coursePlanner, TITLE);
-
         this.selectedCourseList = new ArrayList<>();
         this.defaultListModel = new DefaultListModel<>();
         setInternalPanel(getContentPanel());
@@ -56,13 +56,11 @@ public class CourseListPanel extends GUIPanel {
         });
 
         JScrollPane listScroller = new JScrollPane(courseListView);
-        listScroller.setPreferredSize(new Dimension(200, 400));
+        listScroller.setPreferredSize(new Dimension(200, 425));
 
-        JPanel listContainer = new JPanel();
-        listContainer.add(listScroller);
-
-        listContainer.setMinimumSize(new Dimension(200, 425));
-        listContainer.setPreferredSize(new Dimension(200, 425));
+        JPanel listContainer = new JPanel(new BorderLayout());
+        listScroller.setBorder(new EmptyBorder(0, 0, 0, 0));
+        listContainer.add(listScroller, BorderLayout.CENTER);
 
         return listContainer;
     }

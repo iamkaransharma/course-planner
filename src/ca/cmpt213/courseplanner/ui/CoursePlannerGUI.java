@@ -33,9 +33,7 @@ public class CoursePlannerGUI extends JFrame {
 
         // Center
         JPanel centerPanel = new SemesterOfferingsPanel(coursePlanner);
-
         centerPanel.setBorder(new EmptyBorder(0, 5, 0, 5));
-
         windowContainer.add(centerPanel, BorderLayout.CENTER);
 
         // East Side
@@ -44,6 +42,7 @@ public class CoursePlannerGUI extends JFrame {
         eastPanel.add(new BarGraphPanel(coursePlanner));
         eastPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         eastPanel.add(new OfferingDetailsPanel(coursePlanner));
+        eastPanel.add(Box.createVerticalGlue());
         windowContainer.add(eastPanel, BorderLayout.EAST);
 
         add(windowContainer);
