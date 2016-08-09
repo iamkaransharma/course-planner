@@ -29,7 +29,7 @@ abstract public class GUIPanel extends JPanel {
     }
 
     // Required methods
-//    protected Component getComponent() {
+//    protected Component getOfferingsTable() {
 //        panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
 //        panel.setBackground(Color.white);
 //        return panel;

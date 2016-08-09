@@ -32,9 +32,11 @@ public class CoursePlannerGUI extends JFrame {
         windowContainer.add(westPanel, BorderLayout.WEST);
 
         // Center
-//        JPanel centerPanel = new SemesterOfferingsPanel(coursePlanner).getPanel();
-//        centerPanel.setBorder(new EmptyBorder(0, 5, 0, 5));
-//        windowContainer.add(centerPanel, BorderLayout.CENTER);
+        JPanel centerPanel = new SemesterOfferingsPanel(coursePlanner);
+
+        centerPanel.setBorder(new EmptyBorder(0, 5, 0, 5));
+
+        windowContainer.add(centerPanel, BorderLayout.CENTER);
 
         // East Side
         JPanel eastPanel = new JPanel();

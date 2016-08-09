@@ -123,7 +123,7 @@ public class CourseListFilterPanel extends GUIPanel {
     }
 //
 //    @Override
-//    protected Component getComponent() {
+//    protected Component getOfferingsTable() {
 //        panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
 //        panel.setBackground(Color.white);
 //
@@ -186,7 +186,7 @@ public class CourseListFilterPanel extends GUIPanel {
 //        JPanel courseListFilterPanel = new JPanel();
 //        courseListFilterPanel.setLayout(new BorderLayout());
 //        courseListFilterPanel.add(getLabel(),BorderLayout.NORTH);
-//        courseListFilterPanel.add(getComponent(),BorderLayout.CENTER);
+//        courseListFilterPanel.add(getOfferingsTable(),BorderLayout.CENTER);
 //        courseListFilterPanel.setMinimumSize(new Dimension(225,175));
 //        courseListFilterPanel.setPreferredSize(new Dimension(225,175));
 //        return courseListFilterPanel;
