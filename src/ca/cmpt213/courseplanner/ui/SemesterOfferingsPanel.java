@@ -22,6 +22,7 @@ public class SemesterOfferingsPanel extends GUIPanel {
     protected JPanel getOfferingsTable() {
 
         JPanel offeringsTable = new JPanel();
+        offeringsTable.setBackground(Color.white);
 //        panel.setBackground(Color.white);
 
         // Add buttons into the table, button for each course offering
@@ -34,8 +35,8 @@ public class SemesterOfferingsPanel extends GUIPanel {
 
         offeringsTable.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        c.weighty = 1;
-        c.anchor = GridBagConstraints.NORTHWEST;
+//        c.weighty = 1;
+//        c.anchor = GridBagConstraints.NORTHWEST;
 
         // 550 is the maximum height of the table
 
@@ -45,44 +46,31 @@ public class SemesterOfferingsPanel extends GUIPanel {
 
         int cell_height = maximum_height / years;
 
-        for (int i = 0; i < years + 1; i++) {
+        for (int i = 0; i <= years; i++) {
 
             if (i == 0) {
 
-                JLabel emptyLabel = new JLabel("");
-                emptyLabel.setOpaque(true);
+                JLabel springLabel = new JLabel("Spring");
+                springLabel.setOpaque(false);
 
-                JLabel springLabel = new JLabel("Spring", SwingConstants.LEFT);
-                springLabel.setOpaque(true);
+                JLabel summerLabel = new JLabel("Summer");
+                summerLabel.setOpaque(false);
 
-                JLabel summerLabel = new JLabel("Summer", SwingConstants.LEFT);
-                summerLabel.setOpaque(true);
-
-                JLabel fallLabel = new JLabel("Fall", SwingConstants.LEFT);
-                fallLabel.setOpaque(true);
+                JLabel fallLabel = new JLabel("Fall");
+                fallLabel.setOpaque(false);
                 c.fill = GridBagConstraints.BOTH;
+                c.anchor = GridBagConstraints.WEST;
+                c.weightx = 1.0;
+                c.weighty = 0.0;
 
-                c.weightx = 0.5;
-                c.fill = GridBagConstraints.BOTH;
-                c.gridx = 0;
-                c.gridy = i;
-                offeringsTable.add(emptyLabel, c);
-                offeringsTable.add(Box.createVerticalGlue());
-
-                c.weightx = 0.5;
-                c.fill = GridBagConstraints.BOTH;
                 c.gridx = 1;
                 c.gridy = i;
                 offeringsTable.add(springLabel, c);
 
-                c.weightx = 0.5;
-                c.fill = GridBagConstraints.BOTH;
                 c.gridx = 2;
                 c.gridy = i;
                 offeringsTable.add(summerLabel, c);
 
-                c.weightx = 0.5;
-                c.fill = GridBagConstraints.BOTH;
                 c.gridx = 3;
                 c.gridy = i;
                 offeringsTable.add(fallLabel, c);
@@ -94,46 +82,54 @@ public class SemesterOfferingsPanel extends GUIPanel {
                 int year = 2000 + i - 1;
                 String yearText = year + "";
                 JLabel yearLabel = new JLabel(yearText, SwingConstants.LEFT);
-                yearLabel.setOpaque(true);
+                yearLabel.setOpaque(false);
                 yearLabel.setPreferredSize(new Dimension(45, cell_height));
 
                 JPanel spring = new JPanel();
-                spring.setBackground(Color.white);
+//                spring.setBackground(Color.white);
                 spring.setBorder(BorderFactory.createLineBorder(Color.black));
                 spring.setPreferredSize(new Dimension(220, cell_height));
 
                 JPanel summer = new JPanel();
-                summer.setBackground(Color.white);
+//                summer.setBackground(Color.white);
                 summer.setBorder(BorderFactory.createLineBorder(Color.black));
                 summer.setPreferredSize(new Dimension(220, cell_height));
 
                 JPanel fall = new JPanel();
-                fall.setBackground(Color.white);
+//                fall.setBackground(Color.white);
                 fall.setBorder(BorderFactory.createLineBorder(Color.black));
                 fall.setPreferredSize(new Dimension(220, cell_height));
 
-                c.fill = GridBagConstraints.BOTH;
 
-                c.weightx = 0.5;
-                c.fill = GridBagConstraints.BOTH;
+                c.fill = GridBagConstraints.NONE;
+                c.anchor = GridBagConstraints.EAST;
+                c.weighty = 0.0;
+                c.weightx = 0.0;
                 c.gridx = 0;
                 c.gridy = i;
                 offeringsTable.add(yearLabel, c);
 
-                c.weightx = 0.5;
                 c.fill = GridBagConstraints.BOTH;
+                c.anchor = GridBagConstraints.NORTH;
+                c.weighty = 1.0;
+                c.weightx = 1.0;
+
+//                c.fill = GridBagConstraints.BOTH;
+//                c.anchor = GridBagConstraints.EAST;
                 c.gridx = 1;
                 c.gridy = i;
                 offeringsTable.add(spring, c);
 
-                c.weightx = 0.5;
-                c.fill = GridBagConstraints.BOTH;
+//                c.weightx = 1.0;
+//                c.fill = GridBagConstraints.BOTH;
+//                c.anchor = GridBagConstraints.EAST;
                 c.gridx = 2;
                 c.gridy = i;
                 offeringsTable.add(summer, c);
 
-                c.weightx = 0.5;
-                c.fill = GridBagConstraints.BOTH;
+//                c.weightx = 1.0;
+//                c.fill = GridBagConstraints.BOTH;
+//                c.anchor = GridBagConstraints.EAST;
                 c.gridx = 3;
                 c.gridy = i;
                 offeringsTable.add(fall, c);
@@ -161,10 +157,15 @@ public class SemesterOfferingsPanel extends GUIPanel {
     }
 
     private void registerAsObserver() {
-
+        getModel().addCourseListObserver(
+                () -> updateOfferingsTable()
+        );
+        getModel().addActiveCourseObserver(
+                () -> updateOfferingsTable()
+        );
     }
 
     private void updateOfferingsTable() {
-
+        System.out.println("notified!!!");
     }
 }

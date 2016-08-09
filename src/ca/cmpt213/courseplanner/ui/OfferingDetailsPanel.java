@@ -17,8 +17,6 @@ public class OfferingDetailsPanel extends GUIPanel {
 
     private static final String TITLE = "Details of Course Offering";
     Offering activeOffering;
-    Location activeLocation;
-    private List<Course> activeCourseList;
 
     JTextArea offeringInfoPanel;
     JPanel componentCodeInfo;
@@ -92,11 +90,9 @@ public class OfferingDetailsPanel extends GUIPanel {
     }
 
     private void registerAsObserver() {
-        getModel().addCourseListObserver(
-                ()
-        );
+
         getModel().addActiveCourseObserver(
-                ()
+                ()->updateOfferingDetails()
         );
         getModel().addActiveOfferingObserver(
                 ()->updateOfferingDetails()
@@ -108,53 +104,59 @@ public class OfferingDetailsPanel extends GUIPanel {
 
     private void updateOfferingDetails() {
         activeOffering = getModel().getActiveOffering();
+        if (activeOffering != null) {
 
-        activeCourse = getModel().getActiveCourse().getFullName();
-        String activeSemester = activeOffering.getSemester().getSemesterCode();
-        String activeLocation = getModel().getActiveLocation().getName();
+            activeCourse = getModel().getActiveCourse().getFullName();
+            String activeSemester = activeOffering.getSemester().getSemesterCode();
+            String activeLocation = getModel().getActiveLocation().getName();
 
-        String activeInstructors = "";
+            String activeInstructors = "";
 
-        Set<String> instructorsFromOffering = getModel().getActiveLocation().getInstructors();
-        for (String i : instructorsFromOffering) {
-            activeInstructors = activeInstructors + i;
+            Set<String> instructorsFromOffering = getModel().getActiveLocation().getInstructors();
+            for (String i : instructorsFromOffering) {
+                activeInstructors = activeInstructors + i;
+            }
+
+            offeringInfoPanel.setText(activeCourse + "\n" + activeSemester + "\n" + activeLocation + "\n" + activeInstructors);
+
+            Set<CourseComponent> courseComponentsFromLocation = getModel().getActiveLocation().getCourseComponents();
+
+            ArrayList<String> componentCodes = new ArrayList<>();
+            ArrayList<String> enrollments = new ArrayList<>();
+
+            for (CourseComponent c : courseComponentsFromLocation) {
+                componentCodes.add(c.getComponentCode());
+                enrollments.add(c.getEnrollmentTotal() + "/" + c.getEnrollmentCapacity());
+            }
+
+            componentCodeLabels.add(new JLabel("Section Type"));
+            componentCodeInfo.add(new JLabel("Enrollment (filled/cap)"));
+
+            for (String c : componentCodes) {
+                componentCodeLabels.add(new JLabel(c));
+            }
+            for (String e : enrollments) {
+                componentCodeInfo.add(new JLabel(e));
+            }
         }
 
-        offeringInfoPanel.setText(activeCourse + "\n" + activeSemester + "\n" + activeLocation + "\n" + activeInstructors);
-
-        Set<CourseComponent> courseComponentsFromLocation = getModel().getActiveLocation().getCourseComponents();
-
-        ArrayList<String> componentCodes = new ArrayList<>();
-        ArrayList<String> enrollments = new ArrayList<>();
-
-        for (CourseComponent c : courseComponentsFromLocation) {
-            componentCodes.add(c.getComponentCode());
-            enrollments.add(c.getEnrollmentTotal() + "/" + c.getEnrollmentCapacity());
-        }
-
-        componentCodeLabels.add(new JLabel("Section Type"));
-        componentCodeInfo.add(new JLabel("Enrollment (filled/cap)"));
-
-        for (String c : componentCodes) {
-            componentCodeLabels.add(new JLabel(c));
-        }
-        for (String e : enrollments) {
-            componentCodeInfo.add(new JLabel(e));
-        }
 
         this.updateUI();
     }
 
-    private void updateLocation(){
+    private void clearOfferingDetails(){
+        offeringInfoPanel.setText("");
 
-    }
+        componentCodeLabels.removeAll();
+        componentCodeInfo.removeAll();
 
-    private void updateCourseList(){
+        componentCodeLabels.revalidate();
+        componentCodeInfo.revalidate();
 
-    }
+        componentCodeLabels.repaint();
+        componentCodeInfo.repaint();
 
-    private void updateCourse(){
-
+        this.updateUI();
     }
 
 }
