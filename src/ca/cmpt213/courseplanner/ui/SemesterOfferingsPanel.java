@@ -94,22 +94,19 @@ public class SemesterOfferingsPanel extends GUIPanel{
                 yearLabel.setOpaque(true);
                 yearLabel.setPreferredSize(new Dimension(45,cell_height));
 
-                JLabel spring = new JLabel("", SwingConstants.CENTER);
+                JPanel spring = new JPanel();
                 spring.setBackground(Color.white);
                 spring.setBorder(BorderFactory.createLineBorder(Color.black));
-                spring.setOpaque(true);
                 spring.setPreferredSize(new Dimension(220, cell_height));
 
-                JLabel summer = new JLabel("", SwingConstants.CENTER);
+                JPanel summer = new JPanel();
                 summer.setBackground(Color.white);
                 summer.setBorder(BorderFactory.createLineBorder(Color.black));
-                summer.setOpaque(true);
                 summer.setPreferredSize(new Dimension(220, cell_height));
 
-                JLabel fall = new JLabel("", SwingConstants.CENTER);
+                JPanel fall = new JPanel();
                 fall.setBackground(Color.white);
                 fall.setBorder(BorderFactory.createLineBorder(Color.black));
-                fall.setOpaque(true);
                 fall.setPreferredSize(new Dimension(220, cell_height));
 
                 c.fill = GridBagConstraints.HORIZONTAL;
