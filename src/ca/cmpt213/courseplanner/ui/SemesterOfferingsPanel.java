@@ -9,9 +9,11 @@ import java.awt.*;
 /**
  * Created by Thomas_Ngo on 2016-07-30.
  */
-public class SemesterOfferingsPanel extends GUIPanel {
+public class SemesterOfferingsPanel extends GUIBasePanel {
 
     private static final String TITLE = "Course Offerings by Semester";
+    private static final int DEFAULT_WIDTH = 600;
+    private static final int DEFAULT_HEIGHT = 600;
 
     public SemesterOfferingsPanel(CoursePlanner coursePlanner) {
         super(coursePlanner, TITLE);
@@ -52,14 +54,20 @@ public class SemesterOfferingsPanel extends GUIPanel {
 
                 JLabel springLabel = new JLabel("Spring");
                 springLabel.setOpaque(false);
+                springLabel.setPreferredSize(new Dimension(Integer.MIN_VALUE, 20));
+                resizeHorizontallyOnly(springLabel);
 
                 JLabel summerLabel = new JLabel("Summer");
                 summerLabel.setOpaque(false);
+                springLabel.setPreferredSize(new Dimension(Integer.MIN_VALUE, 20));
+                resizeHorizontallyOnly(summerLabel);
 
                 JLabel fallLabel = new JLabel("Fall");
                 fallLabel.setOpaque(false);
+                springLabel.setPreferredSize(new Dimension(Integer.MIN_VALUE, 20));
+                resizeHorizontallyOnly(fallLabel);
                 c.fill = GridBagConstraints.BOTH;
-                c.anchor = GridBagConstraints.WEST;
+                c.anchor = GridBagConstraints.SOUTHWEST;
                 c.weightx = 1.0;
                 c.weighty = 0.0;
 
@@ -83,27 +91,21 @@ public class SemesterOfferingsPanel extends GUIPanel {
                 String yearText = year + "";
                 JLabel yearLabel = new JLabel(yearText, SwingConstants.LEFT);
                 yearLabel.setOpaque(false);
-                yearLabel.setPreferredSize(new Dimension(45, cell_height));
+                yearLabel.setPreferredSize(new Dimension(35, 10));
 
                 JPanel spring = new JPanel();
-//                spring.setBackground(Color.white);
                 spring.setBorder(BorderFactory.createLineBorder(Color.black));
-                spring.setPreferredSize(new Dimension(220, cell_height));
 
                 JPanel summer = new JPanel();
-//                summer.setBackground(Color.white);
                 summer.setBorder(BorderFactory.createLineBorder(Color.black));
-                summer.setPreferredSize(new Dimension(220, cell_height));
 
                 JPanel fall = new JPanel();
-//                fall.setBackground(Color.white);
                 fall.setBorder(BorderFactory.createLineBorder(Color.black));
-                fall.setPreferredSize(new Dimension(220, cell_height));
 
 
                 c.fill = GridBagConstraints.NONE;
-                c.anchor = GridBagConstraints.EAST;
-                c.weighty = 0.0;
+                c.anchor = GridBagConstraints.NORTHEAST;
+                c.weighty = 0.2;
                 c.weightx = 0.0;
                 c.gridx = 0;
                 c.gridy = i;
@@ -114,22 +116,14 @@ public class SemesterOfferingsPanel extends GUIPanel {
                 c.weighty = 1.0;
                 c.weightx = 1.0;
 
-//                c.fill = GridBagConstraints.BOTH;
-//                c.anchor = GridBagConstraints.EAST;
                 c.gridx = 1;
                 c.gridy = i;
                 offeringsTable.add(spring, c);
 
-//                c.weightx = 1.0;
-//                c.fill = GridBagConstraints.BOTH;
-//                c.anchor = GridBagConstraints.EAST;
                 c.gridx = 2;
                 c.gridy = i;
                 offeringsTable.add(summer, c);
 
-//                c.weightx = 1.0;
-//                c.fill = GridBagConstraints.BOTH;
-//                c.anchor = GridBagConstraints.EAST;
                 c.gridx = 3;
                 c.gridy = i;
                 offeringsTable.add(fall, c);
@@ -151,7 +145,7 @@ public class SemesterOfferingsPanel extends GUIPanel {
 
         semesterOfferingsPanel.add(offeringsPanel);
 
-        semesterOfferingsPanel.setPreferredSize(new Dimension(800, HEIGHT));
+        semesterOfferingsPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
 
         return semesterOfferingsPanel;
     }

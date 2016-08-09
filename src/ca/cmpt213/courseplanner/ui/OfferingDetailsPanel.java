@@ -13,7 +13,7 @@ import java.util.Set;
  * OfferingDetailsPanel contains the active offering's course name, semester, location, instructors,
  * Section Type and Enrollment.
  */
-public class OfferingDetailsPanel extends GUIPanel {
+public class OfferingDetailsPanel extends GUIBasePanel {
 
     private static final String TITLE = "Details of Course Offering";
     Offering activeOffering;
@@ -28,7 +28,7 @@ public class OfferingDetailsPanel extends GUIPanel {
     public OfferingDetailsPanel(CoursePlanner coursePlanner) {
         super(coursePlanner, TITLE);
         setInternalPanel(getContentPanel());
-        resizeHorizontallyOnly();
+        resizeHorizontallyOnly(this);
         registerAsObserver();
     }
 

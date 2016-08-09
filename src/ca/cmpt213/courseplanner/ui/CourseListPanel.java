@@ -15,7 +15,7 @@ import java.util.List;
  * CourseListPanel contains a list of undergrad/grad courses from the selected department and displays them in a list
  * that the user can click on to display all of the offerings for that course
  */
-public class CourseListPanel extends GUIPanel {
+public class CourseListPanel extends GUIBasePanel {
 
     private static final String TITLE = "Course List";
 

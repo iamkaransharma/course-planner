@@ -11,7 +11,7 @@ import java.awt.*;
  * BarGraphPanel contains statistics that show how many offerings are offered in Spring, Summer and Fall, and
  * the locations of the offerings at Burnaby, Surrey, Harbor Center and other locations.
  */
-public class BarGraphPanel extends GUIPanel {
+public class BarGraphPanel extends GUIBasePanel {
 
     private static final String TITLE = "Statistics";
 
@@ -22,7 +22,7 @@ public class BarGraphPanel extends GUIPanel {
 
     public BarGraphPanel(CoursePlanner coursePlanner) {
         super(coursePlanner, TITLE);
-        resizeHorizontallyOnly();
+        resizeHorizontallyOnly(this);
         registerAsObserver();
         initializeBarGraphs();
         setInternalPanel(getContentPanel());

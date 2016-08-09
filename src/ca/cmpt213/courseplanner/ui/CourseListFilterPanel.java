@@ -18,7 +18,7 @@ import java.util.Set;
  * It also lets the users choose if they want to see only undergrad courses, only grad courses, none of
  * them or both. The user presses the "Update Course List" to change the CourseListPanel's display.
  */
-public class CourseListFilterPanel extends GUIPanel {
+public class CourseListFilterPanel extends GUIBasePanel {
 
     private static final String TITLE = "Course List Filter";
 
@@ -36,7 +36,7 @@ public class CourseListFilterPanel extends GUIPanel {
         selectedDepartment = null;
         selectedFilter = null;
         setInternalPanel(getContentPanel());
-        resizeHorizontallyOnly();
+        resizeHorizontallyOnly(this);
     }
 
     private JPanel getContentPanel() {

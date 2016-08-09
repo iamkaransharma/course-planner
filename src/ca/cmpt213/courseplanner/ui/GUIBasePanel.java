@@ -9,12 +9,12 @@ import java.awt.*;
 /**
  * Created by Thomas_Ngo on 2016-08-03.
  */
-abstract public class GUIPanel extends JPanel {
+abstract public class GUIBasePanel extends JPanel {
 
     private CoursePlanner coursePlanner;
     private JPanel internalPanel;
 
-    public GUIPanel(CoursePlanner coursePlanner, String title) {
+    public GUIBasePanel(CoursePlanner coursePlanner, String title) {
         this.coursePlanner = coursePlanner;
         JLabel titleLabel = new JLabel(title, JLabel.LEFT);
         titleLabel.setForeground(Color.blue);
@@ -29,13 +29,13 @@ abstract public class GUIPanel extends JPanel {
         this.add(internalPanel, BorderLayout.CENTER);
     }
 
-    protected void resizeHorizontallyOnly() {
-        Dimension prefSize = getPreferredSize();
+    protected void resizeHorizontallyOnly(JComponent component) {
+        Dimension prefSize = component.getPreferredSize();
         Dimension newSize = new Dimension(
                 Integer.MAX_VALUE,
                 (int) prefSize.getHeight()
         );
-        setMaximumSize(newSize);
+        component.setMaximumSize(newSize);
     }
 
     protected CoursePlanner getModel() {
