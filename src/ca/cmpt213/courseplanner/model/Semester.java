@@ -4,10 +4,6 @@ package ca.cmpt213.courseplanner.model;
  * Semester class models a semester and contains the semester code, season and year. It returns the season it takes
  * place in, the year it takes place in, and its semester code.
  */
-
-/**
- * Created by Thomas_Ngo on 2016-07-30.
- */
 public class Semester {
     private static final int CENTURY_INDEX = 0;
     private static final int YEAR_SECOND_LAST_DIGIT = 1;

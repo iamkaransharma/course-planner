@@ -1,16 +1,13 @@
 package ca.cmpt213.courseplanner.model;
 
-import java.util.*;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Course class models a course under its respective department and contains a set of offerings for each year
  * and semester. It contains methods that adds offerings, returns a list of offerings, merges offerings,
  * filters offerings by seasons, returns full name of the course, hashes catalog numbers, and compares
  * itself with other courses to see if it shares the same catalog number with them.
-*/
-
-/**
- * Created by Thomas_Ngo on 2016-07-30.
  */
 public class Course implements Comparable<Course> {
     private String departmentName;

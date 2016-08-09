@@ -1,15 +1,13 @@
 package ca.cmpt213.courseplanner.model;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Offering class contains the catalog number, semester and locations of where the offering courses are at.
  * It returns the semester and catalog number and adds locations to itself if it finds a course offering
  * that is located in the same location as itself.
- */
-
-/**
- * Created by Thomas_Ngo on 2016-07-30.
  */
 public class Offering implements Comparable<Offering> {
     private String catalogNumber;
@@ -34,14 +32,6 @@ public class Offering implements Comparable<Offering> {
         if (!foundLocation) {
             this.locations.add(newLocation);
         }
-//        final int NOT_FOUND = -1;
-//        int currentIndex = this.locations.indexOf(newLocation);
-//        if (currentIndex != NOT_FOUND) {
-//            Location currentLocation = this.locations.get(currentIndex);
-//            currentLocation.merge(newLocation);
-//        } else {
-//            this.locations.add(newLocation);
-//        }
     }
 
     public void merge(Offering other) {
@@ -84,16 +74,6 @@ public class Offering implements Comparable<Offering> {
             stringBuilder.append("\t");
             lastElementIndex--;
         }
-//        for (Iterator<Location> it = locations.iterator(); it.hasNext(); i++) {
-//            Location location = locations.get(i);
-//            stringBuilder.append(semester.getSemesterCode() + " in " + location.getName() + " by ");
-//            appendCommaSeparatedWords(stringBuilder, location.getInstructors());
-//            stringBuilder.append(location.toString());
-//            if (i < locations.size() - 1) {
-//                stringBuilder.append("\n");
-//            }
-//            stringBuilder.append("\t");
-//        }
         return stringBuilder.toString();
     }
 

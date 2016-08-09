@@ -1,14 +1,12 @@
 package ca.cmpt213.courseplanner.model;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * DepartmentManager adds departments into the "departments" set, and adds offerings into each course under their
  * respective department.
- */
-
-/**
- * Created by Karan on 06/08/2016.
  */
 public class DepartmentManager {
     private Set<Department> departments;

@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * CoursePlanner models the logic of the Course Planner application and provides the observers, the course,
@@ -12,20 +11,12 @@ import java.util.TreeSet;
  * and throws an exception if the file is not found. It also provides the implementation code that notifies
  * all observers when the model changes.
  */
-
-/**
- * Created by Thomas_Ngo on 2016-07-30.
- */
-public class CoursePlanner{
+public class CoursePlanner {
     private DepartmentManager departmentManager;
     private Set<Course> activeCourseList;
-//    private Department activeDepartment;
     private Course activeCourse;
     private Offering activeOffering;
-
     private Location activeLocation;
-
-//    private List<CoursePlannerObserver> departmentListObservers;
     private List<CoursePlannerObserver> courseListObservers;
     private List<CoursePlannerObserver> activeCourseObservers;
     private List<CoursePlannerObserver> activeOfferingObserver;
@@ -94,10 +85,6 @@ public class CoursePlanner{
      * Methods to support being observable
      * -----------------------------------
      * */
-//    public void addDepartmentListObserver(CoursePlannerObserver observer) {
-//        departmentListObservers.add(observer);
-//    }
-
     public void addCourseListObserver(CoursePlannerObserver observer) {
         courseListObservers.add(observer);
     }
@@ -113,12 +100,6 @@ public class CoursePlanner{
     public void addActiveLocationObserver(CoursePlannerObserver observer){
         activeLocationObserver.add(observer);
     }
-
-//    private void notifyDepartmentListObservers() {
-//        for (CoursePlannerObserver observer : departmentListObservers) {
-//            observer.modelStateChanged();
-//        }
-//    }
 
     private void notifyCourseListObservers() {
         for (CoursePlannerObserver observer : courseListObservers) {

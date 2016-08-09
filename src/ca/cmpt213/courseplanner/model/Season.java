@@ -7,16 +7,11 @@ import java.util.Map;
  * Season represents the three seasonal semesters: Spring, Summer and Fall and acts a bridge between semesters and
  * offerings
  */
-
-/**
- * Created by Thomas_Ngo on 2016-07-30.
- */
 public enum Season {
     SPRING(1),
     SUMMER(4),
     FALL(7);
 
-    private int seasonID;
     private static Map<Integer, Season> seasonIdToSeason = new HashMap<>();
 
     static {
@@ -24,6 +19,8 @@ public enum Season {
             seasonIdToSeason.put(season.seasonID, season);
         }
     }
+
+    private int seasonID;
 
     Season(final int seasonId) {
         this.seasonID = seasonId;

@@ -9,12 +9,12 @@ import java.awt.*;
 /**
  * Created by Thomas_Ngo on 2016-07-30.
  */
-public class SemesterOfferingsPanel extends GUIPanel{
+public class SemesterOfferingsPanel extends GUIPanel {
 
     private static final String TITLE = "Course Offerings by Semester";
 
-    public SemesterOfferingsPanel (CoursePlanner coursePlanner){
-        super(coursePlanner,TITLE);
+    public SemesterOfferingsPanel(CoursePlanner coursePlanner) {
+        super(coursePlanner, TITLE);
         setInternalPanel(getContentPanel());
         registerAsObserver();
     }
@@ -43,11 +43,11 @@ public class SemesterOfferingsPanel extends GUIPanel{
 
         int years = 10;
 
-        int cell_height = maximum_height/years;
+        int cell_height = maximum_height / years;
 
-        for (int i = 0; i < years+1; i++){
+        for (int i = 0; i < years + 1; i++) {
 
-            if (i == 0){
+            if (i == 0) {
 
                 JLabel emptyLabel = new JLabel("");
                 emptyLabel.setOpaque(true);
@@ -95,7 +95,7 @@ public class SemesterOfferingsPanel extends GUIPanel{
                 String yearText = year + "";
                 JLabel yearLabel = new JLabel(yearText, SwingConstants.LEFT);
                 yearLabel.setOpaque(true);
-                yearLabel.setPreferredSize(new Dimension(45,cell_height));
+                yearLabel.setPreferredSize(new Dimension(45, cell_height));
 
                 JPanel spring = new JPanel();
                 spring.setBackground(Color.white);
@@ -145,7 +145,7 @@ public class SemesterOfferingsPanel extends GUIPanel{
         return offeringsTable;
     }
 
-    protected JPanel getContentPanel(){
+    protected JPanel getContentPanel() {
 
         JPanel semesterOfferingsPanel = new JPanel();
 
@@ -155,16 +155,16 @@ public class SemesterOfferingsPanel extends GUIPanel{
 
         semesterOfferingsPanel.add(offeringsPanel);
 
-        semesterOfferingsPanel.setPreferredSize(new Dimension(800,HEIGHT));
+        semesterOfferingsPanel.setPreferredSize(new Dimension(800, HEIGHT));
 
         return semesterOfferingsPanel;
     }
 
-    private void registerAsObserver(){
+    private void registerAsObserver() {
 
     }
 
-    private void updateOfferingsTable(){
+    private void updateOfferingsTable() {
 
     }
 }

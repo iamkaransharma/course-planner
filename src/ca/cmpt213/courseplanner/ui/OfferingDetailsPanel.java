@@ -1,19 +1,17 @@
 package ca.cmpt213.courseplanner.ui;
 
+import ca.cmpt213.courseplanner.model.CourseComponent;
 import ca.cmpt213.courseplanner.model.CoursePlanner;
-import ca.cmpt213.courseplanner.model.*;
+import ca.cmpt213.courseplanner.model.Offering;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * OfferingDetailsPanel contains the active offering's course name, semester, location, instructors,
  * Section Type and Enrollment.
- */
-
-/**
- * Created by Thomas_Ngo on 2016-07-30.
  */
 public class OfferingDetailsPanel extends GUIPanel {
 
@@ -23,14 +21,14 @@ public class OfferingDetailsPanel extends GUIPanel {
     JPanel componentCodeInfo;
     JPanel componentCodeLabels;
 
-    public OfferingDetailsPanel(CoursePlanner coursePlanner){
-        super(coursePlanner,TITLE);
+    public OfferingDetailsPanel(CoursePlanner coursePlanner) {
+        super(coursePlanner, TITLE);
         setInternalPanel(getContentPanel());
         resizeHorizontallyOnly();
         registerAsObserver();
     }
 
-    protected JPanel getContentPanel(){
+    protected JPanel getContentPanel() {
 
         JPanel courseSemesterLocationInstructorsPanel = new JPanel(new GridLayout(1, 1));
 
@@ -41,7 +39,7 @@ public class OfferingDetailsPanel extends GUIPanel {
         labelsPanel.add(new JLabel("Location:"));
         labelsPanel.add(new JLabel("Instructors:"));
 
-        labelsPanel.setPreferredSize(new Dimension(110,80));
+        labelsPanel.setPreferredSize(new Dimension(110, 80));
 
 
         // Placeholder for information from active offering
@@ -57,7 +55,7 @@ public class OfferingDetailsPanel extends GUIPanel {
 //        offeringInfoPanel.add(new JLabel("Current Location"));
 //        offeringInfoPanel.add(new JLabel("Current Instructors"));
 
-        offeringInfoPanel.setPreferredSize(new Dimension(120,80));
+        offeringInfoPanel.setPreferredSize(new Dimension(120, 80));
 
         courseSemesterLocationInstructorsPanel.add(labelsPanel);
         courseSemesterLocationInstructorsPanel.add(offeringInfoPanel);
@@ -65,12 +63,12 @@ public class OfferingDetailsPanel extends GUIPanel {
         componentCodeLabels = new JPanel(new GridLayout(2, 1));
         componentCodeLabels.setLayout(new BoxLayout(componentCodeLabels, BoxLayout.PAGE_AXIS));
 
-        componentCodeLabels.setPreferredSize(new Dimension(80,80));
+        componentCodeLabels.setPreferredSize(new Dimension(80, 80));
 
         componentCodeInfo = new JPanel(new GridLayout(2, 2));
         componentCodeInfo.setLayout(new BoxLayout(componentCodeInfo, BoxLayout.PAGE_AXIS));
 
-        componentCodeInfo.setPreferredSize(new Dimension(150,80));
+        componentCodeInfo.setPreferredSize(new Dimension(150, 80));
 
 
         JPanel offeringDetailsPanel = new JPanel();
@@ -82,21 +80,21 @@ public class OfferingDetailsPanel extends GUIPanel {
         offeringDetailsPanel.add(componentCodeLabels);
         offeringDetailsPanel.add(componentCodeInfo);
 
-        offeringDetailsPanel.setPreferredSize(new Dimension(250,175));
+        offeringDetailsPanel.setPreferredSize(new Dimension(250, 175));
 
         return offeringDetailsPanel;
     }
 
-    private void registerAsObserver(){
+    private void registerAsObserver() {
 //        getModel().addActiveOfferingObserver(
 //                ()->updateOfferingDetails()
 //        );
         getModel().addActiveLocationObserver(
-                ()->updateOfferingDetails()
+                () -> updateOfferingDetails()
         );
     }
 
-    private void updateOfferingDetails(){
+    private void updateOfferingDetails() {
         activeOffering = getModel().getActiveOffering();
 
         String activeCourse = getModel().getActiveCourse().getFullName();
@@ -106,18 +104,18 @@ public class OfferingDetailsPanel extends GUIPanel {
         String activeInstructors = "";
 
         Set<String> instructorsFromOffering = getModel().getActiveLocation().getInstructors();
-        for (String i: instructorsFromOffering){
+        for (String i : instructorsFromOffering) {
             activeInstructors = activeInstructors + i;
         }
 
-        offeringInfoPanel.setText(activeCourse+"\n"+activeSemester+"\n"+activeLocation+"\n"+activeInstructors);
+        offeringInfoPanel.setText(activeCourse + "\n" + activeSemester + "\n" + activeLocation + "\n" + activeInstructors);
 
         Set<CourseComponent> courseComponentsFromLocation = getModel().getActiveLocation().getCourseComponents();
 
         ArrayList<String> componentCodes = new ArrayList<>();
         ArrayList<String> enrollments = new ArrayList<>();
 
-        for (CourseComponent c: courseComponentsFromLocation){
+        for (CourseComponent c : courseComponentsFromLocation) {
             componentCodes.add(c.getComponentCode());
             enrollments.add(c.getEnrollmentTotal() + "/" + c.getEnrollmentCapacity());
         }
@@ -125,10 +123,10 @@ public class OfferingDetailsPanel extends GUIPanel {
         componentCodeLabels.add(new JLabel("Section Type"));
         componentCodeInfo.add(new JLabel("Enrollment (filled/cap)"));
 
-        for (String c: componentCodes){
+        for (String c : componentCodes) {
             componentCodeLabels.add(new JLabel(c));
         }
-        for (String e: enrollments){
+        for (String e : enrollments) {
             componentCodeInfo.add(new JLabel(e));
         }
 

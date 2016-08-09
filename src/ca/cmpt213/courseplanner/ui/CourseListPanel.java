@@ -8,19 +8,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * CourseListPanel contains a list of undergrad/grad courses from the selected department and displays them in a list
  * that the user can click on to display all of the offerings for that course
- */
-
-/**
- * Created by Thomas_Ngo on 2016-07-30.
  */
 public class CourseListPanel extends GUIPanel {
 

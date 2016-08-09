@@ -18,6 +18,10 @@ public class CoursePlannerGUI extends JFrame {
         new JFrame(WINDOW_TITLE);
     }
 
+    public static void displayDialogBox(String text) {
+        JOptionPane.showMessageDialog(null, text);
+    }
+
     public void start() {
         JPanel windowContainer = new JPanel();
         windowContainer.setLayout(new BorderLayout());
@@ -50,10 +54,6 @@ public class CoursePlannerGUI extends JFrame {
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-    }
-
-    public static void displayDialogBox(String text) {
-        JOptionPane.showMessageDialog(null, text);
     }
 
 }

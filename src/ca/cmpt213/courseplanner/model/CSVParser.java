@@ -10,12 +10,7 @@ import java.util.List;
  * department set. It throws an exception if the CSVParser cannot find the CSV file. It also handles
  * rows that have multiple instructors.
  */
-
-/**
- * Created by Karan on 01/08/2016.
- */
 public class CSVParser {
-
     private static final int SEMESTER_INDEX = 0;
     private static final int SUBJECT_INDEX = 1;
     private static final int CATALOG_NUMBER_INDEX = 2;
@@ -32,15 +27,11 @@ public class CSVParser {
     }
 
     public DepartmentManager getDepartmentManager() {
-
         DepartmentManager departments = new DepartmentManager();
-
         try {
             csvReader.readNextLineTokens(); // skip header line containing column names
-
-            String[] currentLineTokens = null;
+            String[] currentLineTokens;
             while ((currentLineTokens = csvReader.readNextLineTokens()) != null) {
-
                 List<String> instructors = getInstructors(currentLineTokens[INSTRUCTORS_INDEX]);
                 int enrollmentTotal = Integer.parseInt(currentLineTokens[ENROLLMENT_TOTAL_INDEX]);
                 int enrollmentCapacity = Integer.parseInt(currentLineTokens[ENROLLMENT_CAPACITY_INDEX]);
@@ -56,7 +47,6 @@ public class CSVParser {
                         currentLineTokens[COMPONENT_CODE_INDEX]
                 );
             }
-
         } catch (IOException exception) {
             exception.printStackTrace();
         } finally {
@@ -73,7 +63,7 @@ public class CSVParser {
         final String NO_INSTRUCTOR_STRING = "(null)";
         final String INSTRUCTOR_STRING_DELIMITER = ", ";
 
-        String[] instructors = null;
+        String[] instructors;
         if (rawString.equals(NO_INSTRUCTOR_STRING)) {
             instructors = new String[]{};
         } else if (rawString.charAt(0) == '"') {

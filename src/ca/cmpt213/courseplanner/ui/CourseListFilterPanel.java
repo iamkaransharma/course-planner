@@ -6,7 +6,9 @@ import ca.cmpt213.courseplanner.model.Department;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -15,10 +17,6 @@ import java.util.Set;
  * CourseListFilterPanel contains a list of departments that the user can select from the JComboBox.
  * It also lets the users choose if they want to see only undergrad courses, only grad courses, none of
  * them or both. The user presses the "Update Course List" to change the CourseListPanel's display.
- */
-
-/**
- * Created by Thomas_Ngo on 2016-07-30.
  */
 public class CourseListFilterPanel extends GUIPanel {
 
@@ -56,7 +54,7 @@ public class CourseListFilterPanel extends GUIPanel {
         JPanel dropdownPanel = new JPanel();
         dropdownPanel.setLayout(new BoxLayout(dropdownPanel, BoxLayout.LINE_AXIS));
         dropdownPanel.add(new JLabel("Department"));
-        dropdownPanel.add(Box.createRigidArea(new Dimension(5,0)));
+        dropdownPanel.add(Box.createRigidArea(new Dimension(5, 0)));
         dropdownPanel.add(departmentNamesBox);
 
         // Checkboxes
