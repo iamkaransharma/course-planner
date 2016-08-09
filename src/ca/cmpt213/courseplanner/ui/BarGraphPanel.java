@@ -27,29 +27,37 @@ public class BarGraphPanel extends GUIPanel {
         // Testing out the graphs
 
         JPanel semesterGraphs = new JPanel();
+        semesterGraphs.setLayout(new BoxLayout(semesterGraphs, BoxLayout.PAGE_AXIS));
+
         int[] semesterData = {8,7,9};
         String[] titles = {"Spring","Summer","Fall"};
+
         BarGraphModel semesterGraphModel = new BarGraphModel(semesterData,titles);
         semesterGraphModel.setData(semesterData);
 
+        JLabel semesterOfferingsLabel = new JLabel("Semester Offerings:");
+
         BarGraphIcon semesterGraphIcon = new BarGraphIcon(semesterGraphModel,200,150);
-        JLabel semesterOfferingsLabel = new JLabel("Semester Offerings:",JLabel.LEFT);
+        JLabel semesterGraph = new JLabel(semesterGraphIcon);
+
         semesterGraphs.add(semesterOfferingsLabel);
-        semesterGraphs.add(new JLabel(semesterGraphIcon));
+        semesterGraphs.add(semesterGraph);
 
         JPanel locationGraphs = new JPanel();
+        locationGraphs.setLayout(new BoxLayout(locationGraphs, BoxLayout.PAGE_AXIS));
+
         int[] locationData = {7,5,3,0};
         String[] campuses = {"Bby","Sry","Van","Other"};
         BarGraphModel testGraphModel2 = new BarGraphModel(locationData,campuses);
         testGraphModel2.setData(locationData);
 
         BarGraphIcon testGraph2 = new BarGraphIcon(testGraphModel2,200,150);
-        JLabel campusOfferingsLabel = new JLabel("Campus Offerings:",JLabel.LEFT);
+        JLabel campusOfferingsLabel = new JLabel("Campus Offerings:");
         locationGraphs.add(campusOfferingsLabel);
         locationGraphs.add(new JLabel(testGraph2));
 
         String selectedCourse = "CMPT 213";
-        JLabel courseLabel = new JLabel("Course: " + selectedCourse, JLabel.LEFT);
+        JLabel courseLabel = new JLabel("Course: " + selectedCourse);
 
         // Adding elements to graphs
         graphs.add(courseLabel);
@@ -57,6 +65,7 @@ public class BarGraphPanel extends GUIPanel {
         graphs.add(locationGraphs);
 
         JPanel barGraphPanel = new JPanel();
+        barGraphPanel.setLayout(new BoxLayout(barGraphPanel, BoxLayout.PAGE_AXIS));
         barGraphPanel.setBackground(Color.white);
         barGraphPanel.setLayout(new BorderLayout());
         barGraphPanel.add(graphs);
