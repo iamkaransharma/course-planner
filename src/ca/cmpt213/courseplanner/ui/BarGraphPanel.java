@@ -59,14 +59,15 @@ public class BarGraphPanel extends GUIBasePanel {
 
         BarGraphIcon testGraph2 = new BarGraphIcon(locationsGraphModel, 250, 180);
         JLabel campusOfferingsLabel = new JLabel("Campus Offerings:");
+        locationGraphs.add(Box.createRigidArea(new Dimension(0, 10)));
         locationGraphs.add(campusOfferingsLabel);
         locationGraphs.add(new JLabel(testGraph2));
 
         courseLabel = new JLabel("");
         graphs.add(courseLabel);
+        graphs.add(Box.createRigidArea(new Dimension(0, 10)));
 
         // Adding elements to graphs
-        graphs.add(Box.createRigidArea(new Dimension(0, 5)));
         graphs.add(semesterGraphs);
         graphs.add(locationGraphs);
 
@@ -75,7 +76,6 @@ public class BarGraphPanel extends GUIBasePanel {
         barGraphPanel.setBackground(Color.white);
         barGraphPanel.setLayout(new BorderLayout());
         barGraphPanel.add(graphs);
-        barGraphPanel.setPreferredSize(new Dimension(250, 400));
         return barGraphPanel;
     }
 
@@ -139,7 +139,6 @@ public class BarGraphPanel extends GUIBasePanel {
 
         int[] locationData = {burnabyCoursesCount, surreyCoursesCount, vancouverCoursesCount, otherCoursesCount};
         locationsGraphModel.setData(locationData);
-        barGraphPanel.setPreferredSize(new Dimension(250, 410));
         this.updateUI();
     }
 }

@@ -28,7 +28,7 @@ public class OfferingDetailsPanel extends GUIBasePanel {
     public OfferingDetailsPanel(CoursePlanner coursePlanner) {
         super(coursePlanner, TITLE);
         setInternalPanel(getContentPanel());
-        resizeHorizontallyOnly(this);
+//        resizeHorizontallyOnly(this);
         registerAsObserver();
     }
 
