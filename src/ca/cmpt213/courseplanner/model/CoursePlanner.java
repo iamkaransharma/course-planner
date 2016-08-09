@@ -22,10 +22,14 @@ public class CoursePlanner{
 //    private Department activeDepartment;
     private Course activeCourse;
     private Offering activeOffering;
+
+    private Location activeLocation;
+
 //    private List<CoursePlannerObserver> departmentListObservers;
     private List<CoursePlannerObserver> courseListObservers;
     private List<CoursePlannerObserver> activeCourseObservers;
     private List<CoursePlannerObserver> activeOfferingObserver;
+    private List<CoursePlannerObserver> activeLocationObserver;
 
     public CoursePlanner(String csvFileName) throws FileNotFoundException {
         CSVParser csvParser = new CSVParser(csvFileName);
@@ -33,6 +37,7 @@ public class CoursePlanner{
         courseListObservers = new ArrayList<>();
         activeCourseObservers = new ArrayList<>();
         activeOfferingObserver = new ArrayList<>();
+        activeLocationObserver = new ArrayList<>();
     }
 
     public void selectDepartment(Department selectedDepartment, CourseListFilter filter) {
@@ -50,6 +55,11 @@ public class CoursePlanner{
     public void selectOffering(Offering selectedOffering) {
         activeOffering = selectedOffering;
         notifyActiveOfferingObservers();
+    }
+
+    public void selectLocation(Location selectedLocation){
+        activeLocation = selectedLocation;
+        notifyActiveLocationObservers();
     }
 
     public void dumpModel() {
@@ -76,6 +86,10 @@ public class CoursePlanner{
         return activeOffering;
     }
 
+    public Location getActiveLocation() {
+        return activeLocation;
+    }
+
     /*
      * Methods to support being observable
      * -----------------------------------
@@ -94,6 +108,10 @@ public class CoursePlanner{
 
     public void addActiveOfferingObserver(CoursePlannerObserver observer) {
         activeOfferingObserver.add(observer);
+    }
+
+    public void addActiveLocationObserver(CoursePlannerObserver observer){
+        activeLocationObserver.add(observer);
     }
 
 //    private void notifyDepartmentListObservers() {
@@ -116,6 +134,12 @@ public class CoursePlanner{
 
     private void notifyActiveOfferingObservers() {
         for (CoursePlannerObserver observer : activeOfferingObserver) {
+            observer.modelStateChanged();
+        }
+    }
+
+    public void notifyActiveLocationObservers() {
+        for (CoursePlannerObserver observer : activeLocationObserver) {
             observer.modelStateChanged();
         }
     }

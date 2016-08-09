@@ -43,14 +43,9 @@ public class BarGraphPanel extends GUIPanel {
         JPanel graphs = new JPanel();
         graphs.setLayout(new BoxLayout(graphs, BoxLayout.PAGE_AXIS));
 
-        // Testing out the graphs
 
         JPanel semesterGraphs = new JPanel();
         semesterGraphs.setLayout(new BoxLayout(semesterGraphs, BoxLayout.PAGE_AXIS));
-
-
-
-
 
         JLabel semesterOfferingsLabel = new JLabel("Semester Offerings:");
 
@@ -106,7 +101,6 @@ public class BarGraphPanel extends GUIPanel {
             fallCoursesCount = activeCourse.getOfferingsBySeason(Season.FALL).size();
         }
         int[] semesterData = {springCoursesCount,summerCoursesCount,fallCoursesCount};
-
 
 //        semesterGraphModel = new BarGraphModel(semesterData,titles);
         semesterGraphModel.setData(semesterData);

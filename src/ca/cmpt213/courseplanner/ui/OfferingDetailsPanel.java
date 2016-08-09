@@ -1,9 +1,11 @@
 package ca.cmpt213.courseplanner.ui;
 
 import ca.cmpt213.courseplanner.model.CoursePlanner;
+import ca.cmpt213.courseplanner.model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 
 /**
  * OfferingDetailsPanel contains the active offering's course name, semester, location, instructors,
@@ -16,7 +18,10 @@ import java.awt.*;
 public class OfferingDetailsPanel extends GUIPanel {
 
     private static final String TITLE = "Details of Course Offering";
-
+    Offering activeOffering;
+    JTextArea offeringInfoPanel;
+    JPanel componentCodeInfo;
+    JPanel componentCodeLabels;
 
     public OfferingDetailsPanel(CoursePlanner coursePlanner){
         super(coursePlanner,TITLE);
@@ -40,12 +45,12 @@ public class OfferingDetailsPanel extends GUIPanel {
 
 
         // Placeholder for information from active offering
-        JTextArea offeringInfoPanel = new JTextArea();
+        offeringInfoPanel = new JTextArea();
         offeringInfoPanel.setLayout(new GridLayout(1, 2));
         offeringInfoPanel.setBackground(Color.white);
         offeringInfoPanel.setLineWrap(true);
         offeringInfoPanel.setWrapStyleWord(true);
-        offeringInfoPanel.setText("A B C DE FE GH ISD DSKS");
+//        offeringInfoPanel.setText("");
 //        offeringInfoPanel.setLayout(new BoxLayout(offeringInfoPanel, BoxLayout.PAGE_AXIS));
 //        offeringInfoPanel.add(new JLabel("Current Course"));
 //        offeringInfoPanel.add(new JLabel("Current Semester"));
@@ -57,21 +62,13 @@ public class OfferingDetailsPanel extends GUIPanel {
         courseSemesterLocationInstructorsPanel.add(labelsPanel);
         courseSemesterLocationInstructorsPanel.add(offeringInfoPanel);
 
-        JPanel componentCodeLabels = new JPanel(new GridLayout(2, 1));
+        componentCodeLabels = new JPanel(new GridLayout(2, 1));
         componentCodeLabels.setLayout(new BoxLayout(componentCodeLabels, BoxLayout.PAGE_AXIS));
-        componentCodeLabels.add(new JLabel("Section Type"));
-        componentCodeLabels.add(new JLabel("LAB"));
-        componentCodeLabels.add(new JLabel("LEC"));
-        componentCodeLabels.add(new JLabel("SEC"));
 
         componentCodeLabels.setPreferredSize(new Dimension(80,80));
 
-        JPanel componentCodeInfo = new JPanel(new GridLayout(2, 2));
+        componentCodeInfo = new JPanel(new GridLayout(2, 2));
         componentCodeInfo.setLayout(new BoxLayout(componentCodeInfo, BoxLayout.PAGE_AXIS));
-        componentCodeInfo.add(new JLabel("Enrollment (filled/cap)"));
-        componentCodeInfo.add(new JLabel("Placeholder"));
-        componentCodeInfo.add(new JLabel("Placeholder"));
-        componentCodeInfo.add(new JLabel("Placeholder"));
 
         componentCodeInfo.setPreferredSize(new Dimension(150,80));
 
@@ -91,13 +88,51 @@ public class OfferingDetailsPanel extends GUIPanel {
     }
 
     private void registerAsObserver(){
-        getModel().addActiveOfferingObserver(
+//        getModel().addActiveOfferingObserver(
+//                ()->updateOfferingDetails()
+//        );
+        getModel().addActiveLocationObserver(
                 ()->updateOfferingDetails()
         );
     }
 
     private void updateOfferingDetails(){
+        activeOffering = getModel().getActiveOffering();
 
+        String activeCourse = getModel().getActiveCourse().getFullName();
+        String activeSemester = activeOffering.getSemester().getSemesterCode();
+        String activeLocation = getModel().getActiveLocation().getName();
+
+        String activeInstructors = "";
+
+        Set<String> instructorsFromOffering = getModel().getActiveLocation().getInstructors();
+        for (String i: instructorsFromOffering){
+            activeInstructors = activeInstructors + i;
+        }
+
+        offeringInfoPanel.setText(activeCourse+"\n"+activeSemester+"\n"+activeLocation+"\n"+activeInstructors);
+
+        Set<CourseComponent> courseComponentsFromLocation = getModel().getActiveLocation().getCourseComponents();
+
+        ArrayList<String> componentCodes = new ArrayList<>();
+        ArrayList<String> enrollments = new ArrayList<>();
+
+        for (CourseComponent c: courseComponentsFromLocation){
+            componentCodes.add(c.getComponentCode());
+            enrollments.add(c.getEnrollmentTotal() + "/" + c.getEnrollmentCapacity());
+        }
+
+        componentCodeLabels.add(new JLabel("Section Type"));
+        componentCodeInfo.add(new JLabel("Enrollment (filled/cap)"));
+
+        for (String c: componentCodes){
+            componentCodeLabels.add(new JLabel(c));
+        }
+        for (String e: enrollments){
+            componentCodeInfo.add(new JLabel(e));
+        }
+
+        this.updateUI();
     }
 
 }

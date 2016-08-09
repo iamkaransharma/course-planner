@@ -28,6 +28,8 @@ public class CourseComponent implements Comparable<CourseComponent> {
         }
     }
 
+    public String getComponentCode(){ return componentCode; }
+
     public int getEnrollmentTotal() {
         return enrollmentTotal;
     }
