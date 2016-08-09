@@ -92,17 +92,19 @@ public class OfferingDetailsPanel extends GUIPanel {
     private void registerAsObserver() {
 
         getModel().addActiveCourseObserver(
-                ()->updateOfferingDetails()
+                ()->clearOfferingDetails()
         );
         getModel().addActiveOfferingObserver(
-                ()->updateOfferingDetails()
+                ()->clearOfferingDetails()
         );
+
         getModel().addActiveLocationObserver(
                 () -> updateOfferingDetails()
         );
     }
 
     private void updateOfferingDetails() {
+
         activeOffering = getModel().getActiveOffering();
         if (activeOffering != null) {
 
@@ -145,6 +147,9 @@ public class OfferingDetailsPanel extends GUIPanel {
     }
 
     private void clearOfferingDetails(){
+
+        activeOffering = null;
+
         offeringInfoPanel.setText("");
 
         componentCodeLabels.removeAll();
