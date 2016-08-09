@@ -86,9 +86,12 @@ public class OfferingDetailsPanel extends GUIPanel {
     }
 
     private void registerAsObserver() {
-//        getModel().addActiveOfferingObserver(
-//                ()->updateOfferingDetails()
-//        );
+        getModel().addActiveCourseObserver(
+                ()->updateOfferingDetails()
+        );
+        getModel().addActiveOfferingObserver(
+                ()->updateOfferingDetails()
+        );
         getModel().addActiveLocationObserver(
                 () -> updateOfferingDetails()
         );
@@ -96,39 +99,41 @@ public class OfferingDetailsPanel extends GUIPanel {
 
     private void updateOfferingDetails() {
         activeOffering = getModel().getActiveOffering();
+        if (activeOffering != null) {
+            String activeCourse = getModel().getActiveCourse().getFullName();
+            String activeSemester = activeOffering.getSemester().getSemesterCode();
+            String activeLocation = getModel().getActiveLocation().getName();
 
-        String activeCourse = getModel().getActiveCourse().getFullName();
-        String activeSemester = activeOffering.getSemester().getSemesterCode();
-        String activeLocation = getModel().getActiveLocation().getName();
+            String activeInstructors = "";
 
-        String activeInstructors = "";
+            Set<String> instructorsFromOffering = getModel().getActiveLocation().getInstructors();
+            for (String i : instructorsFromOffering) {
+                activeInstructors = activeInstructors + i;
+            }
 
-        Set<String> instructorsFromOffering = getModel().getActiveLocation().getInstructors();
-        for (String i : instructorsFromOffering) {
-            activeInstructors = activeInstructors + i;
+            offeringInfoPanel.setText(activeCourse + "\n" + activeSemester + "\n" + activeLocation + "\n" + activeInstructors);
+
+            Set<CourseComponent> courseComponentsFromLocation = getModel().getActiveLocation().getCourseComponents();
+
+            ArrayList<String> componentCodes = new ArrayList<>();
+            ArrayList<String> enrollments = new ArrayList<>();
+
+            for (CourseComponent c : courseComponentsFromLocation) {
+                componentCodes.add(c.getComponentCode());
+                enrollments.add(c.getEnrollmentTotal() + "/" + c.getEnrollmentCapacity());
+            }
+
+            componentCodeLabels.add(new JLabel("Section Type"));
+            componentCodeInfo.add(new JLabel("Enrollment (filled/cap)"));
+
+            for (String c : componentCodes) {
+                componentCodeLabels.add(new JLabel(c));
+            }
+            for (String e : enrollments) {
+                componentCodeInfo.add(new JLabel(e));
+            }
         }
 
-        offeringInfoPanel.setText(activeCourse + "\n" + activeSemester + "\n" + activeLocation + "\n" + activeInstructors);
-
-        Set<CourseComponent> courseComponentsFromLocation = getModel().getActiveLocation().getCourseComponents();
-
-        ArrayList<String> componentCodes = new ArrayList<>();
-        ArrayList<String> enrollments = new ArrayList<>();
-
-        for (CourseComponent c : courseComponentsFromLocation) {
-            componentCodes.add(c.getComponentCode());
-            enrollments.add(c.getEnrollmentTotal() + "/" + c.getEnrollmentCapacity());
-        }
-
-        componentCodeLabels.add(new JLabel("Section Type"));
-        componentCodeInfo.add(new JLabel("Enrollment (filled/cap)"));
-
-        for (String c : componentCodes) {
-            componentCodeLabels.add(new JLabel(c));
-        }
-        for (String e : enrollments) {
-            componentCodeInfo.add(new JLabel(e));
-        }
 
         this.updateUI();
     }

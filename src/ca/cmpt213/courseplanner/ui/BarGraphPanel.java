@@ -80,6 +80,9 @@ public class BarGraphPanel extends GUIPanel {
     }
 
     private void registerAsObserver() {
+        getModel().addCourseListObserver(
+                () -> updateBarGraphs()
+        );
         getModel().addActiveCourseObserver(
                 () -> updateBarGraphs()
         );
