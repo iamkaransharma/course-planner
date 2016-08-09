@@ -2,7 +2,7 @@ package ca.cmpt213.courseplanner.ui;
 
 import ca.cmpt213.courseplanner.model.CourseComponent;
 import ca.cmpt213.courseplanner.model.CoursePlanner;
-import ca.cmpt213.courseplanner.model.Offering;
+import ca.cmpt213.courseplanner.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,9 +17,15 @@ public class OfferingDetailsPanel extends GUIPanel {
 
     private static final String TITLE = "Details of Course Offering";
     Offering activeOffering;
+    Location activeLocation;
+    private List<Course> activeCourseList;
+
     JTextArea offeringInfoPanel;
     JPanel componentCodeInfo;
     JPanel componentCodeLabels;
+
+    String activeCourse;
+    String activeSemester;
 
     public OfferingDetailsPanel(CoursePlanner coursePlanner) {
         super(coursePlanner, TITLE);
@@ -86,9 +92,15 @@ public class OfferingDetailsPanel extends GUIPanel {
     }
 
     private void registerAsObserver() {
-//        getModel().addActiveOfferingObserver(
-//                ()->updateOfferingDetails()
-//        );
+        getModel().addCourseListObserver(
+                ()
+        );
+        getModel().addActiveCourseObserver(
+                ()
+        );
+        getModel().addActiveOfferingObserver(
+                ()->updateOfferingDetails()
+        );
         getModel().addActiveLocationObserver(
                 () -> updateOfferingDetails()
         );
@@ -97,7 +109,7 @@ public class OfferingDetailsPanel extends GUIPanel {
     private void updateOfferingDetails() {
         activeOffering = getModel().getActiveOffering();
 
-        String activeCourse = getModel().getActiveCourse().getFullName();
+        activeCourse = getModel().getActiveCourse().getFullName();
         String activeSemester = activeOffering.getSemester().getSemesterCode();
         String activeLocation = getModel().getActiveLocation().getName();
 
@@ -131,6 +143,18 @@ public class OfferingDetailsPanel extends GUIPanel {
         }
 
         this.updateUI();
+    }
+
+    private void updateLocation(){
+
+    }
+
+    private void updateCourseList(){
+
+    }
+
+    private void updateCourse(){
+
     }
 
 }
