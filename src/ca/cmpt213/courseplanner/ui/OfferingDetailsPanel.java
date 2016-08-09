@@ -17,6 +17,7 @@ public class OfferingDetailsPanel extends GUIPanel {
 
     private static final String TITLE = "Details of Course Offering";
 
+
     public OfferingDetailsPanel(CoursePlanner coursePlanner){
         super(coursePlanner,TITLE);
         setInternalPanel(getContentPanel());
@@ -86,7 +87,9 @@ public class OfferingDetailsPanel extends GUIPanel {
     }
 
     private void registerAsObserver(){
-
+        getModel().addActiveOfferingObserver(
+                ()->updateOfferingDetails()
+        );
     }
 
     private void updateOfferingDetails(){
