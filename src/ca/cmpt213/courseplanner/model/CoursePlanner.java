@@ -39,7 +39,6 @@ public class CoursePlanner{
         assert selectedDepartment != null;
         activeCourseList = selectedDepartment.getCourses(filter);
         activeCourse = null;
-        notifyActiveCourseObservers();
         notifyCourseListObservers();
     }
 

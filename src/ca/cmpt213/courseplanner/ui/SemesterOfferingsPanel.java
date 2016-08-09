@@ -34,6 +34,8 @@ public class SemesterOfferingsPanel extends GUIPanel{
 
         offeringsTable.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
+        c.weighty = 1;
+        c.anchor = GridBagConstraints.NORTHWEST;
 
         // 550 is the maximum height of the table
 
@@ -58,28 +60,29 @@ public class SemesterOfferingsPanel extends GUIPanel{
 
                 JLabel fallLabel = new JLabel("Fall", SwingConstants.LEFT);
                 fallLabel.setOpaque(true);
-                c.fill = GridBagConstraints.HORIZONTAL;
+                c.fill = GridBagConstraints.BOTH;
 
                 c.weightx = 0.5;
-                c.fill = GridBagConstraints.HORIZONTAL;
+                c.fill = GridBagConstraints.BOTH;
                 c.gridx = 0;
                 c.gridy = i;
                 offeringsTable.add(emptyLabel, c);
+                offeringsTable.add(Box.createVerticalGlue());
 
                 c.weightx = 0.5;
-                c.fill = GridBagConstraints.HORIZONTAL;
+                c.fill = GridBagConstraints.BOTH;
                 c.gridx = 1;
                 c.gridy = i;
                 offeringsTable.add(springLabel, c);
 
                 c.weightx = 0.5;
-                c.fill = GridBagConstraints.HORIZONTAL;
+                c.fill = GridBagConstraints.BOTH;
                 c.gridx = 2;
                 c.gridy = i;
                 offeringsTable.add(summerLabel, c);
 
                 c.weightx = 0.5;
-                c.fill = GridBagConstraints.HORIZONTAL;
+                c.fill = GridBagConstraints.BOTH;
                 c.gridx = 3;
                 c.gridy = i;
                 offeringsTable.add(fallLabel, c);
@@ -109,28 +112,28 @@ public class SemesterOfferingsPanel extends GUIPanel{
                 fall.setBorder(BorderFactory.createLineBorder(Color.black));
                 fall.setPreferredSize(new Dimension(220, cell_height));
 
-                c.fill = GridBagConstraints.HORIZONTAL;
+                c.fill = GridBagConstraints.BOTH;
 
                 c.weightx = 0.5;
-                c.fill = GridBagConstraints.HORIZONTAL;
+                c.fill = GridBagConstraints.BOTH;
                 c.gridx = 0;
                 c.gridy = i;
                 offeringsTable.add(yearLabel, c);
 
                 c.weightx = 0.5;
-                c.fill = GridBagConstraints.HORIZONTAL;
+                c.fill = GridBagConstraints.BOTH;
                 c.gridx = 1;
                 c.gridy = i;
                 offeringsTable.add(spring, c);
 
                 c.weightx = 0.5;
-                c.fill = GridBagConstraints.HORIZONTAL;
+                c.fill = GridBagConstraints.BOTH;
                 c.gridx = 2;
                 c.gridy = i;
                 offeringsTable.add(summer, c);
 
                 c.weightx = 0.5;
-                c.fill = GridBagConstraints.HORIZONTAL;
+                c.fill = GridBagConstraints.BOTH;
                 c.gridx = 3;
                 c.gridy = i;
                 offeringsTable.add(fall, c);

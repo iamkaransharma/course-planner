@@ -22,7 +22,7 @@ abstract public class GUIPanel extends JPanel {
         this.add(titleLabel, BorderLayout.NORTH);
         this.internalPanel = new JPanel();
     }
-    
+
     protected void setInternalPanel(JPanel internalPanel) {
         this.internalPanel = internalPanel;
         internalPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));

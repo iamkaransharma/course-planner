@@ -18,11 +18,24 @@ public class BarGraphPanel extends GUIPanel {
 
     private static final String TITLE = "Statistics";
 
+    Course activeCourse;
+
+    BarGraphModel semesterGraphModel;
+    BarGraphModel locationsGraphModel;
+
     public BarGraphPanel(CoursePlanner coursePlanner){
         super(coursePlanner,TITLE);
-        setInternalPanel(getContentPanel());
         resizeHorizontallyOnly();
         registerAsObserver();
+        initializeBarGraphs();
+        setInternalPanel(getContentPanel());
+    }
+
+    private void initializeBarGraphs() {
+        String[] titles = {"Spring","Summer","Fall"};
+        semesterGraphModel = new BarGraphModel(new int[]{0,0,0},titles);
+        String[] campuses = {"Bby","Sry","Van","Other"};
+        locationsGraphModel = new BarGraphModel(new int[]{0,0,0,0},campuses);
     }
 
     protected JPanel getContentPanel() {
@@ -35,12 +48,9 @@ public class BarGraphPanel extends GUIPanel {
         JPanel semesterGraphs = new JPanel();
         semesterGraphs.setLayout(new BoxLayout(semesterGraphs, BoxLayout.PAGE_AXIS));
 
-        // Replace values here
-        int[] semesterData = {8,7,9};
-        String[] titles = {"Spring","Summer","Fall"};
 
-        BarGraphModel semesterGraphModel = new BarGraphModel(semesterData,titles);
-        semesterGraphModel.setData(semesterData);
+
+
 
         JLabel semesterOfferingsLabel = new JLabel("Semester Offerings:");
 
@@ -53,21 +63,18 @@ public class BarGraphPanel extends GUIPanel {
         JPanel locationGraphs = new JPanel();
         locationGraphs.setLayout(new BoxLayout(locationGraphs, BoxLayout.PAGE_AXIS));
 
-        int[] locationData = {7,5,3,0};
-        String[] campuses = {"Bby","Sry","Van","Other"};
-        BarGraphModel testGraphModel2 = new BarGraphModel(locationData,campuses);
-        testGraphModel2.setData(locationData);
-
-        BarGraphIcon testGraph2 = new BarGraphIcon(testGraphModel2,250,180);
+        BarGraphIcon testGraph2 = new BarGraphIcon(locationsGraphModel,250,180);
         JLabel campusOfferingsLabel = new JLabel("Campus Offerings:");
         locationGraphs.add(campusOfferingsLabel);
         locationGraphs.add(new JLabel(testGraph2));
 
-        String selectedCourse = "CMPT 213";
-        JLabel courseLabel = new JLabel("Course: " + selectedCourse);
+        if (getModel().getActiveCourse() != null) {
+            String selectedCourse = getModel().getActiveCourse().getFullName();
+            JLabel courseLabel = new JLabel("Course: " + selectedCourse);
+            graphs.add(courseLabel);
+        }
 
         // Adding elements to graphs
-        graphs.add(courseLabel);
         graphs.add(Box.createRigidArea(new Dimension(0,5)));
         graphs.add(semesterGraphs);
         graphs.add(locationGraphs);
@@ -82,19 +89,50 @@ public class BarGraphPanel extends GUIPanel {
     }
 
     private void registerAsObserver(){
-        getModel().addActiveOfferingObserver(
-                () -> updateSemesterGraph()
-        );
-        getModel().addActiveOfferingObserver(
-                () -> updateCampusGraph()
+        getModel().addActiveCourseObserver(
+                () -> updateBarGraphs()
         );
     }
 
-    private void updateSemesterGraph(){
+    private void updateBarGraphs(){
+        activeCourse = getModel().getActiveCourse();
 
-    }
+        int springCoursesCount = 0;
+        int summerCoursesCount = 0;
+        int fallCoursesCount = 0;
+        if (activeCourse != null) {
+            springCoursesCount = activeCourse.getOfferingsBySeason(Season.SPRING).size();
+            summerCoursesCount = activeCourse.getOfferingsBySeason(Season.SUMMER).size();
+            fallCoursesCount = activeCourse.getOfferingsBySeason(Season.FALL).size();
+        }
+        int[] semesterData = {springCoursesCount,summerCoursesCount,fallCoursesCount};
 
-    private void updateCampusGraph(){
 
+//        semesterGraphModel = new BarGraphModel(semesterData,titles);
+        semesterGraphModel.setData(semesterData);
+
+        int burnabyCoursesCount = 0;
+        int surreyCoursesCount = 0;
+        int vancouverCoursesCount = 0;
+        int otherCoursesCount = 0;
+        if (activeCourse != null) {
+            for (Offering offering : activeCourse.getOfferings()) {
+                for (Location location : offering.getLocations()) {
+                    switch (location.getName()) {
+                        case "BURNABY" : burnabyCoursesCount++; break;
+                        case "SURREY" : surreyCoursesCount++; break;
+                        case "HRBRCNTR" : vancouverCoursesCount++; break;
+                        case "OTHER": otherCoursesCount++; break;
+                        default: throw new RuntimeException("Unexpected location name");
+                    }
+                }
+            }
+        }
+
+        int[] locationData = {burnabyCoursesCount,surreyCoursesCount,vancouverCoursesCount,otherCoursesCount};
+
+        locationsGraphModel.setData(locationData);
+
+        this.updateUI();
     }
 }

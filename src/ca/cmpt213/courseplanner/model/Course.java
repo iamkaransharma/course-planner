@@ -45,8 +45,6 @@ public class Course implements Comparable<Course> {
         }
     }
 
-
-
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -65,15 +63,6 @@ public class Course implements Comparable<Course> {
     public Offering getNewestOffering() {
         return offerings.last();
     }
-//
-//    public Set<Location> getLocationsByYearAndSeason(int year, Season season) {
-//        for (Offering currentOffering : offerings) {
-//            Semester semester = currentOffering.getSemester();
-//            if (semester.getSemesterCode().endsWith(season.value()) && semester) {
-//                return currentOffering;
-//            }
-//        }
-//    }
 
     public Set<Location> getLocationsBySemesterCode(String semesterCode) {
         for (Offering currentOffering : offerings) {

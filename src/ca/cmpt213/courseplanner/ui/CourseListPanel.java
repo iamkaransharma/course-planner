@@ -50,10 +50,12 @@ public class CourseListPanel extends GUIPanel {
         courseListView.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                int selectedIndex = courseListView.getSelectedIndex();
-                if (selectedIndex != -1) {
-                    Course selectedCourse = selectedCourseList.get(selectedIndex);
-                    getModel().selectCourse(selectedCourse);
+                if (!e.getValueIsAdjusting()) {
+                    int selectedIndex = courseListView.getSelectedIndex();
+                    if (selectedIndex != -1) {
+                        Course selectedCourse = selectedCourseList.get(selectedIndex);
+                        getModel().selectCourse(selectedCourse);
+                    }
                 }
             }
         });
