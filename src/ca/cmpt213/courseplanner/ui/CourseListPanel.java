@@ -7,6 +7,9 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +54,7 @@ public class CourseListPanel extends GUIPanel {
                 if (selectedIndex != -1) {
                     Course selectedCourse = selectedCourseList.get(selectedIndex);
                     getModel().selectCourse(selectedCourse);
+                    System.out.println(selectedCourse.getFullName());
                 }
             }
         });
