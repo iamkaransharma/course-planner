@@ -27,19 +27,21 @@ public class OfferingDetailsPanel extends GUIPanel {
 
     protected JPanel getContentPanel(){
 
-        JPanel courseSemesterLocationInstructorsPanel = new JPanel();
+        JPanel courseSemesterLocationInstructorsPanel = new JPanel(new GridLayout(1, 1));
 
-        JPanel labelsPanel = new JPanel(new GridLayout(0, 2));
-//        labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.PAGE_AXIS));
+        JPanel labelsPanel = new JPanel();
+        labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.PAGE_AXIS));
         labelsPanel.add(new JLabel("Course Name:"));
         labelsPanel.add(new JLabel("Semester:"));
         labelsPanel.add(new JLabel("Location:"));
         labelsPanel.add(new JLabel("Instructors:"));
 
-        labelsPanel.setPreferredSize(new Dimension(100,80));
+        labelsPanel.setPreferredSize(new Dimension(110,80));
+
 
         // Placeholder for information from active offering
         JTextArea offeringInfoPanel = new JTextArea();
+        offeringInfoPanel.setLayout(new GridLayout(1, 2));
         offeringInfoPanel.setBackground(Color.white);
         offeringInfoPanel.setLineWrap(true);
         offeringInfoPanel.setWrapStyleWord(true);
@@ -50,41 +52,39 @@ public class OfferingDetailsPanel extends GUIPanel {
 //        offeringInfoPanel.add(new JLabel("Current Location"));
 //        offeringInfoPanel.add(new JLabel("Current Instructors"));
 
-        offeringInfoPanel.setPreferredSize(new Dimension(100,80));
+        offeringInfoPanel.setPreferredSize(new Dimension(120,80));
 
         courseSemesterLocationInstructorsPanel.add(labelsPanel);
         courseSemesterLocationInstructorsPanel.add(offeringInfoPanel);
 
-
-        JPanel componentCodePanel = new JPanel();
-
-        JPanel componentCodeLabels = new JPanel();
+        JPanel componentCodeLabels = new JPanel(new GridLayout(2, 1));
         componentCodeLabels.setLayout(new BoxLayout(componentCodeLabels, BoxLayout.PAGE_AXIS));
         componentCodeLabels.add(new JLabel("Section Type"));
         componentCodeLabels.add(new JLabel("LAB"));
         componentCodeLabels.add(new JLabel("LEC"));
         componentCodeLabels.add(new JLabel("SEC"));
 
-        componentCodeLabels.setPreferredSize(new Dimension(100,95));
+        componentCodeLabels.setPreferredSize(new Dimension(80,80));
 
-        JPanel componentCodeInfo = new JPanel();
+        JPanel componentCodeInfo = new JPanel(new GridLayout(2, 2));
         componentCodeInfo.setLayout(new BoxLayout(componentCodeInfo, BoxLayout.PAGE_AXIS));
         componentCodeInfo.add(new JLabel("Enrollment (filled/cap)"));
         componentCodeInfo.add(new JLabel("Placeholder"));
         componentCodeInfo.add(new JLabel("Placeholder"));
         componentCodeInfo.add(new JLabel("Placeholder"));
 
-        componentCodeInfo.setPreferredSize(new Dimension(150,95));
+        componentCodeInfo.setPreferredSize(new Dimension(150,80));
 
-        componentCodePanel.add(componentCodeLabels);
-        componentCodePanel.add(componentCodeInfo);
 
         JPanel offeringDetailsPanel = new JPanel();
         //offeringDetailsPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
         //offeringDetailsPanel.setBackground(Color.white);
 
-        offeringDetailsPanel.add(courseSemesterLocationInstructorsPanel);
-        offeringDetailsPanel.add(componentCodePanel);
+        offeringDetailsPanel.add(labelsPanel);
+        offeringDetailsPanel.add(offeringInfoPanel);
+        offeringDetailsPanel.add(componentCodeLabels);
+        offeringDetailsPanel.add(componentCodeInfo);
+
         offeringDetailsPanel.setPreferredSize(new Dimension(250,175));
 
         return offeringDetailsPanel;

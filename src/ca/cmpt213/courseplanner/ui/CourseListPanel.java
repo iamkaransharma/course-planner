@@ -54,7 +54,6 @@ public class CourseListPanel extends GUIPanel {
                 if (selectedIndex != -1) {
                     Course selectedCourse = selectedCourseList.get(selectedIndex);
                     getModel().selectCourse(selectedCourse);
-                    System.out.println(selectedCourse.getFullName());
                 }
             }
         });
