@@ -3,6 +3,12 @@ package ca.cmpt213.courseplanner.model;
 import java.util.*;
 
 /**
+ * Location class contains a tree set of CourseComponents and Instructors. It adds a CourseComponent if it finds
+ * a CourseComponent that has the same values as itself. It also returns the instructors and course components
+ * at its location.
+ */
+
+/**
  * Created by Karan on 01/08/2016.
  */
 public class Location implements Comparable<Location> {

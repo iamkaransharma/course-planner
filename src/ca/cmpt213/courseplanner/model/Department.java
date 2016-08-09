@@ -3,6 +3,11 @@ package ca.cmpt213.courseplanner.model;
 import java.util.*;
 
 /**
+ * Department class models a department/faculty in a university. It contains a tree set of courses under its department,
+ * adds courses into its tree set, and merges with other departments that share the same name as itself.
+ */
+
+/**
  * Created by Thomas_Ngo on 2016-07-30.
  */
 public class Department implements Comparable<Department> {

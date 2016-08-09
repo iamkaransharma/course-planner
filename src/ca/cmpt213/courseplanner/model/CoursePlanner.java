@@ -7,6 +7,13 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
+ * CoursePlanner models the logic of the Course Planner application and provides the observers, the course,
+ * course list & offering that is currently being used, and departmentManager. It also reads in the CSV file
+ * and throws an exception if the file is not found. It also provides the implementation code that notifies
+ * all observers when the model changes.
+ */
+
+/**
  * Created by Thomas_Ngo on 2016-07-30.
  */
 public class CoursePlanner{

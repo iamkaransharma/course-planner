@@ -6,6 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
+ * CSVReader takes in the CSV file and reads each row inside the CSV File. It throws an exception
+ * if it cannot find the file. It also can identify commas that are not inside double quotations.
+ */
+
+/**
  * Created by Thomas_Ngo on 2016-07-30.
  */
 public class CSVReader extends BufferedReader {

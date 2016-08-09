@@ -1,6 +1,13 @@
 package ca.cmpt213.courseplanner.model;
 
 /**
+ * CourseComponent class contains comparable methods for Course class to use. It returns the
+ * enrollment total, enrollment capacity, merges enrollment capacity & enrollment total with
+ * offerings that share the same catalog number. It also checks to see if there are offerings that
+ * share the same catalog number.
+ */
+
+/**
  * Created by Karan on 02/08/2016.
  */
 public class CourseComponent implements Comparable<CourseComponent> {

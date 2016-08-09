@@ -6,6 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * CSVParser takes in the CSV file, reads its content, and inserts the content into the department manager's
+ * department set. It throws an exception if the CSVParser cannot find the CSV file. It also handles
+ * rows that have multiple instructors.
+ */
+
+/**
  * Created by Karan on 01/08/2016.
  */
 public class CSVParser {

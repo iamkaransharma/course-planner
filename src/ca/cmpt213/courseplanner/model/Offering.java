@@ -3,6 +3,12 @@ package ca.cmpt213.courseplanner.model;
 import java.util.*;
 
 /**
+ * Offering class contains the catalog number, semester and locations of where the offering courses are at.
+ * It returns the semester and catalog number and adds locations to itself if it finds a course offering
+ * that is located in the same location as itself.
+ */
+
+/**
  * Created by Thomas_Ngo on 2016-07-30.
  */
 public class Offering implements Comparable<Offering> {
