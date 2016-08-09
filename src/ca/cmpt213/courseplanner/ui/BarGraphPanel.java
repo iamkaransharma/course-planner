@@ -20,6 +20,8 @@ public class BarGraphPanel extends GUIBasePanel {
     BarGraphModel semesterGraphModel;
     BarGraphModel locationsGraphModel;
 
+    JLabel courseLabel;
+
     public BarGraphPanel(CoursePlanner coursePlanner) {
         super(coursePlanner, TITLE);
         resizeHorizontallyOnly(this);
@@ -59,11 +61,8 @@ public class BarGraphPanel extends GUIBasePanel {
         locationGraphs.add(campusOfferingsLabel);
         locationGraphs.add(new JLabel(testGraph2));
 
-        if (getModel().getActiveCourse() != null) {
-            String selectedCourse = getModel().getActiveCourse().getFullName();
-            JLabel courseLabel = new JLabel("Course: " + selectedCourse);
-            graphs.add(courseLabel);
-        }
+        courseLabel = new JLabel("");
+        graphs.add(courseLabel);
 
         // Adding elements to graphs
         graphs.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -109,6 +108,10 @@ public class BarGraphPanel extends GUIBasePanel {
         int vancouverCoursesCount = 0;
         int otherCoursesCount = 0;
         if (activeCourse != null) {
+
+            String selectedCourse = activeCourse.getFullName();
+            courseLabel.setText("Course: "+selectedCourse);
+
             for (Offering offering : activeCourse.getOfferings()) {
                 for (Location location : offering.getLocations()) {
                     switch (location.getName()) {
@@ -129,6 +132,8 @@ public class BarGraphPanel extends GUIBasePanel {
                     }
                 }
             }
+        } else {
+            courseLabel.setText("");
         }
 
         int[] locationData = {burnabyCoursesCount, surreyCoursesCount, vancouverCoursesCount, otherCoursesCount};

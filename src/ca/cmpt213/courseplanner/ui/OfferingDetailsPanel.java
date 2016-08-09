@@ -67,12 +67,12 @@ public class OfferingDetailsPanel extends GUIBasePanel {
         componentCodeLabels = new JPanel(new GridLayout(2, 1));
         componentCodeLabels.setLayout(new BoxLayout(componentCodeLabels, BoxLayout.PAGE_AXIS));
 
-        componentCodeLabels.setPreferredSize(new Dimension(80, 80));
+        componentCodeLabels.setMinimumSize(new Dimension(80, 80));
 
         componentCodeInfo = new JPanel(new GridLayout(2, 2));
         componentCodeInfo.setLayout(new BoxLayout(componentCodeInfo, BoxLayout.PAGE_AXIS));
 
-        componentCodeInfo.setPreferredSize(new Dimension(150, 80));
+        componentCodeInfo.setMinimumSize(new Dimension(150, 80));
 
 
         JPanel offeringDetailsPanel = new JPanel();
