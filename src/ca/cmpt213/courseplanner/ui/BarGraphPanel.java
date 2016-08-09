@@ -17,6 +17,7 @@ public class BarGraphPanel extends GUIPanel {
     public BarGraphPanel(CoursePlanner coursePlanner){
         super(coursePlanner,TITLE);
         setInternalPanel(getContentPanel());
+        registerAsObserver();
     }
 
     protected JPanel getContentPanel() {
@@ -29,6 +30,7 @@ public class BarGraphPanel extends GUIPanel {
         JPanel semesterGraphs = new JPanel();
         semesterGraphs.setLayout(new BoxLayout(semesterGraphs, BoxLayout.PAGE_AXIS));
 
+        // Replace values here
         int[] semesterData = {8,7,9};
         String[] titles = {"Spring","Summer","Fall"};
 
@@ -71,5 +73,17 @@ public class BarGraphPanel extends GUIPanel {
         barGraphPanel.add(graphs);
         barGraphPanel.setPreferredSize(new Dimension(250,425));
         return barGraphPanel;
+    }
+
+    private void registerAsObserver(){
+
+    }
+
+    private void updateSemesterGraph(){
+
+    }
+
+    private void updateCampusGraph(){
+
     }
 }

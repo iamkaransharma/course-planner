@@ -16,6 +16,7 @@ public class OfferingDetailsPanel extends GUIPanel {
     public OfferingDetailsPanel(CoursePlanner coursePlanner){
         super(coursePlanner,TITLE);
         setInternalPanel(getContentPanel());
+        registerAsObserver();
     }
 
     protected JPanel getContentPanel(){
@@ -78,6 +79,14 @@ public class OfferingDetailsPanel extends GUIPanel {
         offeringDetailsPanel.setPreferredSize(new Dimension(250,175));
 
         return offeringDetailsPanel;
+    }
+
+    private void registerAsObserver(){
+
+    }
+
+    private void updateOfferingDetails(){
+
     }
 
 }
