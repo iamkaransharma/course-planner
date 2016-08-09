@@ -4,8 +4,12 @@ import ca.cmpt213.courseplanner.model.*;
 import ca.cmpt213.bargraph.*;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
+
+/**
+ * BarGraphPanel contains statistics that show how many offerings are offered in Spring, Summer and Fall, and
+ * the locations of the offerings at Burnaby, Surrey, Harbor Center and other locations.
+ */
 
 /**
  * Created by Thomas_Ngo on 2016-07-30.

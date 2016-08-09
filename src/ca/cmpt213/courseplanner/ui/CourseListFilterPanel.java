@@ -12,6 +12,12 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * CourseListFilterPanel contains a list of departments that the user can select from the JComboBox.
+ * It also lets the users choose if they want to see only undergrad courses, only grad courses, none of
+ * them or both. The user presses the "Update Course List" to change the CourseListPanel's display.
+ */
+
+/**
  * Created by Thomas_Ngo on 2016-07-30.
  */
 public class CourseListFilterPanel extends GUIPanel {

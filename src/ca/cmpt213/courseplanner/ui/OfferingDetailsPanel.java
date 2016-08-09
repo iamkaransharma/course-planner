@@ -3,8 +3,12 @@ package ca.cmpt213.courseplanner.ui;
 import ca.cmpt213.courseplanner.model.CoursePlanner;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
+
+/**
+ * OfferingDetailsPanel contains the active offering's course name, semester, location, instructors,
+ * Section Type and Enrollment.
+ */
 
 /**
  * Created by Thomas_Ngo on 2016-07-30.
