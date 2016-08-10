@@ -7,21 +7,22 @@ import java.awt.*;
  * Created by Karan on 09/08/2016.
  */
 public class BarGraphPanel extends JPanel {
+    public static final int ICON_WIDTH = 250;
+    public static final int ICON_HEIGHT = 180;
+    private static final Dimension VERTICAL_PADDING = new Dimension(0, 10);
     private BarGraphModel barGraphModel;
-    private String title;
 
     public BarGraphPanel(String title, String[] barTitles) {
-        this.title = title;
         int[] arrayOfZeroes = new int[barTitles.length];
         this.barGraphModel = new BarGraphModel(arrayOfZeroes, barTitles);
 
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        add(Box.createRigidArea(new Dimension(0, 10)));
+        add(Box.createRigidArea(VERTICAL_PADDING));
 
         JLabel titleLabel = new JLabel(title);
         add(titleLabel);
 
-        BarGraphIcon barGraph = new BarGraphIcon(barGraphModel, 250, 180);
+        BarGraphIcon barGraph = new BarGraphIcon(barGraphModel, ICON_WIDTH, ICON_HEIGHT);
         add(new JLabel(barGraph));
     }
 

@@ -21,7 +21,7 @@ import java.util.Set;
 public class CourseListFilterPanel extends GUIBasePanel {
 
     private static final String TITLE = "Course List Filter";
-    private static final int DEFAULT_WIDTH = 90;
+    private static final int DEFAULT_WIDTH = 200;
     private static final int DEFAULT_HEIGHT = 105;
 
     private List<Department> departmentList;

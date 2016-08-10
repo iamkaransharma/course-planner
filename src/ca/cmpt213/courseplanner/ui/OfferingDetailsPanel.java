@@ -36,7 +36,7 @@ public class OfferingDetailsPanel extends GUIBasePanel {
         offeringInfoPanel.setBackground(Color.white);
         offeringInfoPanel.setLineWrap(true);
         offeringInfoPanel.setWrapStyleWord(true);
-
+        offeringInfoPanel.setEditable(false);
 
         componentTypeLabels = new JPanel();
         componentTypeLabels.setLayout(new BoxLayout(componentTypeLabels, BoxLayout.PAGE_AXIS));
