@@ -42,7 +42,7 @@ public class Semester {
     private String getCenturyPrefixFromYear(String year) {
         final int FIRST_DIGIT = 0;
         final int SECOND_DIGIT = 1;
-        String centuryString = year.substring(FIRST_DIGIT, SECOND_DIGIT+1);
+        String centuryString = year.substring(FIRST_DIGIT, SECOND_DIGIT + 1);
         int century = Integer.parseInt(centuryString);
         return String.valueOf(century - CENTURY_OFFSET);
     }
