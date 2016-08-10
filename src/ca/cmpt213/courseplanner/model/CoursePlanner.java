@@ -35,20 +35,25 @@ public class CoursePlanner {
         assert selectedDepartment != null;
         activeCourseList = selectedDepartment.getCourses(filter);
         activeCourse = null;
+        activeOffering = null;
+        activeLocation = null;
         notifyCourseListObservers();
     }
 
     public void selectCourse(Course selectedCourse) {
         activeCourse = selectedCourse;
+        activeOffering = null;
+        activeLocation = null;
         notifyActiveCourseObservers();
     }
 
     public void selectOffering(Offering selectedOffering) {
         activeOffering = selectedOffering;
+        activeLocation = null;
         notifyActiveOfferingObservers();
     }
 
-    public void selectLocation(Location selectedLocation){
+    public void selectLocation(Location selectedLocation) {
         activeLocation = selectedLocation;
         notifyActiveLocationObservers();
     }
@@ -97,7 +102,7 @@ public class CoursePlanner {
         activeOfferingObserver.add(observer);
     }
 
-    public void addActiveLocationObserver(CoursePlannerObserver observer){
+    public void addActiveLocationObserver(CoursePlannerObserver observer) {
         activeLocationObserver.add(observer);
     }
 

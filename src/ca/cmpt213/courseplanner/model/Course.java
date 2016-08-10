@@ -61,20 +61,20 @@ public class Course implements Comparable<Course> {
         return offerings.last();
     }
 
-    public Set<Location> getLocationsBySemesterCode(Semester searchSemester) {
+    public Offering getOfferingBySemester(Semester searchSemester) {
         for (Offering currentOffering : offerings) {
             if (searchSemester.equals(currentOffering.getSemester())) {
-                return currentOffering.getLocations();
+                return currentOffering;
             }
         }
-        return new TreeSet<>();
+        return null;
     }
 
     public Set<Offering> getOfferings() {
         return offerings;
     }
 
-    public int countOfferingsBySeason (Season seasonFilter) {
+    public int countOfferingsBySeason(Season seasonFilter) {
         int offeringCount = 0;
         for (Offering currentOffering : offerings) {
             if (currentOffering.getSemester().getSeason().equals(seasonFilter)) {

@@ -103,57 +103,7 @@ public class CourseListFilterPanel extends GUIBasePanel {
         contentPanel.setPreferredSize(new Dimension(90, 105));
         return contentPanel;
     }
-//
-//    @Override
-//    protected Component getOfferingsTable() {
-//        panel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
-//        panel.setBackground(Color.white);
-//
-//        String[] departmentNameList = createDepartmentNamesList();
-//        departmentList = new JComboBox(departmentNameList);
-//
-//        departmentList.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                selectedIndex = (Integer) departmentList.getSelectedIndex();
-//                selectedDepartment = getModel().getDepartmentManager().getDepartments().get(selectedIndex);
-//                //System.out.println(selectedDepartment.getCourses().size());
-//            }
-//        });
-//
-//        // Check-boxes for undergrad and grad courses
-//
-//        JPanel checkBoxes = new JPanel();
-//        checkBoxes.setLayout(new BoxLayout(checkBoxes, BoxLayout.PAGE_AXIS));
-//        checkBoxes.setBackground(Color.white);
-//
-//        undergradCoursesButton = new JCheckBox("Include undergrad courses");
-//        undergradCoursesButton.setMnemonic(KeyEvent.VK_C);
-//        undergradCoursesButton.setSelected(true);
-//        undergradCoursesButton.addItemListener(this);
-//
-//        gradCoursesButton = new JCheckBox("Include grad courses");
-//        gradCoursesButton.setMnemonic(KeyEvent.VK_C);
-//        gradCoursesButton.setSelected(false);
-//        gradCoursesButton.addItemListener(this);
-//
-//        checkBoxes.add(undergradCoursesButton);
-//        checkBoxes.add(gradCoursesButton);
-//
-//        // Button to update the list
-//        JButton updateListButton = new JButton("Update Course List");
-//
-//        updateListButton.addActionListener(
-//                event -> updateSelectedDepartment()
-//        );
-//
-//        panel.add(new JLabel("Department:"));
-//        panel.add(departmentList);
-//        panel.add(checkBoxes);
-//        panel.add(updateListButton);
-//
-//        return panel;
-//    }
+
 
     private String[] createDepartmentNamesList() {
         String[] departmentNames = new String[departmentList.size()];
@@ -162,25 +112,4 @@ public class CourseListFilterPanel extends GUIBasePanel {
         }
         return departmentNames;
     }
-
-//    @Override
-//    protected JPanel getPanel(){
-//        JPanel courseListFilterPanel = new JPanel();
-//        courseListFilterPanel.setLayout(new BorderLayout());
-//        courseListFilterPanel.add(getLabel(),BorderLayout.NORTH);
-//        courseListFilterPanel.add(getOfferingsTable(),BorderLayout.CENTER);
-//        courseListFilterPanel.setMinimumSize(new Dimension(225,175));
-//        courseListFilterPanel.setPreferredSize(new Dimension(225,175));
-//        return courseListFilterPanel;
-//    }
-
-//    @Override
-//    public void itemStateChanged(ItemEvent e) {
-//
-//    }
-
-//    private void updateSelectedDepartment() {
-//        getModel().selectDepartment(selectedDepartment, selectedFilter);
-//        System.out.println(getModel().getActiveCourseList());
-//    }
 }

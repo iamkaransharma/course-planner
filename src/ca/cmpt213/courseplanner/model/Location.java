@@ -79,6 +79,12 @@ public class Location implements Comparable<Location> {
         return stringBuilder.toString();
     }
 
+    public String getInstructorsAsString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        appendInstructors(stringBuilder);
+        return stringBuilder.toString();
+    }
+
     private void appendInstructors(StringBuilder stringBuilder) {
         String commaPrefix = "";
         for (String instructor : instructors) {

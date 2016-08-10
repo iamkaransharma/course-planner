@@ -3,15 +3,11 @@ package ca.cmpt213.courseplanner.ui;
 import ca.cmpt213.courseplanner.model.*;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Set;
 
-/**
- * Created by Thomas_Ngo on 2016-07-30.
- */
 public class SemesterOfferingsPanel extends GUIBasePanel {
 
     private static final String TITLE = "Course Offerings by Semester";
@@ -27,11 +23,12 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
     public SemesterOfferingsPanel(CoursePlanner coursePlanner) {
         super(coursePlanner, TITLE);
         this.internalPanel = getContentPanel();
+        this.internalPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
         setInternalPanel(internalPanel);
         registerAsObserver();
     }
 
-    private JPanel getOfferingsTable() {
+    private JPanel getContentPanel() {
 
         JPanel offeringsTable = new JPanel();
 
@@ -101,21 +98,24 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
 
                 if (activeCourse != null) {
                     Semester cellSemester = createSemester(currentYear, SEASON_NAMES[column]);
-                    Set<Location> locationsSet = activeCourse.getLocationsBySemesterCode(cellSemester);
-                    for (Location location : locationsSet) {
-                        String buttonText = activeCourse.getFullName() + " - " + location.getName();
-                        JButton locationButton = new JButton(buttonText);
-                        resizeHorizontallyOnly(locationButton);
-                        locationButton.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                getModel().selectLocation(location);
-                            }
-                        });
-                        cellLabel.add(locationButton);
+                    Offering activeOffering = activeCourse.getOfferingBySemester(cellSemester);
+                    if (activeOffering != null) {
+                        Set<Location> locationsSet = activeOffering.getLocations();
+                        for (Location location : locationsSet) {
+                            String buttonText = activeCourse.getFullName() + " - " + location.getName();
+                            JButton locationButton = new JButton(buttonText);
+                            resizeHorizontallyOnly(locationButton);
+                            locationButton.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    getModel().selectOffering(activeOffering);
+                                    getModel().selectLocation(location);
+                                }
+                            });
+                            cellLabel.add(locationButton);
+                        }
                     }
                 }
-
                 offeringsTable.add(cellLabel, constraints);
             }
         }
@@ -140,20 +140,6 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
         return newSemester;
     }
 
-    private JPanel getContentPanel() {
-
-        JPanel semesterOfferingsPanel = new JPanel();
-
-        semesterOfferingsPanel.setLayout(new BorderLayout());
-        semesterOfferingsPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
-        JPanel offeringsPanel = getOfferingsTable();
-
-        semesterOfferingsPanel.add(offeringsPanel);
-
-        semesterOfferingsPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
-        return semesterOfferingsPanel;
-    }
-
     private void registerAsObserver() {
         getModel().addCourseListObserver(
                 () -> clearOfferingsTable()
@@ -164,11 +150,10 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
     }
 
     private void clearOfferingsTable() {
-        System.out.println("clear table");//TODO: remove!
+        updateOfferingsTable();
     }
 
     private void updateOfferingsTable() {
-        System.out.println("update table");//TODO: remove!
         activeCourse = getModel().getActiveCourse();
         internalPanel.removeAll();
         internalPanel = getContentPanel();

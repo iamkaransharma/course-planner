@@ -6,9 +6,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-/**
- * Created by Thomas_Ngo on 2016-07-30.
- */
 public class CoursePlannerGUI extends JFrame {
     private static final String WINDOW_TITLE = "FAS Course Planner";
     private CoursePlanner coursePlanner;
@@ -43,7 +40,7 @@ public class CoursePlannerGUI extends JFrame {
         // East Side
         JPanel eastPanel = new JPanel();
         eastPanel.setLayout(new BoxLayout(eastPanel, BoxLayout.PAGE_AXIS));
-        eastPanel.add(new BarGraphPanel(coursePlanner));
+        eastPanel.add(new StatisticsPanel(coursePlanner));
         eastPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         eastPanel.add(new OfferingDetailsPanel(coursePlanner));
         eastPanel.add(Box.createVerticalGlue());
