@@ -34,6 +34,7 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
     private JPanel getOfferingsTable() {
 
         JPanel offeringsTable = new JPanel();
+
         offeringsTable.setBackground(Color.white);
 
         offeringsTable.setLayout(new GridBagLayout());
@@ -78,7 +79,7 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
 
             constraints.fill = GridBagConstraints.NONE;
             constraints.anchor = GridBagConstraints.NORTHEAST;
-            constraints.weighty = 0.0;
+            constraints.weighty = 1.0;
             constraints.weightx = 0.0;
             constraints.gridx = 0;
             constraints.gridy = row;

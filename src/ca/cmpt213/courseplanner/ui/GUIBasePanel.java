@@ -13,9 +13,11 @@ abstract public class GUIBasePanel extends JPanel {
 
     private CoursePlanner coursePlanner;
     private JPanel internalPanel;
+    private String title;
 
     public GUIBasePanel(CoursePlanner coursePlanner, String title) {
         this.coursePlanner = coursePlanner;
+        this.title = title;
         JLabel titleLabel = new JLabel(title, JLabel.LEFT);
         titleLabel.setForeground(Color.blue);
         this.setLayout(new BorderLayout());
@@ -24,7 +26,10 @@ abstract public class GUIBasePanel extends JPanel {
     }
 
     protected void setInternalPanel(JPanel internalPanel) {
-        this.internalPanel = internalPanel;
+        removeAll();
+        JLabel titleLabel = new JLabel(title, JLabel.LEFT);
+        titleLabel.setForeground(Color.blue);
+        this.add(titleLabel, BorderLayout.NORTH);
         internalPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED, Color.black, Color.gray));
         this.add(internalPanel, BorderLayout.CENTER);
     }
