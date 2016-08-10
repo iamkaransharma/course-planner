@@ -7,7 +7,6 @@ import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.EnumSet;
 import java.util.Set;
 
 /**
@@ -90,6 +89,7 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
                 JPanel cellLabel = new JPanel();
                 cellLabel.setBorder(BorderFactory.createLineBorder(Color.black));
                 cellLabel.setLayout(new BoxLayout(cellLabel, BoxLayout.PAGE_AXIS));
+                cellLabel.setPreferredSize(new Dimension(50, 10));
 
                 constraints.fill = GridBagConstraints.BOTH;
                 constraints.anchor = GridBagConstraints.NORTH;
@@ -101,10 +101,10 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
                 if (activeCourse != null) {
                     Semester cellSemester = createSemester(currentYear, SEASON_NAMES[column]);
                     Set<Location> locationsSet = activeCourse.getLocationsBySemesterCode(cellSemester);
-
                     for (Location location : locationsSet) {
                         String buttonText = activeCourse.getFullName() + " - " + location.getName();
                         JButton locationButton = new JButton(buttonText);
+                        resizeHorizontallyOnly(locationButton);
                         locationButton.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
@@ -150,8 +150,6 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
         semesterOfferingsPanel.add(offeringsPanel);
 
         semesterOfferingsPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
-//        semesterOfferingsPanel.revalidate();
-//        semesterOfferingsPanel.repaint();
         return semesterOfferingsPanel;
     }
 
