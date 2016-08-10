@@ -61,10 +61,9 @@ public class Course implements Comparable<Course> {
         return offerings.last();
     }
 
-    public Set<Location> getLocationsBySemesterCode(String semesterCode) {
+    public Set<Location> getLocationsBySemesterCode(Semester searchSemester) {
         for (Offering currentOffering : offerings) {
-            String currentSemesterCode = currentOffering.getSemester().getSemesterCode();
-            if (currentSemesterCode.equals(semesterCode)) {
+            if (searchSemester.equals(currentOffering.getSemester())) {
                 return currentOffering.getLocations();
             }
         }

@@ -9,6 +9,7 @@ public class Semester {
     private static final int YEAR_SECOND_LAST_DIGIT = 1;
     private static final int YEAR_LAST_DIGIT = 2;
     private static final int SEASON_ID_INDEX = 3;
+    private static final int CENTURY_OFFSET = 19;
 
     private String semesterCode;
     private Season season;
@@ -20,14 +21,33 @@ public class Semester {
         this.year = getYearFromSemesterCode(semesterCode);
     }
 
+    public Semester(Season season, String year) {
+        this.season = season;
+        this.year = year;
+        this.semesterCode = calculateSemesterCode(season, year);
+    }
+
+    private String calculateSemesterCode(Season season, String year) {
+        String centuryPrefix = getCenturyPrefixFromYear(year);
+        String decadeAndYear = year.substring(2, 4);
+        String semesterCode = centuryPrefix + decadeAndYear + season.value();
+        return semesterCode;
+    }
+
     private Season getSeasonFromSemesterCode(String semesterCode) {
         int seasonId = parseIntFromStringElement(semesterCode, SEASON_ID_INDEX);
         return Season.valueOf(seasonId);
     }
 
-    private String getYearFromSemesterCode(String semesterCode) {
-        final int CENTURY_OFFSET = 19;
+    private String getCenturyPrefixFromYear(String year) {
+        final int FIRST_DIGIT = 0;
+        final int SECOND_DIGIT = 1;
+        String centuryString = year.substring(FIRST_DIGIT, SECOND_DIGIT+1);
+        int century = Integer.parseInt(centuryString);
+        return String.valueOf(century - CENTURY_OFFSET);
+    }
 
+    private String getYearFromSemesterCode(String semesterCode) {
         int centuryId = parseIntFromStringElement(semesterCode, CENTURY_INDEX);
         String firstTwoDigits = Integer.toString(centuryId + CENTURY_OFFSET);
 

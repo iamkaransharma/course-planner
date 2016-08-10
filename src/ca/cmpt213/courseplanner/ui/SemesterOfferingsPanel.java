@@ -1,14 +1,13 @@
 package ca.cmpt213.courseplanner.ui;
 
-import ca.cmpt213.courseplanner.model.Course;
-import ca.cmpt213.courseplanner.model.CoursePlanner;
-import ca.cmpt213.courseplanner.model.Location;
+import ca.cmpt213.courseplanner.model.*;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.EnumSet;
 import java.util.Set;
 
 /**
@@ -99,12 +98,10 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
                 constraints.gridx = column + FIRST_COLUMN_OFFSET;
                 constraints.gridy = row;
 
-                //TODO: add buttons panel instead of celllabel
                 if (activeCourse != null) {
-                    String cellSemesterCode = calculateSemesterCode(currentYear, SEASON_NAMES[column]);
-                    Set<Location> locationsSet = activeCourse.getLocationsBySemesterCode(cellSemesterCode);
-//                    JPanel buttonsPanel = new JPanel();
-//                    buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.PAGE_AXIS));
+                    Semester cellSemester = createSemester(currentYear, SEASON_NAMES[column]);
+                    Set<Location> locationsSet = activeCourse.getLocationsBySemesterCode(cellSemester);
+
                     for (Location location : locationsSet) {
                         String buttonText = activeCourse.getFullName() + " - " + location.getName();
                         JButton locationButton = new JButton(buttonText);
@@ -114,10 +111,8 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
                                 getModel().selectLocation(location);
                             }
                         });
-//                        resizeHorizontallyOnly(locationButton);
                         cellLabel.add(locationButton);
                     }
-//                    cellLabel.add(buttonsPanel);
                 }
 
                 offeringsTable.add(cellLabel, constraints);
@@ -126,26 +121,22 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
         return offeringsTable;
     }
 
-    // TODO: Improve if possible
-    private String calculateSemesterCode(int currentYear, String seasonName) {
-        final String CENTURY_PREFIX = "1";
-        String currentYearInfix = String.valueOf(currentYear % 100);
-        String semesterCode;
-
+    private Semester createSemester(int year, String seasonName) {
+        Semester newSemester;
         switch (seasonName) {
             case "Spring":
-                semesterCode = CENTURY_PREFIX + currentYearInfix + "1";
+                newSemester = new Semester(Season.SPRING, String.valueOf(year));
                 break;
             case "Summer":
-                semesterCode = CENTURY_PREFIX + currentYearInfix + "4";
+                newSemester = new Semester(Season.SUMMER, String.valueOf(year));
                 break;
             case "Fall":
-                semesterCode = CENTURY_PREFIX + currentYearInfix + "7";
+                newSemester = new Semester(Season.FALL, String.valueOf(year));
                 break;
             default:
                 throw new RuntimeException("Unknown season name received");
         }
-        return semesterCode;
+        return newSemester;
     }
 
     private JPanel getContentPanel() {
