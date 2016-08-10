@@ -21,6 +21,8 @@ import java.util.Set;
 public class CourseListFilterPanel extends GUIBasePanel {
 
     private static final String TITLE = "Course List Filter";
+    private static final int DEFAULT_WIDTH = 90;
+    private static final int DEFAULT_HEIGHT = 105;
 
     private List<Department> departmentList;
     private Department selectedDepartment;
@@ -35,8 +37,8 @@ public class CourseListFilterPanel extends GUIBasePanel {
 
         selectedDepartment = null;
         selectedFilter = null;
-        setInternalPanel(getContentPanel());
         resizeHorizontallyOnly(this);
+        setInternalPanel(getContentPanel());
     }
 
     private JPanel getContentPanel() {
@@ -71,7 +73,21 @@ public class CourseListFilterPanel extends GUIBasePanel {
         checkBoxes.add(undergradSelectButton);
         checkBoxes.add(gradSelectButton);
 
-        // Button to update the list
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        contentPanel.add(dropdownPanel, BorderLayout.NORTH);
+        contentPanel.add(checkBoxes, BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(makeUpdateButton(undergradSelectButton, gradSelectButton));
+        contentPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        contentPanel.setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+        return contentPanel;
+    }
+
+    private JButton makeUpdateButton(final JCheckBox undergradSelectButton, final JCheckBox gradSelectButton) {
         JButton updateListButton = new JButton("Update Course List");
 
         updateListButton.addActionListener(new ActionListener() {
@@ -89,19 +105,7 @@ public class CourseListFilterPanel extends GUIBasePanel {
                 getModel().selectDepartment(selectedDepartment, selectedFilter);
             }
         });
-
-        JPanel contentPanel = new JPanel(new BorderLayout());
-        contentPanel.add(dropdownPanel, BorderLayout.NORTH);
-        contentPanel.add(checkBoxes, BorderLayout.CENTER);
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
-        buttonPanel.add(Box.createHorizontalGlue());
-        buttonPanel.add(updateListButton);
-        contentPanel.add(buttonPanel, BorderLayout.SOUTH);
-
-        contentPanel.setPreferredSize(new Dimension(90, 105));
-        return contentPanel;
+        return updateListButton;
     }
 
 

@@ -76,7 +76,7 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
 
             constraints.fill = GridBagConstraints.NONE;
             constraints.anchor = GridBagConstraints.NORTHEAST;
-            constraints.weighty = 1.0;
+            constraints.weighty = 0.0;
             constraints.weightx = 0.0;
             constraints.gridx = 0;
             constraints.gridy = row;

@@ -21,37 +21,39 @@ public class OfferingDetailsPanel extends GUIBasePanel {
     public OfferingDetailsPanel(CoursePlanner coursePlanner) {
         super(coursePlanner, TITLE);
         setInternalPanel(getContentPanel());
-        resizeHorizontallyOnly(this);
         registerAsObserver();
     }
 
     protected JPanel getContentPanel() {
-
-        JPanel container = new JPanel(new GridLayout(2, 2));
-
         JPanel labelsPanel = new JPanel();
         labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.PAGE_AXIS));
         labelsPanel.add(new JLabel("Course Name:"));
         labelsPanel.add(new JLabel("Semester:"));
         labelsPanel.add(new JLabel("Location:"));
         labelsPanel.add(new JLabel("Instructors:"));
+
         offeringInfoPanel = new JTextArea(4, 10);
         offeringInfoPanel.setBackground(Color.white);
         offeringInfoPanel.setLineWrap(true);
         offeringInfoPanel.setWrapStyleWord(true);
 
-        container.add(labelsPanel);
-        container.add(offeringInfoPanel);
 
         componentTypeLabels = new JPanel();
         componentTypeLabels.setLayout(new BoxLayout(componentTypeLabels, BoxLayout.PAGE_AXIS));
         enrollmentLabels = new JPanel();
         enrollmentLabels.setLayout(new BoxLayout(enrollmentLabels, BoxLayout.PAGE_AXIS));
 
-        container.add(componentTypeLabels);
-        container.add(enrollmentLabels);
+        JPanel gridContainer = new JPanel(new GridLayout(2, 2));
+        gridContainer.add(labelsPanel);
+        gridContainer.add(offeringInfoPanel);
+        gridContainer.add(componentTypeLabels);
+        gridContainer.add(enrollmentLabels);
 
-        return container;
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        contentPanel.add(gridContainer, BorderLayout.NORTH);
+        resizeHorizontallyOnly(contentPanel);
+
+        return contentPanel;
     }
 
     private void registerAsObserver() {
