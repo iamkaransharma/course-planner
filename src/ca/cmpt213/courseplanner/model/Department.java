@@ -28,15 +28,6 @@ public class Department implements Comparable<Department> {
         if (!foundCourse) {
             this.courses.add(newCourse);
         }
-//        final int NOT_FOUND = -1;
-//        int currentIndex = this.courses.indexOf(newCourse);
-//        if (currentIndex != NOT_FOUND) {
-//            Course currentCourse = this.courses.get(currentIndex);
-//            currentCourse.merge(newCourse);
-//        } else {
-//            this.courses.add(newCourse);
-//        }
-//        Collections.sort(courses);
     }
 
     public void merge(Department other) {
@@ -70,22 +61,6 @@ public class Department implements Comparable<Department> {
         return filteredCourses;
     }
 
-//    public Set<Course> getCourses() {
-//        return courses;
-//    }
-//
-//    public Set<Course> getUndergraduateCourses() {
-//        Course firstGraduateCourse = new Course(name, GRADUATE_COURSES_BEGIN);
-////        int firstGraduateCourseIdx = courses.indexOf(firstGraduateCourse);
-//        return courses.headSet(firstGraduateCourse, false);
-//    }
-//
-//    public Set<Course> getGraduateCourses() {
-//        Course firstGraduateCourse = new Course(name, GRADUATE_COURSES_BEGIN);
-////        int firstGraduateCourseIdx = courses.indexOf(firstGraduateCourse);
-//        return courses.tailSet(firstGraduateCourse, true);
-//    }
-
     public String getName() {
         return name;
     }
@@ -118,11 +93,6 @@ public class Department implements Comparable<Department> {
     public int hashCode() {
         return name.hashCode() * 19;
     }
-//
-//    @Override
-//    public Iterator<Course> iterator() {
-//        return Collections.unmodifiableList(courses).iterator();
-//    }
 
     @Override
     public int compareTo(Department other) {

@@ -21,7 +21,6 @@ public class BarGraphPanel extends GUIBasePanel {
     BarGraphModel locationsGraphModel;
 
     JLabel courseLabel;
-    JPanel barGraphPanel = new JPanel();
 
     public BarGraphPanel(CoursePlanner coursePlanner) {
         super(coursePlanner, TITLE);
@@ -38,7 +37,7 @@ public class BarGraphPanel extends GUIBasePanel {
         locationsGraphModel = new BarGraphModel(new int[]{0, 0, 0, 0}, campuses);
     }
 
-    protected JPanel getContentPanel() {
+    private JPanel getContentPanel() {
 
         JPanel graphs = new JPanel();
         graphs.setLayout(new BoxLayout(graphs, BoxLayout.PAGE_AXIS));
@@ -71,7 +70,7 @@ public class BarGraphPanel extends GUIBasePanel {
         graphs.add(semesterGraphs);
         graphs.add(locationGraphs);
 
-        //JPanel barGraphPanel = new JPanel();
+        JPanel barGraphPanel = new JPanel();
         barGraphPanel.setLayout(new BoxLayout(barGraphPanel, BoxLayout.PAGE_AXIS));
         barGraphPanel.setBackground(Color.white);
         barGraphPanel.setLayout(new BorderLayout());

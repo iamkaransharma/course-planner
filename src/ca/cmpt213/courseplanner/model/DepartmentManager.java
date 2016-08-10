@@ -49,36 +49,11 @@ public class DepartmentManager {
         if (!foundDepartment) {
             this.departments.add(newDepartment);
         }
-//        final int NOT_FOUND = -1;
-//        int currentIndex = this.departments.indexOf(newDepartment);
-//        if (currentIndex != NOT_FOUND) {
-//            Department currentDepartment = this.departments.get(currentIndex);
-//            currentDepartment.merge(newDepartment);
-//        } else {
-//            this.departments.add(newDepartment);
-//        }
-//        Collections.sort(departments);
     }
-
-//    public List<String> getDepartmentNames() {
-//        List<String> departmentNames = new ArrayList<>();
-//        for (Department department : departments) {
-//            departmentNames.add(department.getName());
-//        }
-//        return departmentNames;
-//    }
 
     public Set<Department> getDepartments() {
         return departments;
     }
-
-//    public Course getCourse(String departmentName, String catalogNumber) {
-//        for (Department department : departments) {
-//            if (department.getName().equals(departmentName)) {
-//
-//            }
-//        }
-//    }
 
     @Override
     public String toString() {
@@ -89,9 +64,4 @@ public class DepartmentManager {
         }
         return stringBuilder.toString();
     }
-
-//    @Override
-//    public Iterator<Department> iterator() {
-//        return departments.iterator();
-//    }
 }

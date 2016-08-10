@@ -104,7 +104,6 @@ public class OfferingDetailsPanel extends GUIBasePanel {
     }
 
     private void updateOfferingDetails() {
-
         activeOffering = getModel().getActiveOffering();
         if (activeOffering != null) {
 
