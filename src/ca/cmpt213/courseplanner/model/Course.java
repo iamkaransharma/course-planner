@@ -74,19 +74,14 @@ public class Course implements Comparable<Course> {
         return offerings;
     }
 
-    public Set<Offering> getOfferingsBySeason(Season seasonFilter) {
-        return filterOfferingsBySeason(seasonFilter);
-    }
-
-    private Set<Offering> filterOfferingsBySeason(Season seasonFilter) {
-        Set<Offering> filteredOfferings = new TreeSet<>();
+    public int countOfferingsBySeason (Season seasonFilter) {
+        int offeringCount = 0;
         for (Offering currentOffering : offerings) {
-            String semesterCode = currentOffering.getSemester().getSemesterCode();
-            if (semesterCode.endsWith(seasonFilter.value())) {
-                filteredOfferings.add(currentOffering);
+            if (currentOffering.getSemester().getSeason().equals(seasonFilter)) {
+                offeringCount += currentOffering.getLocations().size();
             }
         }
-        return filteredOfferings;
+        return offeringCount;
     }
 
     public String getFullName() {

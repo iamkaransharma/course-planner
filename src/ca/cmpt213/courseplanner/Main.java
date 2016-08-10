@@ -38,11 +38,18 @@ public class Main {
 //                    firstCourse = course;
 //                }
 //            }
-//            Set<Location> locations = firstCourse.getLocationsBySemesterCode("1144");
-//            for (Location location: locations) {
-//                System.out.println(location.getName());
-//            }
+//
+//            Set<Offering> summerOfferings = firstCourse.getOfferingsBySeason(Season.SUMMER);
+//            Set<Offering> fallOfferings = firstCourse.getOfferingsBySeason(Season.FALL);
+//            Set<Offering> springOfferings = firstCourse.getOfferingsBySeason(Season.SPRING);
+////            for (Offering offering: filteredOfferings) {
+////                System.out.println(offering.getSemester().getSeason());
+////            }
+//            System.out.println(summerOfferings.size() + fallOfferings.size() + springOfferings.size());
+//            System.out.println(firstCourse.getOfferings().size());
 //            System.out.println("Finished printing");
+
+
         } catch (FileNotFoundException e) {
             CoursePlannerGUI.displayDialogBox("Data file (" + CSV_FILE_PATH + ") not found.");
         }

@@ -94,9 +94,9 @@ public class BarGraphPanel extends GUIBasePanel {
         int summerCoursesCount = 0;
         int fallCoursesCount = 0;
         if (activeCourse != null) {
-            springCoursesCount = activeCourse.getOfferingsBySeason(Season.SPRING).size();
-            summerCoursesCount = activeCourse.getOfferingsBySeason(Season.SUMMER).size();
-            fallCoursesCount = activeCourse.getOfferingsBySeason(Season.FALL).size();
+            springCoursesCount = activeCourse.countOfferingsBySeason(Season.SPRING);
+            summerCoursesCount = activeCourse.countOfferingsBySeason(Season.SUMMER);
+            fallCoursesCount = activeCourse.countOfferingsBySeason(Season.FALL);
         }
 
         int[] semesterData = {springCoursesCount, summerCoursesCount, fallCoursesCount};
