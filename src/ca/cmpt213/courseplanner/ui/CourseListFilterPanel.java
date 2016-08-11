@@ -46,12 +46,9 @@ public class CourseListFilterPanel extends GUIBasePanel {
         String[] departmentNames = createDepartmentNamesList();
         JComboBox<String> departmentNamesBox = new JComboBox<>(departmentNames);
         selectedDepartment = departmentList.get(0);
-        departmentNamesBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int selectedIndex = departmentNamesBox.getSelectedIndex();
-                selectedDepartment = departmentList.get(selectedIndex);
-            }
+        departmentNamesBox.addActionListener((event) -> {
+            int selectedIndex = departmentNamesBox.getSelectedIndex();
+            selectedDepartment = departmentList.get(selectedIndex);
         });
         JPanel dropdownPanel = new JPanel();
         dropdownPanel.setLayout(new BoxLayout(dropdownPanel, BoxLayout.LINE_AXIS));
@@ -89,21 +86,17 @@ public class CourseListFilterPanel extends GUIBasePanel {
 
     private JButton makeUpdateButton(final JCheckBox undergradSelectButton, final JCheckBox gradSelectButton) {
         JButton updateListButton = new JButton("Update Course List");
-
-        updateListButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (undergradSelectButton.isSelected() && gradSelectButton.isSelected()) {
-                    selectedFilter = CourseListFilter.ALL_COURSES;
-                } else if (undergradSelectButton.isSelected()) {
-                    selectedFilter = CourseListFilter.UNDERGRADUATE_COURSES;
-                } else if (gradSelectButton.isSelected()) {
-                    selectedFilter = CourseListFilter.GRADUATE_COURSES;
-                } else {
-                    selectedFilter = CourseListFilter.NO_COURSES;
-                }
-                getModel().selectDepartment(selectedDepartment, selectedFilter);
+        updateListButton.addActionListener((event) -> {
+            if (undergradSelectButton.isSelected() && gradSelectButton.isSelected()) {
+                selectedFilter = CourseListFilter.ALL_COURSES;
+            } else if (undergradSelectButton.isSelected()) {
+                selectedFilter = CourseListFilter.UNDERGRADUATE_COURSES;
+            } else if (gradSelectButton.isSelected()) {
+                selectedFilter = CourseListFilter.GRADUATE_COURSES;
+            } else {
+                selectedFilter = CourseListFilter.NO_COURSES;
             }
+            getModel().selectDepartment(selectedDepartment, selectedFilter);
         });
         return updateListButton;
     }

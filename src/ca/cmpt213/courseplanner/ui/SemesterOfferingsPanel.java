@@ -4,8 +4,6 @@ import ca.cmpt213.courseplanner.model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Set;
 
 public class SemesterOfferingsPanel extends GUIBasePanel {
@@ -105,12 +103,9 @@ public class SemesterOfferingsPanel extends GUIBasePanel {
                             String buttonText = activeCourse.getFullName() + " - " + location.getName();
                             JButton locationButton = new JButton(buttonText);
                             resizeHorizontallyOnly(locationButton);
-                            locationButton.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    getModel().selectOffering(activeOffering);
-                                    getModel().selectLocation(location);
-                                }
+                            locationButton.addActionListener((event) -> {
+                                getModel().selectOffering(activeOffering);
+                                getModel().selectLocation(location);
                             });
                             cellLabel.add(locationButton);
                         }

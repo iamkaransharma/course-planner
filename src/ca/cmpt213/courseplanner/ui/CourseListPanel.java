@@ -5,8 +5,6 @@ import ca.cmpt213.courseplanner.model.CoursePlanner;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,15 +38,12 @@ public class CourseListPanel extends GUIBasePanel {
         courseListView.setLayoutOrientation(JList.HORIZONTAL_WRAP);
         courseListView.setVisibleRowCount(-1);
 
-        courseListView.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-                    int selectedIndex = courseListView.getSelectedIndex();
-                    if (selectedIndex != -1) {
-                        Course selectedCourse = selectedCourseList.get(selectedIndex);
-                        getModel().selectCourse(selectedCourse);
-                    }
+        courseListView.addListSelectionListener((event) -> {
+            if (!event.getValueIsAdjusting()) {
+                int selectedIndex = courseListView.getSelectedIndex();
+                if (selectedIndex != -1) {
+                    Course selectedCourse = selectedCourseList.get(selectedIndex);
+                    getModel().selectCourse(selectedCourse);
                 }
             }
         });
